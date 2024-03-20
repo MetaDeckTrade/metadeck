@@ -73,9 +73,9 @@ const CanvasLayout = ({ children }: any) => {
                 {/* @ts-ignore */}
                 <r3f.Out />
                 <Preload all />
+                <ThreeScope/>
             </Canvas>
             <Leva hidden={false} />
-            <ThreeScope/>
         </div>
     )
 }
