@@ -1,10 +1,4 @@
-# :japanese_castle: React-Three-Next starter
-
-## Extended from: https://github.com/pmndrs/react-three-next, and preconfigured for our case
-
-A minimalist starter for NextJS, @react-three/fiber & react-spring.
-
-This starter allows you to navigate seamlessly between pages with dynamic dom and/or canvas content without reloading or creating a new canvas every time. 3D components are usable anywhere in the dom. The events, dom, viewport, everything is synchronized!
+# :japanese_castle: Next Styled Three Starter
 
 ### How to use
 
@@ -12,18 +6,17 @@ Clone this repository and link to another gh
 
 ### :mount_fuji: Features
 
-- [x] GLSL imports
 - [x] Canvas is not getting unmounted while navigating between pages
 - [x] Canvas components usable in any div of the page
 - [x] PWA Support
-
 - [x] Based on the **Page** directory architecture
-- [x] SCSS preconfigured
+- [x] Styled Components
 - [x] Configured Store (zustand)
-- [x] Some custom hooks & components, which we often use
-
+- [x] Some custom hooks & components
 - [x] Fonts Scale System
 - [x] LVH
+- [x] Global three hooks "useThreeScope" & "useFrameScope"
+
 
 
 ### :bullettrain_side: Architecture
@@ -56,4 +49,4 @@ Thanks to [tunnel-rat](https://github.com/pmndrs/tunnel-rat) the starter can por
 - [`r3f-perf`](https://github.com/RenaudRohlinger/r3f-perf) &ndash; Tool to easily monitor react threejs performances.
 - [`react-spring`]
 - [`zustand`]
-- [`react-merge-refs`]
+- [`styled-components`]
