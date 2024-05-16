@@ -1,85 +1,127 @@
 import { colors } from "./colors"
-import { fontOnest } from "./fonts"
+import { fonts, orbitron } from "./fonts"
+import { responsive, rm } from "./utils"
 
 export const normalize = `
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        outline: none;
-        border: none;
-        text-decoration: none;
-        color: inherit;
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+outline: none;
+border: none;
+text-decoration: none;
+color: inherit;
+}
+
+img {
+user-select: none;
+}
+
+span, a {
+display: inline-block;
+}
+
+button {
+background: none;
+}
+
+html {
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+background-color: ${colors.blue2};
+color: ${colors.white1};
+font-size: 16px;
+${orbitron()}
+overflow: hidden;
+}
+
+html, body {
+-webkit-overflow-scrolling: touch;
+position: relative;
+overscroll-behavior-y: none;
+// height: calc(var(--vh, 1vh) * 100);
+@media screen and (max-width: 1080px) {
+    // height: calc(var(--svh, 1vh) * 100);
+}
+}
+body::-webkit-scrollbar { width: 0; }
+
+#__next {
+height: 100%;
+}
+
+html.lenis {
+height: auto;
+}
+
+
+.lenis.lenis-smooth {
+scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+pointer-events: none;
+}
+
+    
+.mySwiperTheyTrustUs {
+    height: auto !important;
+    margin-top: ${rm(100)};
+
+    ${responsive.lg`
+        margin-top: ${rm(200)};
+        `
     }
 
-    img {
-        user-select: none;
+    ${responsive.md`
+        margin-top: ${rm(120)};
+        `
+    }
+    
+    ${responsive.xsm`
+        margin-top: ${rm(80)};
+        `
     }
 
-    span, a {
-        display: inline-block;
+    .swiper-wrapper {
+        height: auto !important;
+        transition-timing-function: linear !important;
     }
 
-    button {
-        background: none;
+    .swiper-slide {
+        height: auto !important;
+        margin-right: ${rm(80)} !important;
+        width: ${rm(380)} !important;
+        ${responsive.lg`
+            width: ${rm(290)};
+            `
     }
+        ${responsive.md`
+        width: ${rm(332.5)} !important;
 
-    html {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        background-color: ${colors.primary900};
-        color: ${colors.primary50};
-        font-size: 16px;
-        ${fontOnest(400)}
-        overflow: hidden;
+            `
     }
+        ${responsive.xsm`
+            width: ${rm(185)} !important;
+            margin-right: ${rm(45)} !important;
 
-    html, body {
-        -webkit-overflow-scrolling: touch;
-        position: relative;
-        overscroll-behavior-y: none;
-        height: calc(var(--vh, 1vh) * 100);
-        @media screen and (max-width: 1080px) {
-            height: calc(var(--svh, 1vh) * 100);
-        }
+            `
     }
-    body::-webkit-scrollbar { width: 0; }
-
-    #__next {
-        height: 100%;
     }
+}
 
-    html.lenis {
-        height: auto;
-    }
-
-    // body {
-    //     animation: 3s fadeIn ease;
-    // }
-    // @keyframes fadeIn {
-    //     from {
-    //     opacity: 0;
-    //     /* filter: blur(30px); */
-    //     }
-    //     to {
-    //     opacity: 1;
-    //     /* filter: blur(0); */
-    //     }
-    // }
-
-    .lenis.lenis-smooth {
-        scroll-behavior: auto;
-    }
-
-    .lenis.lenis-smooth [data-lenis-prevent] {
-        overscroll-behavior: contain;
-    }
-
-    .lenis.lenis-stopped {
-        overflow: hidden;
-    }
-
-    .lenis.lenis-scrolling iframe {
-        pointer-events: none;
-    }
+.swiper {
+    width: 100%;
+    height: 100%;
+    display: flex !important;
+    position: static !important;
+}
 `

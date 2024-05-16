@@ -7,10 +7,9 @@
 // 3 - enjoy
 import { addEffect, useFrame } from '@react-three/fiber'
 import Lenis from '@studio-freight/lenis'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { useScroll } from './useScroll'
-import { useRouter } from 'next/router'
 
 const state = {
     top: 0,
@@ -21,89 +20,44 @@ const { damp } = THREE.MathUtils
 
 export function ScrollLayout({ children }: any) {
     const isEnableScroll = useScroll(state => state.isEnableScroll)
-
-    const [hash, setHash] = useState<string>('')
-    const [lenis, setLenis] = useScroll((state) => [state.lenis, state.setLenis])
-    const router = useRouter()
-
+    const lenis = useRef<any>()
     useEffect(() => {
-        window.scrollTo(0, 0)
-        const lenis = new Lenis({
-            smoothWheel: true,
-            syncTouch: true,
+        lenis.current = new Lenis({
+            // // @ts-expect-error
+            // wrapper: wrapper.current,
+            // // @ts-expect-error
+            // content: content.current,
+            lerp: 0.075,
+            // duration: 1.2,
+            // easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
+            // @ts-expect-error
+            direction: 'vertical', // vertical, horizontal
+            gestureDirection: 'vertical', // vertical, horizontal, both
+            smooth: true,
+            smoothTouch: true,
+            touchMultiplier: 1,
+            infinite: false,
         })
-        // @ts-expect-error
-        window.lenis = lenis
-        setLenis(lenis)
 
-        // new ScrollSnap(lenis, { type: 'proximity' })
-        lenis.on('scroll', ({ scroll, progress }: any) => {
+        lenis.current.on('scroll', ({ scroll, progress }: any) => {
             state.top = scroll
             state.progress = progress
         })
-        const effectSub = addEffect((time) => lenis.raf(time))
-
+        const effectSub = addEffect((time) => lenis.current.raf(time))
         return () => {
             effectSub()
-            lenis.destroy()
-            setLenis(null)
+            lenis.current.destroy()
         }
     }, [])
-
-
     useEffect(() => {
         if (isEnableScroll) {
-            lenis?.start()
+            lenis.current.start()
             enableNativeScroll(true)
         } else {
-            lenis?.stop()
+            lenis.current.stop()
             enableNativeScroll(false)
         }
-    }, [isEnableScroll, lenis])
-
-
-    useEffect(() => {
-        if (lenis && hash) {
-            // scroll to on hash change
-            const target = document.querySelector(hash)
-            lenis.scrollTo(target, { offset: 0 })
-        }
-    }, [lenis, hash])
-
-    useEffect(() => {
-        // update scroll position on page refresh based on hash
-        if (router.asPath.includes('#')) {
-            const hash = router.asPath.split('#').pop()
-            setHash('#' + hash)
-        }
-    }, [router])
-
-    useEffect(() => {
-        // catch anchor links clicks
-        function onClick(e: any) {
-            e.preventDefault()
-            const node = e.currentTarget
-            const hash = node.href.split('#').pop()
-            setHash('#' + hash)
-            setTimeout(() => {
-                window.location.hash = hash
-            }, 0)
-        }
-        // @ts-expect-error
-        const internalLinks = [...document.querySelectorAll('[href]')].filter(
-            (node) => node.href.includes(router.pathname + '#')
-        )
-
-        internalLinks.forEach((node) => {
-            node.addEventListener('click', onClick, false)
-        })
-
-        return () => {
-            internalLinks.forEach((node) => {
-                node.removeEventListener('click', onClick, false)
-            })
-        }
-    }, [])
+    }, [isEnableScroll])
 
     return <>{children}</>
 }

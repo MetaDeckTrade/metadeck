@@ -5,15 +5,17 @@ import { AdaptiveGrid } from '@/hooks/useGrid'
 import GlobalStyles from "@/styles"
 
 import type { AppProps } from 'next/app'
+import Header from '@/components/layout/Header/Header'
 
 export default function App({ Component, pageProps }: AppProps) {
     return (
         <ScrollLayout>
             <CanvasLayout>
-                <GlobalStyles/>
-                <Lvh/>
-                <AdaptiveGrid baseWidth={1440}/>
-                <Component {...pageProps} />
+            <Header />
+            <GlobalStyles />
+            <Lvh />
+            <AdaptiveGrid baseWidth={1440} />
+            <Component {...pageProps} />
             </CanvasLayout>
         </ScrollLayout>
     )

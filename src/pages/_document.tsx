@@ -42,6 +42,14 @@ export default function Document() {
                 <link rel='mask-icon' color='#000000' href='/icons/safari-pinned-tab.svg' />
                 <link rel='apple-touch-startup-image' href='/icons/startup.png' />
 
+                {/* fonts */}
+                <link fetchPriority='high' rel="preconnect" href="https://fonts.googleapis.com"/>
+                <link fetchPriority='high' rel="preconnect" href="https://fonts.gstatic.com" />
+                <link fetchPriority='high' href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet"></link>
+
+                <link fetchPriority='high' rel="preconnect" href="https://fonts.googleapis.com"/>
+                <link fetchPriority='high' rel="preconnect" href="https://fonts.gstatic.com" />
+                <link fetchPriority='high' href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Orbitron:wght@400..900&display=swap" rel="stylesheet"/>
                 {/* Meta Tags for HTML pages on Mobile */}
                 {/* <meta name="format-detection" content="telephone=yes"/>
                     <meta name="HandheldFriendly" content="true"/>  */}
