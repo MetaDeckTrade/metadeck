@@ -3,7 +3,7 @@ import { OrbitControls, View as ViewImpl } from '@react-three/drei'
 import { Three } from './Three'
 
 const style = {
-    position: 'fixed',
+    position: 'relative',
     top: '0px',
     left: '0px',
     width: '100%',
