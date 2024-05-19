@@ -2,7 +2,8 @@ import {  useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 import 'swiper/css';
-import {CompatibleWhereCountsStyle, SwiperSlideImage, Text} from './styleCompatibleWhereCounts'
+import {CompatibleWhereCountsStyle, CompatibleWhereCountsStyleNew, Stiky, StikyNew, SwiperSlideImage, Text} from './styleCompatibleWhereCounts'
+import { NativeUnderpin } from '@/components/UI/NativeUnderpin/NativeUnderpin';
 
 export default function CompatibleWhereCounts() {
     const stickyRef : any = useRef(null);
@@ -14,7 +15,7 @@ export default function CompatibleWhereCounts() {
 
                 const parentElement = stickyElement.parentElement;
                 if (parentElement) {
-                    //   parentElement.style.paddingBottom = `${height}px`;
+                      parentElement.style.paddingBottom = `${height}px`;
                 }
             }
         };
@@ -35,7 +36,9 @@ export default function CompatibleWhereCounts() {
     //     <CompatibleWhereCounts ref={ref} {...props} />
     //   ));
     return (
-        <CompatibleWhereCountsStyle ref={stickyRef} >
+        <Stiky>
+            <StikyNew>
+            <CompatibleWhereCountsStyleNew ref={stickyRef} >
             <h1>Compatible Where it Counts</h1>
             <Text >
                 <p >MetaDeck seamlessly integrates with numerous high-profile platforms and services to ensure your trading is as efficient as possible. Compatible with:</p>
@@ -57,6 +60,8 @@ export default function CompatibleWhereCounts() {
                     ))
                 }
             </Swiper>
-        </CompatibleWhereCountsStyle>
+        </CompatibleWhereCountsStyleNew>
+        </StikyNew>
+        </Stiky>
     )
 }

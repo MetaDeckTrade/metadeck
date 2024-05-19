@@ -6,6 +6,9 @@ import TradingCompanion from '@/components/pageBlock/mainPage/TradingCompanion/T
 import WhyMetaDeck from '@/components/pageBlock/mainPage/WhyMetaDeck/WhyMetaDeck'
 import Costomizable from '@/components/pageBlock/mainPage/Costomizable/Costomizable'
 import WrapperExplore from '@/components/pageBlock/mainPage/WrapperExplore/WrapperExplore'
+import SuccessStories from '@/components/pageBlock/mainPage/SuccessStories/SuccessStories'
+import JoinMetaDeckCommunity from '@/components/pageBlock/mainPage/JoinMetaDeckCommunity/JoinMetaDeckCommunity'
+import SimplicityMeetsPower from '@/components/pageBlock/mainPage/SimplicityMeetsPower/SimplicityMeetsPower'
 
 const Logo = dynamic(() => import('@/layouts/CanvasLayout/components/Examples').then((mod) => mod.Logo), { ssr: false })
 const PageView = dynamic(() => import('@/layouts/CanvasLayout/components/PageView').then((mod) => mod.PageView), {
@@ -26,6 +29,8 @@ export default function Home() {
             <WhyMetaDeck />
             <Costomizable />
             <WrapperExplore />
+            <SuccessStories />
+            <JoinMetaDeckCommunity />
         </div>
         // {/* <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
         //     <PageView>

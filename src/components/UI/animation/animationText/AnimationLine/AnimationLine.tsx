@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react"
 import { useInView } from "react-intersection-observer"
 import styled, { css } from 'styled-components'
 import { colors, fonts } from '@/styles'
-import { responsive, rm } from '@/styles/utils'
+import { media, responsive, rm } from '@/styles/utils'
 const StyledContainer = styled(SplitText)`
     color: ${colors.white2};
     font-size: ${rm(24)};
@@ -17,14 +17,14 @@ const StyledContainer = styled(SplitText)`
             width: ${rm(585)} !important;
             overflow: hidden;
             ${fonts.inter}
-            ${responsive.lg`
+            ${media.lg`
                 width: ${rm(445)} !important;
             `}
-            ${responsive.md`
+            ${media.md`
                 width: ${rm(474)} !important;
                 margin-top: ${rm(20)};
             `}
-            ${responsive.xsm`
+            ${media.xsm`
                 width: 100% !important;
                 margin-top: ${rm(0)};
             `}
@@ -42,24 +42,24 @@ const StyledContainer = styled(SplitText)`
             text-transform: uppercase;
             letter-spacing: 0.1em !important;
 
-            ${responsive.lg`
+            ${media.lg`
                 width: ${rm(460)} !important;
                 font-size: ${rm(30)} !important;
             `}
-            ${responsive.md`
+            ${media.md`
                 width: ${rm(613)} !important;
             `}
-           ${responsive.xsm`
+           ${media.xsm`
                 width: ${rm(314)} !important;
                 font-size: ${rm(20)} !important;
             `}
         `
     }
 
-    ${responsive.lg`
+    ${media.lg`
         font-size: ${rm(20)};
     `}
-    ${responsive.xsm`
+    ${media.xsm`
          font-size: ${rm(18)};
     `}
 

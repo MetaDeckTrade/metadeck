@@ -16,13 +16,10 @@ interface TypesText {
     delay: number,
 }
 
-const AnimatiosPharagraphTwo = ({ duration = 0, text, delay = 0,  ...props }: Types | any) => {
+const AnimatiosPharagraphTwo = ({animationDelay = 0, duration = 0, text, delay = 0,  ...props }: Types | any) => {
 
     const { ref, inView } = useInView()
-
     const [loaded, setLoaded] = useState(false);
-
-    const animationDelay = 1000; 
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -30,7 +27,6 @@ const AnimatiosPharagraphTwo = ({ duration = 0, text, delay = 0,  ...props }: Ty
         }, animationDelay);
         return () => clearTimeout(timeout);
     }, []);
-
     return (
         <div ref={ref} {...props}>
             <Text inView={inView} text={text} duration={duration} delay={loaded ? delay : animationDelay + delay}/>
