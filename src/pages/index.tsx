@@ -14,14 +14,22 @@ import Blanket from '@/components/Blanket/Blanket'
 export default function Home() {
 
     const containerRef = useRef<HTMLDivElement | null>(null)
+    const metaContainerRef = useRef<HTMLDivElement | null>(null)
+    const customizableFirstRef = useRef<HTMLDivElement | null>(null)
+    const customizaSecondRef = useRef<HTMLDivElement | null>(null)
+    const customizaThirdRef = useRef<HTMLDivElement | null>(null)
+    const customizalFourthRef = useRef<HTMLDivElement | null>(null)
+
 
     return (
         <div ref={containerRef} style={{ height: '100%', width: '100%' }}>
-            <TradingCompanion />
-            <WhyMetaDeck />
-            <Costomizable />
+            <div ref={metaContainerRef}>
+                <TradingCompanion />
+                <WhyMetaDeck />
+            </div>
+            <Costomizable firstRef={customizableFirstRef} secondRef={customizaSecondRef} thirdRef={customizaThirdRef} fourthRef={customizalFourthRef}/>
             <WrapperExplore />
-            <Blanket containerRef={containerRef}></Blanket>
+            <Blanket firstContainerRef={metaContainerRef} firstCustomRef={customizableFirstRef} secondCustomRef={customizaSecondRef} thirdCustomRef={customizaThirdRef} fourthCustomRef={customizalFourthRef} containerRef={containerRef}></Blanket>
         </div>
     )
 }
