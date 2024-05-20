@@ -1,6 +1,6 @@
 import { colors } from "@/styles";
 import { inter, orbitronBold } from "@/styles/fonts";
-import { media, responsive, rm } from "@/styles/utils";
+import { marginLvh, media, responsive, rm } from "@/styles/utils";
 import Image from "next/image";
 import styled from "styled-components";
 
@@ -16,7 +16,9 @@ export const Container = styled.div`
     padding-top: ${rm(190)};
     background-color: ${colors.white1};
     overflow: hidden;
-    margin-top: 100vh;
+    /* margin-top: 100vh; */
+    ${marginLvh(100)}
+
     ${media.lg`
         padding: ${rm(100)} ${rm(40)} ${rm(0)} ${rm(40)};
     `}

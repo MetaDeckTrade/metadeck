@@ -11,7 +11,7 @@ interface Types {
     onclick?: (value?: any) => void,
     header?: boolean,
     color?: string
-    burger?: boolean;
+    burger?: any;
 }
 
 const StyledContainer = styled.button`

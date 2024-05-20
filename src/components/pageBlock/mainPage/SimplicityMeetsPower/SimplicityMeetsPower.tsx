@@ -1,12 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
-import { Con, Container, ContainerNew, Sheme, Subtitle, SubtitleDescription, Title, WrapperSybtitle, WrapperTitle } from './styleSimplicityMeetsPower'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { ContainerNew, Sheme, Subtitle, SubtitleDescription, Title, WrapperSybtitle, WrapperTitle } from './styleSimplicityMeetsPower'
 import useInnerWidth from '@/hooks/useWidthWindow'
-import { NativeUnderpin } from '@/components/UI/NativeUnderpin/NativeUnderpin';
-import SuccessStories from '../SuccessStories/SuccessStories';
-import JoinMetaDeckCommunity from '../JoinMetaDeckCommunity/JoinMetaDeckCommunity';
 import { Stiky, StikyNew } from '../CompatibleWhereCounts/styleCompatibleWhereCounts';
 
 export default function SimplicityMeetsPower() {
+    const refHeight = useRef(null);
+    const wrapperRefHeight = useRef(null);
     const [imageSrc, setImageSrc] = useState('/img/sheme.png');
     const widthWindow = useInnerWidth()
     useEffect(() => {
@@ -21,13 +20,21 @@ export default function SimplicityMeetsPower() {
         }
     }, [widthWindow])
 
-    const outerRef = useRef(null)
-    const pinSpacerRef = useRef(null)
-
+    useMemo(() => {
+        if (!wrapperRefHeight.current || !refHeight.current) { return }
+        //@ts-expect-error
+        const newHeight = refHeight.current.getBoundingClientRect().height
+        if (newHeight) {
+            //@ts-expect-error
+            wrapperRefHeight.current.style.height = `${newHeight * 2}px`
+            //@ts-expect-error
+            wrapperRefHeight.current.style.marginTop = `-${newHeight}px`
+        }
+    }, [wrapperRefHeight, refHeight, widthWindow])
 
     return (
-        <Stiky>
-            <StikyNew>
+        <Stiky ref={wrapperRefHeight}>
+            <StikyNew ref={refHeight}>
             <ContainerNew>
                     <WrapperTitle>
                         <Title >Simplicity Meets Power</Title>

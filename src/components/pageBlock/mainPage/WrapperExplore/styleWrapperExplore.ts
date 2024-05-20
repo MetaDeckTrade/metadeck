@@ -1,10 +1,15 @@
 import AnimatiosWords from "@/components/UI/animation/animationText/AnimationWords/AnimationWords";
 import { colors } from "@/styles";
 import { inter, orbitronBold } from "@/styles/fonts";
-import { media, rm } from "@/styles/utils";
+import { heightLvh, media, rm } from "@/styles/utils";
 import { animated } from "@react-spring/web";
 import styled, { css } from "styled-components";
 
+export const WrapperImageMb = styled(animated.div)`
+    position: sticky;
+    top: 0;
+    height: ${rm(375)};
+`
 
 export const Wrapper = styled.div`
     position: relative;
@@ -17,8 +22,10 @@ export const TitleWrapper = styled.div`
     top: ${rm(80)};
     z-index: 10;
     overflow: hidden;
-    height: 100vh;
+    /* height: 100vh; */
     pointer-events: none;
+    ${heightLvh(100)}
+    
 `
 
 export const WrapperTitle = styled(animated.div)`
@@ -138,7 +145,21 @@ export const WpapperInfo: any = styled.div`
     background-color: ${colors.yellow1};
     z-index: 4;
     transition: ease 0.5s;
-    
+    /* >:nth-child(4){
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: ${rm(375)};
+       
+        ${media.md`
+            display: block;
+        `}
+        ${media.xsm`
+            display: none;
+        `}
+    } */
     ${(props: any) => {
         switch (props.bgcolor) {
             case 0:
@@ -154,10 +175,11 @@ export const WrapperInfoTable = styled.div`
 position: sticky;
     top: ${rm(0)};
     width: 100%;
-    padding-top: ${rm(380)};
+    /* padding-top: ${rm(380)}; */
     display: flex;
     align-items: flex-start;
     justify-content: flex-end;
+    padding-bottom: ${rm(200)};
     ${media.lg`
             gap: ${rm(100)};        
         `}
@@ -165,7 +187,9 @@ position: sticky;
             padding-top: ${rm(1030)};
         `} */
         ${media.xsm`
-            padding-top: ${rm(291)};
+    padding-bottom: ${rm(100)};
+
+            /* padding-top: ${rm(291)}; */
         `}
 `
 
@@ -175,7 +199,7 @@ export const WrapperTable = styled.div`
         display: flex;
         flex-direction: column;
         gap: ${rm(120)};        
-        margin-bottom: ${rm(200)};
+        /* margin-bottom: ${rm(200)}; */
         ${media.lg`
             gap: ${rm(100)};        
         `}

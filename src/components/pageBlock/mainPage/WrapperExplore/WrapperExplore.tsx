@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Functionality, FunctionalitySubtitle, FunctionalityTitle, FunctionalityWrapperTexxt, Table, Title, TitleTable, TitleWrapper, WpapperInfo, Wrapper, WrapperImage, WrapperImageContainer, WrapperInfoTable, WrapperTable, WrapperText, WrapperTitle } from './styleWrapperExplore';
 import { useSpringTrigger } from '@/hooks/useSpringTrigger';
 import SimplicityMeetsPower from '../SimplicityMeetsPower/SimplicityMeetsPower';
 import { useInView } from 'react-intersection-observer';
-import AnimatiosPharagraphTwo from '@/components/UI/animation/animationText/AnimationPatagraph/AnimationPatagraph';
 import { animated } from "@react-spring/web";
-import Image from 'next/image';
 import AnimatiosPharagraphTwoT from '@/components/UI/animation/animationText/AnimationPatagraphTwo/AnimationPatagraphTwo';
+import useInnerWidth from '@/hooks/useWidthWindow';
+import Image from 'next/image';
 const dataTable = [
     {
         text: 'Buy 1',
@@ -101,6 +101,43 @@ export default function WrapperExplore() {
     const { ref: start, inView: startBlock } = useInView()
     const refWrapper = useRef(null)
     const [dataTableList, setdataTableList]: any = useState([...dataTable])
+    const refTable = useRef(null)
+    const refWrapperTable = useRef(null)
+    const innerWidth  = useInnerWidth()
+    useEffect(() => {
+        if(!refTable.current || !refWrapperTable.current) {return} 
+        // const wrapperHeight = refWrapperTable.current.getBoundingClientRect().height
+        const wrapperHeight = window.innerHeight
+
+        // @ts-expect-error
+        const heightElement = refTable.current.getBoundingClientRect().height
+        if(wrapperHeight && heightElement){
+            const newPadding = wrapperHeight - heightElement
+            console.log(wrapperHeight)
+            console.log(heightElement)
+
+            let padding;
+            if(innerWidth > 1440){
+                padding = 227
+            } else if(innerWidth <= 1440 && innerWidth > 1024){
+                padding = 192
+            } else if (innerWidth <= 1024 && innerWidth > 480) {
+                padding = 205
+            } else if (innerWidth <= 480){
+                padding = 120
+            }
+             else if (wrapperHeight < 900) {
+                padding = 80
+                
+            }
+            if(padding && newPadding && refTable.current ){
+                // @ts-expect-error
+                refTable.current.style.paddingTop = `${newPadding -  padding}px`
+            }
+        }
+
+
+    },[refTable, refWrapperTable, innerWidth])
 
     const { values: titleValues } = useSpringTrigger({
         trigger: triggerRef,
@@ -196,8 +233,9 @@ export default function WrapperExplore() {
                         <WrapperTitle ref={refTitle}>
                             <Title duration={500} text={'Explore Your MetaDeck'} delay={300} />
                         </WrapperTitle>
+                       
                     </TitleWrapper>
-                    <Wrapper>
+                    <Wrapper ref={refWrapperTable}> 
                         <Functionality id='functionality' style={{ marginTop: `calc(-100vh + ${heightrefTitle}px)` }}>
                             <FunctionalityWrapperTexxt>
                                 <FunctionalityTitle>Functionality at Your Fingertips</FunctionalityTitle>
@@ -209,14 +247,15 @@ export default function WrapperExplore() {
                             <div ref={yellowRef} style={{ position: 'absolute', top: '50%', transform: 'translate(-50%, 0%)', right: 0, height: '1px', width: '1px', pointerEvents: 'none' }}></div>
                             <div ref={grinRef} style={{ position: 'absolute', bottom: '0%', right: 0, height: '1px', width: '1px', pointerEvents: 'none' }}></div>
                             <div ref={start} style={{ position: 'absolute', top: '0%', right: 0, height: '1px', width: '1px', pointerEvents: 'none' }}></div>
+                            {/* <Image src={'/img/image187.png'}  width={1920} height={375} alt=''/> */}
                             <WrapperInfoTable>
-                                <WrapperTable>
+                                <WrapperTable ref={refTable}>
                                     <TitleTable ref={refWrapper}>5 / 15</TitleTable>
                                     <Table>
                                         {
                                             numerBlock === 0 ?
                                                 dataTable.map((_: any, i: number) => (
-                                                    <WrapperText>
+                                                    <WrapperText key={i + 99}>
                                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M0 0H10L16 6V16H0V0Z" fill="#001A41" />
                                                         </svg>
@@ -228,7 +267,7 @@ export default function WrapperExplore() {
                                         {
                                             numerBlock === 1 ?
                                                 dataTable2.map((_: any, i: number) => (
-                                                    <WrapperText>
+                                                    <WrapperText key={i + 999}>
                                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M0 0H10L16 6V16H0V0Z" fill="#001A41" />
                                                         </svg>
@@ -240,7 +279,7 @@ export default function WrapperExplore() {
                                         {
                                             numerBlock === 2 ?
                                                 dataTable3.map((_: any, i: number) => (
-                                                    <WrapperText>
+                                                    <WrapperText key={i + 9999}>
                                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M0 0H10L16 6V16H0V0Z" fill="#001A41" />
                                                         </svg>

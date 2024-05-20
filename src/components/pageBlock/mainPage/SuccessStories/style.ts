@@ -12,6 +12,10 @@ export const Container = styled.div`
     gap: ${rm(120)};
     padding: ${rm(180)} ${rm(60)} ${rm(90)} ${rm(60)};
     background-color: ${colors.blue2};
+    
+    /* margin-top: -100vh;
+    margin-top: -100lvh;
+    margin-top: calc(var(--vh, 1lvh) * 50); */
 
     >:nth-child(1){
         position: relative;

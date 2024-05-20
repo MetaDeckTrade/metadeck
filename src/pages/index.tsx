@@ -9,6 +9,7 @@ import WrapperExplore from '@/components/pageBlock/mainPage/WrapperExplore/Wrapp
 import SuccessStories from '@/components/pageBlock/mainPage/SuccessStories/SuccessStories'
 import JoinMetaDeckCommunity from '@/components/pageBlock/mainPage/JoinMetaDeckCommunity/JoinMetaDeckCommunity'
 import SimplicityMeetsPower from '@/components/pageBlock/mainPage/SimplicityMeetsPower/SimplicityMeetsPower'
+import CompatibleWhereCounts from '@/components/pageBlock/mainPage/CompatibleWhereCounts/CompatibleWhereCounts'
 
 const Logo = dynamic(() => import('@/layouts/CanvasLayout/components/Examples').then((mod) => mod.Logo), { ssr: false })
 const PageView = dynamic(() => import('@/layouts/CanvasLayout/components/PageView').then((mod) => mod.PageView), {
@@ -27,7 +28,7 @@ export default function Home() {
         <div style={{ height: '100%', width: '100%' }}>
             <TradingCompanion />
             <WhyMetaDeck />
-            <Costomizable />
+           <Costomizable />
             <WrapperExplore />
             <SuccessStories />
             <JoinMetaDeckCommunity />

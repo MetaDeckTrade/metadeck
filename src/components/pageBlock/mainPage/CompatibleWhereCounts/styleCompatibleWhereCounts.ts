@@ -1,6 +1,6 @@
 import { colors } from "@/styles";
 import { inter, orbitronBold } from "@/styles/fonts";
-import { media, responsive, rm } from "@/styles/utils";
+import { heightLvh, marginLvh, media, responsive, rm } from "@/styles/utils";
 import Image from "next/image";
 
 import styled from "styled-components";
@@ -8,21 +8,19 @@ import styled from "styled-components";
 
 export const Stiky = styled.div`
     position: relative;
-    height: 200vh;
-    height: 200lvh;
-    height: calc(var(--vh, 1lvh) * 200);
-    margin-top: -100vh;
-    margin-top: -100lvh;
-    margin-top: calc(var(--vh, 1lvh) * -100);
+    /* ${marginLvh(-100)}
+    ${heightLvh(200)} */
+    background-color: ${colors.white1} ;
+
 `
 export const StikyNew = styled.div`
-
-position: sticky;
+    position: sticky;
     top: 0; left: 0;
     width: 100%;
-    height: 100vh;
+    /* height: 100vh;
     height: 100lvh;
-    height: calc(var(--vh, 1lvh) * 100);
+    height: calc(var(--vh, 1lvh) * 100); */ 
+    /* ${heightLvh(100)} */
     background-color: ${colors.white1} ;
     `
 

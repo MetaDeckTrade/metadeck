@@ -85,6 +85,21 @@ export const media: Media = Object.keys(breakpoints).reduce((acc, label) => {
   return acc;
 }, {} as Media);
 
+export const heightLvh = ($value) => {
+  return css`
+  height: ${$value}vh;
+  height: ${$value}lvh;
+  height: calc(var(--vh, 1lvh) * ${$value});
+  `
+} 
+export const marginLvh = ($value) => {
+  return css`
+    margin-top: ${$value}vh;
+    margin-top: ${$value}lvh;
+    margin-top: calc(var(--vh, 1lvh) * ${$value});
+  `
+} 
+
 export const ResponceGrid = createGlobalStyle`
   html {
     font-size: ${fontBase};
@@ -106,6 +121,5 @@ export const ResponceGrid = createGlobalStyle`
     `}
   }
 `;
-
 
 export default ResponceGrid;

@@ -3,6 +3,7 @@ import CompatibleWhereCounts from '../CompatibleWhereCounts/CompatibleWhereCount
 import {StyledcontainerWrapper, ContainerStyled, WrapperContent} from './styleCostomizable'
 import { useCallback, useMemo } from 'react'
 import { NativeUnderpin } from '@/components/UI/NativeUnderpin/NativeUnderpin'
+import WhyMetaDeck from '../WhyMetaDeck/WhyMetaDeck'
 
 interface Types {
     number: string,
@@ -63,7 +64,8 @@ export default function Costomizable() {
    },[])
     return (
         <StyledcontainerWrapper id='compatibility'>
-
+            <WhyMetaDeck />
+            
             {
                 data.length ?
                     data.map((_: Array<Types>, i: number) => (
