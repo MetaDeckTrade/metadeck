@@ -1,6 +1,6 @@
 import { colors } from "./colors"
 import { fonts, orbitron } from "./fonts"
-import { responsive, rm } from "./utils"
+import { media, responsive, rm } from "./utils"
 
 export const normalize = `
 * {
@@ -76,17 +76,17 @@ pointer-events: none;
     height: auto !important;
     margin-top: ${rm(100)};
 
-    ${responsive.lg`
+    ${media.lg`
         margin-top: ${rm(200)};
         `
     }
 
-    ${responsive.md`
+    ${media.md`
         margin-top: ${rm(120)};
         `
     }
     
-    ${responsive.xsm`
+    ${media.xsm`
         margin-top: ${rm(80)};
         `
     }
@@ -100,16 +100,16 @@ pointer-events: none;
         height: auto !important;
         margin-right: ${rm(80)} !important;
         width: ${rm(380)} !important;
-        ${responsive.lg`
+        ${media.lg`
             width: ${rm(290)};
             `
     }
-        ${responsive.md`
+        ${media.md`
         width: ${rm(332.5)} !important;
 
             `
     }
-        ${responsive.xsm`
+        ${media.xsm`
             width: ${rm(185)} !important;
             margin-right: ${rm(45)} !important;
 

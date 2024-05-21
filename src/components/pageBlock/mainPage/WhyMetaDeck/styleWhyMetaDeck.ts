@@ -1,7 +1,7 @@
 import AnimatiosWords from "@/components/UI/animation/animationText/AnimationWords/AnimationWords";
 import { colors } from "@/styles";
 import { orbitronBold } from "@/styles/fonts";
-import { responsive, rm } from "@/styles/utils";
+import { media, responsive, rm } from "@/styles/utils";
 import Image from "next/image";
 import styled from "styled-components";
 
@@ -13,17 +13,17 @@ export const WhyMetaDeckStyle = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: ${rm(160)};
-    ${responsive.lg`
+    ${media.lg`
         gap: ${rm(140)};
         padding: ${rm(100)} ${rm(40)} ${rm(120)} ${rm(40)};
     `}
 
-    ${responsive.md`
+    ${media.md`
         gap: ${rm(80)};
         padding: ${rm(80)} ${rm(30)} ${rm(80)} ${rm(30)};
     `}
 
-    ${responsive.xsm`
+    ${media.xsm`
     padding: ${rm(30)} ${rm(10)} ${rm(80)} ${rm(10)};
     `}
 `
@@ -45,13 +45,13 @@ export const ContainerText = styled.div`
     display: flex;
     flex-direction: column;
     gap: ${rm(40)};
-    ${responsive.lg`
+    ${media.lg`
         gap: ${rm(43)};
     `}
-    ${responsive.md`
+    ${media.md`
         gap: ${rm(62)};
     `}
-    ${responsive.xsm`
+    ${media.xsm`
         gap: ${rm(22)};
     `}
 `
@@ -69,13 +69,13 @@ export const AnimatiosWordsWhyMetaDeck = styled(AnimatiosWords)`
             color: ${colors.white2};
             font-size: ${rm(128)};
             line-height: 120%;
-            ${responsive.lg`
+            ${media.lg`
                 font-size: ${rm(126)};
             `}
-            ${responsive.md`
+            ${media.md`
                 font-size: ${rm(110)};
             `}
-            ${responsive.xsm`
+            ${media.xsm`
                 font-size: ${rm(64)};
                 line-height: 110%;
             `}

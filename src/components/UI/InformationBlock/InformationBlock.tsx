@@ -3,7 +3,7 @@ import AnimatiosPharagraphTwo from "../animation/animationText/AnimationPatagrap
 import LineAnimation from "../animation/animationText/AnimationLine/AnimationLine";
 import React from 'react';
 import styled from "styled-components";
-import { responsive, rm } from '../../../styles/utils'
+import { media, responsive, rm } from '../../../styles/utils'
 import { orbitronBold } from "@/styles/fonts";
 import { colors } from "@/styles";
 
@@ -54,7 +54,7 @@ margin-top: ${rm(50)};
 max-width: ${rm(530)};
 overflow: hidden;
 ${orbitronBold}
-${responsive.xsm`
+${media.xsm`
 max-width: 100%;
     margin-top: ${rm(30)};
 `}
@@ -64,7 +64,7 @@ const StyleLineAnimation = styled(LineAnimation)`
 position: relative;
 width: ${rm(424)} !important;
 overflow: hidden;
-${responsive.xsm`
+${media.xsm`
 width: 100% !important;
 `}
 `
@@ -72,7 +72,7 @@ export default function InformationBlock({ number, delay = 0, title, text, ...pr
    
     return (
         <ContainerStyle  {...props}>
-            <AnimationBlockY duration={1000} delay={delay}>
+            <AnimationBlockY duration={600} delay={delay}>
                 <WrapperNumer >
                     <svg width="100" height="75" viewBox="0 0 100 75" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 0H88L100 12V75H0V0Z" fill="#001A41" />
@@ -81,9 +81,9 @@ export default function InformationBlock({ number, delay = 0, title, text, ...pr
                 </WrapperNumer>
             </AnimationBlockY>
             <StyleAnimatiosPharagraphTwo
-                duration={500}
-                text={title} delay={500 + delay} />
-            <StyleLineAnimation delay={delay + 800} >
+                duration={600}
+                text={title} delay={200 + delay} />
+            <StyleLineAnimation delay={delay + 400} >
                 {text}
             </StyleLineAnimation>
         </ContainerStyle>

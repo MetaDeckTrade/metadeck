@@ -1,7 +1,7 @@
 import Link from "next/link";
 import style from './LinkHeader.module.scss'
 import styled from "styled-components";
-import { responsive, rm } from "@/styles/utils";
+import { media, responsive, rm } from "@/styles/utils";
 import { colors } from "@/styles";
 
 interface Types{
@@ -23,7 +23,7 @@ export default function LinkHeader({href, name} : Types){
         opacity: 1;
     }
     
-    ${responsive.md`
+    ${media.md`
     font-size: ${rm(32)};
     `}
     `
