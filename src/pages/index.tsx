@@ -26,9 +26,9 @@ export default function Home() {
             <div ref={containerRef} style={{ height: '100%', width: '100%' }}>
                 <TradingCompanion />
                 <WhyMetaDeck />
-            {/* <Costomizable /> */}
+                <Costomizable />
                 <WrapperExplore />
-                <Blanket containerRef={containerRef}></Blanket>
+                {/* <Blanket containerRef={containerRef}></Blanket> */}
                 <SuccessStories />
                 <JoinMetaDeckCommunity />
             </div>
