@@ -54,6 +54,18 @@ html.lenis {
 height: auto;
 }
 
+body {
+    animation: 2s fadeIn ease;
+}
+@Keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 
 .lenis.lenis-smooth {
 scroll-behavior: auto;
