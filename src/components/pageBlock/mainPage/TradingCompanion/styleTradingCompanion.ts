@@ -3,7 +3,7 @@ import AnimatiosPharagraphTwo from "@/components/UI/animation/animationText/Anim
 import AnimatiosWords from "@/components/UI/animation/animationText/AnimationWords/AnimationWords";
 import { colors, fonts } from "@/styles";
 import { orbitronBold } from "@/styles/fonts";
-import { responsive, rm } from "@/styles/utils";
+import { media, responsive, rm } from "@/styles/utils";
 import Image from "next/image";
 import styled from "styled-components";
 
@@ -16,15 +16,15 @@ export const ContainerStyle = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: ${rm(20)};
-    ${responsive.lg`
+    ${media.lg`
     padding: calc(${rm(90)} + ${rm(40)}) ${rm(40)} ${rm(270)} ${rm(40)};
     `}
 
-    ${responsive.md`
+    ${media.md`
     padding: calc(${rm(90)} + ${rm(60)}) ${rm(30)} ${rm(644)} ${rm(30)};
     `}
 
-    ${responsive.xsm`
+    ${media.xsm`
     padding: calc(${rm(90)} + ${rm(40)}) ${rm(10)} ${rm(600)} ${rm(10)};
     `}
 
@@ -47,11 +47,11 @@ export const Ellipse2 = styled(Image)`
     height: ${rm(1442)};
     pointer-events: none;
     max-width: 100%;
-    ${responsive.md`
+    ${media.md`
         height: ${rm(870)};
         width: ${rm(900)};
     `}
-    ${responsive.xsm`
+    ${media.xsm`
         height: ${rm(1030)};
         width: ${rm(533)};
     `}
@@ -69,10 +69,10 @@ export const Subtitle = styled(AnimatiosPharagraphTwo)`
         font-size: ${rm(32)} ;
         line-height: 120%;
         text-transform: uppercase;
-        ${responsive.xsm`
+        ${media.xsm`
             font-size: ${rm(30)};
         `}
-        ${responsive.xsm`
+        ${media.xsm`
             font-size: ${rm(20)};
         `}
     }
@@ -83,21 +83,21 @@ export const Title = styled(AnimatiosWords)`
     width: 100%;
     overflow: hidden;
     ${orbitronBold()}
+
     >span {
         overflow: hidden;
         white-space: pre-wrap;
-
         >p {
             color: ${colors.white2};
             font-size: ${rm(160)};
             line-height: 120%;
-            ${responsive.lg`
+            ${media.lg`
             font-size: ${rm(122)};
             `}
-            ${responsive.md`
+            ${media.md`
                 font-size: ${rm(90)};
             `}
-            ${responsive.xsm`
+            ${media.xsm`
                 font-size: ${rm(48)};
             `}
         }
@@ -109,14 +109,14 @@ export const LineAnimationText = styled(LineAnimation)`
     width: ${rm(585)} !important;
     overflow: hidden;
     ${fonts.inter}
-    ${responsive.lg`
+    ${media.lg`
         width: ${rm(445)} !important;
     `}
-    ${responsive.md`
+    ${media.md`
          width: ${rm(474)} !important;
          margin-top: ${rm(20)};
     `}
-    ${responsive.xsm`
+    ${media.xsm`
         width: 100% !important;
         margin-top: ${rm(0)};
     `}
@@ -129,10 +129,10 @@ export const WrapperButton = styled.div`
     align-items: center;
     gap: ${rm(20)};
     margin-top: ${rm(40)};
-    ${responsive.lg`
+    ${media.lg`
          margin-top: ${rm(60)};
     `}
-    ${responsive.xsm`
+    ${media.xsm`
        flex-direction: column;
        margin-top: ${rm(10)};
        align-items: flex-start;

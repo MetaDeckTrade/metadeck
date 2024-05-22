@@ -7,7 +7,10 @@ import WhyMetaDeck from '@/components/pageBlock/mainPage/WhyMetaDeck/WhyMetaDeck
 import Costomizable from '@/components/pageBlock/mainPage/Costomizable/Costomizable'
 import WrapperExplore from '@/components/pageBlock/mainPage/WrapperExplore/WrapperExplore'
 import Blanket from '@/components/Blanket/Blanket'
-
+import SuccessStories from '@/components/pageBlock/mainPage/SuccessStories/SuccessStories'
+import JoinMetaDeckCommunity from '@/components/pageBlock/mainPage/JoinMetaDeckCommunity/JoinMetaDeckCommunity'
+import SimplicityMeetsPower from '@/components/pageBlock/mainPage/SimplicityMeetsPower/SimplicityMeetsPower'
+import CompatibleWhereCounts from '@/components/pageBlock/mainPage/CompatibleWhereCounts/CompatibleWhereCounts'
 
 
 
@@ -19,9 +22,11 @@ export default function Home() {
         <div ref={containerRef} style={{ height: '100%', width: '100%' }}>
             <TradingCompanion />
             <WhyMetaDeck />
-            <Costomizable />
+           <Costomizable />
             <WrapperExplore />
             <Blanket containerRef={containerRef}></Blanket>
+            <SuccessStories />
+            <JoinMetaDeckCommunity />
         </div>
     )
 }
