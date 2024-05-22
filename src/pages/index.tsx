@@ -8,6 +8,11 @@ import Costomizable from '@/components/pageBlock/mainPage/Costomizable/Costomiza
 import WrapperExplore from '@/components/pageBlock/mainPage/WrapperExplore/WrapperExplore'
 import Blanket from '@/components/Blanket/Blanket'
 
+import SuccessStories from '@/components/pageBlock/mainPage/SuccessStories/SuccessStories'
+import JoinMetaDeckCommunity from '@/components/pageBlock/mainPage/JoinMetaDeckCommunity/JoinMetaDeckCommunity'
+import SimplicityMeetsPower from '@/components/pageBlock/mainPage/SimplicityMeetsPower/SimplicityMeetsPower'
+import CompatibleWhereCounts from '@/components/pageBlock/mainPage/CompatibleWhereCounts/CompatibleWhereCounts'
+import { useWindowWidth } from '@react-hook/window-size'
 
 
 
@@ -20,16 +25,25 @@ export default function Home() {
     const customizaThirdRef = useRef<HTMLDivElement | null>(null)
     const customizalFourthRef = useRef<HTMLDivElement | null>(null)
 
+    const width = useWindowWidth()
 
     return (
         <div ref={containerRef} style={{ height: '100%', width: '100%' }}>
-            <div ref={metaContainerRef}>
-                <TradingCompanion />
-                <WhyMetaDeck />
+            <div style={{position: 'relative', height: '100%'}}>
+                {width > 1024 && <div style={{position: 'sticky', top: 0, left: 0, marginBottom: '100vh', marginTop: '-100vh'}}>
+                    <Blanket firstContainerRef={metaContainerRef} firstCustomRef={customizableFirstRef} secondCustomRef={customizaSecondRef} thirdCustomRef={customizaThirdRef} fourthCustomRef={customizalFourthRef} containerRef={containerRef}></Blanket>
+                </div>}
+                <div ref={metaContainerRef}>
+                    <TradingCompanion />
+                    <WhyMetaDeck />
+                </div>
+                <Costomizable firstRef={customizableFirstRef} secondRef={customizaSecondRef} thirdRef={customizaThirdRef} fourthRef={customizalFourthRef}/>
             </div>
-            <Costomizable firstRef={customizableFirstRef} secondRef={customizaSecondRef} thirdRef={customizaThirdRef} fourthRef={customizalFourthRef}/>
+            <CompatibleWhereCounts />
             <WrapperExplore />
-            <Blanket firstContainerRef={metaContainerRef} firstCustomRef={customizableFirstRef} secondCustomRef={customizaSecondRef} thirdCustomRef={customizaThirdRef} fourthCustomRef={customizalFourthRef} containerRef={containerRef}></Blanket>
+            <SuccessStories />
+            <JoinMetaDeckCommunity />
+
         </div>
     )
 }

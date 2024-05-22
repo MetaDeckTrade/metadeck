@@ -3,10 +3,7 @@ import { useMemo } from "react";
 import styled from "styled-components";
 import { rm } from "@/styles/utils";
 import { colors } from "@/styles";
-
-export default function NetworkIcons({ name,  className }: { name: string , className ?: any}) {
-
-    const StyleLineAnimation = styled(Link)`
+const StyleLineAnimation = styled(Link)`
     position: relative;
     width: ${rm(32)};
     height: ${rm(32)};
@@ -28,6 +25,9 @@ export default function NetworkIcons({ name,  className }: { name: string , clas
         }
     }
     `
+export default function NetworkIcons({ name,  className }: { name: string , className ?: any}) {
+
+    
 
     const icon = useMemo(() => {
         if (!name) { return }

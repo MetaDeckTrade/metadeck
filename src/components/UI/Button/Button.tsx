@@ -3,7 +3,7 @@ import { memo, useCallback } from 'react'
 import style from './Button.module.scss'
 import styled, { css } from 'styled-components'
 import { fonts, orbitronBold } from '@/styles/fonts'
-import { responsive, rm } from '@/styles/utils'
+import { media, responsive, rm } from '@/styles/utils'
 import { colors } from '@/styles'
 
 interface Types {
@@ -11,18 +11,19 @@ interface Types {
     onclick?: (value?: any) => void,
     header?: boolean,
     color?: string
+    burger?: any;
 }
 
 const StyledContainer = styled.button`
-position: relative;
-width: fit-content;
-padding: ${rm(13)} ${rm(20)};
-display: flex;
-align-items: center;
-font-size: ${rm(24)};
-line-height: 120%;
-cursor: pointer;
-${(props: any) => {
+    position: relative;
+    width: fit-content;
+    padding: ${rm(13)} ${rm(20)};
+    display: flex;
+    align-items: center;
+    font-size: ${rm(24)};
+    line-height: 120%;
+    cursor: pointer;
+    ${(props: any) => {
         switch (props.color) {
             case "yellow":
                 return css`
@@ -50,12 +51,21 @@ ${(props: any) => {
     }}
         ${fonts.orbitronBold}
         ${(props: any) => props.header &&
-                css`
-        ${responsive.xsm`
-        display: none !important;
-        `}
+            css`
+                ${media.xsm`
+                    display: none !important;
+                `}
             `
-    }
+        }
+        ${(props : any) => props.burger &&
+            css`
+                display: none !important;
+                margin-top: ${rm(20)};
+                ${media.xsm`
+                    display: flex !important;
+                `}
+            `
+        }
 `
 
 const Button = memo((props: Types) => {
