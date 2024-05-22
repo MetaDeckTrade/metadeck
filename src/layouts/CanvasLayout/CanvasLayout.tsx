@@ -23,6 +23,7 @@ const CanvasLayout = ({ children }: any) => {
                 width: ' 100%',
                 height: '100%',
                 minHeight: 'calc(var(--vh, 1vh) * 100)',
+                zIndex: 100,
             }}
         >
             {children}
@@ -34,6 +35,7 @@ const CanvasLayout = ({ children }: any) => {
                     width: '100vw',
                     height: 'calc(var(--vh, 1vh) * 100)',
                     pointerEvents: 'none',
+                    zIndex: 101
                 }}
                 gl={{
                     powerPreference: "high-performance",
