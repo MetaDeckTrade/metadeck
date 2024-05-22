@@ -19,14 +19,20 @@ export default function Home() {
     const containerRef = useRef<HTMLDivElement | null>(null)
 
     return (
-        <div ref={containerRef} style={{ height: '100%', width: '100%' }}>
-            <TradingCompanion />
-            <WhyMetaDeck />
-           <Costomizable />
-            <WrapperExplore />
-            <Blanket containerRef={containerRef}></Blanket>
-            <SuccessStories />
-            <JoinMetaDeckCommunity />
-        </div>
+        <>
+            <Head>
+                <title>Meta Deck | The Ultimate Trading Companion</title>
+            </Head>
+            <div ref={containerRef} style={{ height: '100%', width: '100%' }}>
+                <TradingCompanion />
+                <WhyMetaDeck />
+            {/* <Costomizable /> */}
+                <WrapperExplore />
+                <Blanket containerRef={containerRef}></Blanket>
+                <SuccessStories />
+                <JoinMetaDeckCommunity />
+            </div>
+        </>
+
     )
 }
