@@ -113,8 +113,6 @@ export default function WrapperExplore() {
         const heightElement = refTable.current.getBoundingClientRect().height
         if(wrapperHeight && heightElement){
             const newPadding = wrapperHeight - heightElement
-            console.log(wrapperHeight)
-            console.log(heightElement)
 
             let padding;
             if(innerWidth > 1440){
@@ -126,7 +124,7 @@ export default function WrapperExplore() {
             } else if (innerWidth <= 480){
                 padding = 120
             }
-             else if (wrapperHeight < 900) {
+             if (wrapperHeight < 900) {
                 padding = 80
                 
             }

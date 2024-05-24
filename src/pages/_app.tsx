@@ -11,23 +11,35 @@ import Footer from '@/components/layout/Footer/Footer'
 import Network from '@/components/layout/Network/Network'
 import ScrollDown from '@/components/layout/ScrollDown/ScrollDown'
 import Burger from '@/components/layout/Burger/Burger'
+import { useEffect, useLayoutEffect, useState } from 'react'
 
 export default function App({ Component, pageProps }: AppProps) {
+    const [start, setStart] = useState(false)
+    useLayoutEffect(() => void setStart(true), [])
     return (
-        <ScrollLayout>
-            <ScrollDown>
-                <CanvasLayout>
-                    <Burger />
-                    <ResponceGrid />
-                    <Header />
-                    <GlobalStyles />
-                    <Network />
-                    <Lvh />
-                    <AdaptiveGrid baseWidth={1920} />
-                    <Component {...pageProps} />
-                </CanvasLayout>
-                <Footer />
-            </ScrollDown>
-        </ScrollLayout>
+        <>
+
+            {
+                start ?
+                    <ScrollLayout>
+                        <ScrollDown>
+                            <CanvasLayout>
+                                <Burger />
+                                <ResponceGrid />
+                                <Header />
+                                <GlobalStyles />
+                                <Network />
+                                <Lvh />
+                                <AdaptiveGrid baseWidth={1920} />
+                                <Component {...pageProps} />
+                            </CanvasLayout>
+                            <Footer />
+                        </ScrollDown>
+                    </ScrollLayout>
+                    : <></>
+            }
+
+
+        </>
     )
 }

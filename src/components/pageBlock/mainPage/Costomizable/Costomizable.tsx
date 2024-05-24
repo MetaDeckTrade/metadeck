@@ -64,7 +64,7 @@ export default function Costomizable() {
    },[])
     return (
         <StyledcontainerWrapper id='compatibility'>
-            <WhyMetaDeck />
+            {/* <WhyMetaDeck /> */}
             
             {
                 data.length ?
