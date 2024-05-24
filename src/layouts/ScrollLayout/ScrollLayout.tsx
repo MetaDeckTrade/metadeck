@@ -17,44 +17,32 @@ const state = {
 }
 
 const { damp } = THREE.MathUtils
-
+export const lenis: { current: Lenis | null } = { current: null }
 export function ScrollLayout({ children }: any) {
     const isEnableScroll = useScroll(state => state.isEnableScroll)
-    const lenis = useRef<any>()
     useEffect(() => {
         lenis.current = new Lenis({
-            // // @ts-expect-error
-            // wrapper: wrapper.current,
-            // // @ts-expect-error
-            // content: content.current,
-            lerp: 0.075,
-            // duration: 1.2,
-            // easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
-            // @ts-expect-error
-            direction: 'vertical', // vertical, horizontal
-            gestureDirection: 'vertical', // vertical, horizontal, both
-            smooth: true,
-            smoothTouch: true,
-            touchMultiplier: 1,
-            infinite: false,
+            smoothWheel: true,
+            syncTouch: true
+            // smoothTouch: true,
         })
 
         lenis.current.on('scroll', ({ scroll, progress }: any) => {
             state.top = scroll
             state.progress = progress
         })
-        const effectSub = addEffect((time) => lenis.current.raf(time))
+        const effectSub = addEffect((time) => lenis.current!.raf(time))
         return () => {
             effectSub()
-            lenis.current.destroy()
+            lenis.current!.destroy()
         }
     }, [])
     useEffect(() => {
         if (isEnableScroll) {
-            lenis.current.start()
+            lenis.current!.start()
             enableNativeScroll(true)
         } else {
-            lenis.current.stop()
+            lenis.current!.stop()
             enableNativeScroll(false)
         }
     }, [isEnableScroll])

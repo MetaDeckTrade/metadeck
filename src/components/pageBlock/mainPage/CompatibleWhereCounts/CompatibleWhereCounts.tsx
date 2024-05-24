@@ -55,8 +55,8 @@ export default function CompatibleWhereCounts() {
             <StikyNew ref={refHeight}>
                 <CompatibleWhereCountsStyleNew ref={stickyRef} >
                     <h1>Compatible Where it Counts</h1>
-                    <Text >
-                        <p >MetaDeck seamlessly integrates with numerous high-profile platforms and services to ensure your trading is as efficient as possible. Compatible with:</p>
+                    <Text>
+                        <p>MetaDeck seamlessly integrates with numerous high-profile platforms and services to ensure your trading is as efficient as possible. Compatible with:</p>
                     </Text>
                     <Swiper
                         spaceBetween={0}

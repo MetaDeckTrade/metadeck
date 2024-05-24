@@ -123,16 +123,16 @@ const LineAnimation = ({ delay = 0, children, ...props }: any) => {
     }, [inView])
 
     return (
-    
-                    <StyledContainer
-                        ref={ref}
-                        LineWrapper={LineText}
-                        loaded={loaded}
-                        animatedOnce={animatedOnce}
-                        {...props}
-                    >
-                        {children}
-                    </StyledContainer>
+
+        <StyledContainer
+            ref={ref}
+            LineWrapper={LineText}
+            loaded={loaded}
+            animatedOnce={animatedOnce}
+            {...props}
+        >
+            {children}
+        </StyledContainer>
     )
 }
 

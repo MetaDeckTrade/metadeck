@@ -33,7 +33,7 @@ export default function SimplicityMeetsPower() {
     }, [wrapperRefHeight, refHeight, widthWindow])
 
     return (
-        <Stiky ref={wrapperRefHeight}>
+        <Stiky id="how" ref={wrapperRefHeight}>
             <StikyNew ref={refHeight}>
             <ContainerNew>
                     <WrapperTitle>
