@@ -1,3 +1,5 @@
+'use client'
+
 import { Suspense, useRef, MutableRefObject} from 'react'
 import dynamic from 'next/dynamic'
 import { PerspectiveCamera, Preload } from '@react-three/drei'
@@ -8,7 +10,6 @@ import ButtonModels from './Models/ButtonModels'
 
 const PageView = dynamic(() => import('@/layouts/CanvasLayout/components/PageView').then((mod) => mod.PageView), {
     ssr: false,
-    loading: () => (<div>Loading Page Scene...</div>),
 })
 
 interface Blanket {
@@ -21,7 +22,7 @@ interface Blanket {
     blockNumber: number,
 }
 
-export default function BlanketWithButtons({containerRef, firstContainerRef, firstCustomRef, secondCustomRef, thirdCustomRef, fourthCustomRef, blockNumber}: Blanket) {
+export default function BlanketWithButtons({containerRef, blockNumber}: Blanket) {
 
     const { ref, inView } = useInView();
     const width = useWindowWidth()    

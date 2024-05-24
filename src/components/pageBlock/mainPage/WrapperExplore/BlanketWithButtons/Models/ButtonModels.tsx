@@ -10,11 +10,6 @@ import { easings } from "@react-spring/web";
 interface Model {
     containerRef: MutableRefObject<HTMLElement | HTMLDivElement | null>,
     inView: any,
-    firstContainerRef?: MutableRefObject<HTMLElement | HTMLDivElement | null>,
-    firstCustomRef?: MutableRefObject<HTMLElement | HTMLDivElement | null>,
-    secondCustomRef?: MutableRefObject<HTMLElement | HTMLDivElement | null>,
-    thirdCustomRef?: MutableRefObject<HTMLElement | HTMLDivElement | null>,
-    fourthCustomRef?: MutableRefObject<HTMLElement | HTMLDivElement | null>,
     position: any,
     rotation: any,
     url: string,
@@ -22,25 +17,14 @@ interface Model {
     activeNumber: number,
 }
 
-export default function ButtonModels({ containerRef, inView, firstContainerRef, firstCustomRef, secondCustomRef, thirdCustomRef, fourthCustomRef, rotation, position, url, blockNumber, activeNumber }: Model) {
-    const { scene: model } = useGLTF(url);
+export default function ButtonModels({ containerRef, inView, rotation, position, url, blockNumber, activeNumber }: Model) {
+    const { scene } = useGLTF(url);
     const modelRef = useRef<THREE.Object3D>(null);
-    const materialsRef = useRef<any[]>([]);
     const width = useWindowWidth();
-
-    const [animatedOnce, setAnimatedOnce] = useState(false);
-
-    useEffect(() => {
-        if (!inView) return;
-        if (inView) {
-            setAnimatedOnce(true);
-        }
-    }, [inView]);
 
     const effect = useSpring({
         opacity: blockNumber === activeNumber ? 1 : 0,
-        config: { duration: 700, easing: easings.easeInOutCubic },
-        delay: 300,
+        config: { duration: 300, easing: easings.easeInOutCubic },
     });
 
     const positionSpring = useSpring({
@@ -48,36 +32,48 @@ export default function ButtonModels({ containerRef, inView, firstContainerRef, 
         config: { duration: 500, easing: easings.easeInOutCubic },
     });
 
-    useMemo(() => {
-        model.traverse((object: any) => {
-            if (object.isMesh && object.material) {
-                const material = object.material.clone();
-                material.transparent = true;
-                material.depthWrite = false;
-                object.material = material;
-                material.onBeforeCompile = (shader: any) => {
-                    shader.uniforms.uOpacity = { value: 1.0 };
-                    shader.fragmentShader = `
-                        uniform float uOpacity;
-                        ${shader.fragmentShader.replace(
-                            `gl_FragColor = vec4( outgoingLight, diffuseColor.a );`,
-                            `gl_FragColor = vec4( outgoingLight, diffuseColor.a * uOpacity );`
-                        )}
-                    `;
-                    materialsRef.current.push(shader.uniforms.uOpacity);
-                };
-                material.needsUpdate = true;
+    const uniforms = useRef({ alpha: { value: 0 } })
+
+
+
+    const model = useMemo(() => {
+        scene.traverse((object: any) => {
+            if (object.isMesh) {
+                const material = object.material.clone()
+                material.transparent = true
+    
+                object.castShadow = true
+                object.recieveShadow = true
+    
+                material.onBeforeCompile = (_shader: THREE.Shader) => {
+                    _shader.uniforms = { ..._shader.uniforms, ...uniforms.current  }
+    
+                    // Injection
+                    _shader.fragmentShader = _shader.fragmentShader.replace('#include <common>', `
+                        #include <common>
+                        uniform float alpha;
+                    `)
+                    _shader.fragmentShader = _shader.fragmentShader.replace('#include <dithering_fragment>', `
+                        #include <dithering_fragment>
+                        gl_FragColor.a *= alpha;
+                    `)
+                }
+                object.material = material
             }
-        });
-    }, [model]);
+        })
+        return scene
+    }, [scene])
+
 
     useFrame(() => {
         if (modelRef.current) {
             modelRef.current.position.z = positionSpring.z.get();
         }
-        materialsRef.current.forEach((uniform: any) => {
-            uniform.value = effect.opacity.get();
-        });
+        // materialsRef.current.forEach((uniform: any) => {
+        //     uniform.value = effect.opacity.get();
+        // });
+
+        uniforms.current.alpha.value = effect.opacity.get()
     });
 
     return (

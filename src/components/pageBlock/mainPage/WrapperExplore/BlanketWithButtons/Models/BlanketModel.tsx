@@ -3,7 +3,7 @@ import { PageView } from "@/layouts/CanvasLayout/components/PageView";
 import { useWindowWidth } from "@react-hook/window-size";
 import { useSpring } from "@react-spring/three";
 import { Preload, useGLTF } from "@react-three/drei";
-import { useRef, MutableRefObject, useState, useEffect } from 'react';
+import { useRef, MutableRefObject, useState, useEffect, useMemo } from 'react';
 import { useInView } from "react-intersection-observer";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
@@ -12,20 +12,14 @@ import { lerp } from "three/src/math/MathUtils.js";
 
 interface Model {
     containerRef: MutableRefObject<HTMLElement | HTMLDivElement | null>,
-    inView: any,
-    firstContainerRef?: MutableRefObject<HTMLElement | HTMLDivElement | null>,
-    firstCustomRef?: MutableRefObject<HTMLElement | HTMLDivElement | null>,
-    secondCustomRef?: MutableRefObject<HTMLElement | HTMLDivElement | null>,
-    thirdCustomRef?: MutableRefObject<HTMLElement | HTMLDivElement | null>,
-    fourthCustomRef?: MutableRefObject<HTMLElement | HTMLDivElement | null>,
-    position: any,
-    rotation: any,
+    inView: boolean,
+    position: Array<number>,
+    rotation: Array<number>,
 }
 
-export default function BlanketModal({ containerRef, inView, firstContainerRef, firstCustomRef, secondCustomRef, thirdCustomRef, fourthCustomRef, rotation, position}: Model) {
-    const { scene: model } = useGLTF('/models/model.glb');
+export default function BlanketModal({ inView, rotation, position}: Model) {
+    const { scene } = useGLTF('/models/model.glb');
     const modelRef = useRef<THREE.Object3D>(null);
-    const progressRef = useRef<number>(0)
 
 
     const width = useWindowWidth();
@@ -46,22 +40,44 @@ export default function BlanketModal({ containerRef, inView, firstContainerRef, 
         delay: 300,
     });
 
-    useSpringTrigger({
-        trigger: containerRef,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: true,
-        from: {
-            value: '0'
-        },
-        to: {
-            value: '10' 
-        },
-        onChange: (state) => {
-            progressRef.current = state.value.progress
-        }
-    });
+    const uniforms = useRef({ alpha: { value: 0 } })
 
+
+
+    const model = useMemo(() => {
+        const clonedScene = scene.clone()
+
+        clonedScene.traverse((object: any) => {
+            if (object.isMesh) {
+                const material = object.material.clone()
+                material.transparent = true
+    
+                object.castShadow = true
+                object.recieveShadow = true
+    
+                material.onBeforeCompile = (_shader: THREE.Shader) => {
+                    _shader.uniforms = { ..._shader.uniforms, ...uniforms.current  }
+    
+                    // Injection
+                    _shader.fragmentShader = _shader.fragmentShader.replace('#include <common>', `
+                        #include <common>
+                        uniform float alpha;
+                    `)
+                    _shader.fragmentShader = _shader.fragmentShader.replace('#include <dithering_fragment>', `
+                        #include <dithering_fragment>
+                        gl_FragColor.a *= alpha;
+                    `)
+                }
+                object.material = material
+            }
+        })
+        return clonedScene
+    }, [scene])
+
+
+    useFrame(() => {
+        uniforms.current.alpha.value = effect.opacity.get()
+    })
 
     return (
         <primitive
@@ -69,7 +85,7 @@ export default function BlanketModal({ containerRef, inView, firstContainerRef, 
             scale={20}
             position={position}
             rotation={rotation}
-            object={model.clone()}
+            object={model}
         />
     );
 }

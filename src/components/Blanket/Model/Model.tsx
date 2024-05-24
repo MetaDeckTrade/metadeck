@@ -28,7 +28,7 @@ const progressPc = {
 }
 
 export default function Model({ containerRef, inView, firstContainerRef, firstCustomRef, secondCustomRef, thirdCustomRef, fourthCustomRef}: ModelProps) {
-    const model = useGLTF('/models/model.glb');
+    const {scene} = useGLTF('/models/model.glb');
     const modelRef = useRef<THREE.Object3D>(null);
     const progressRef = useRef<number>(0);
     const materialsRef = useRef<any[]>([]);
@@ -42,36 +42,47 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
     useEffect(() => {
         if (!inView) return;
         setAnimatedOnce(true);
+        console.log(animatedOnce)
     }, [inView]);
 
     const effect = useSpring({
         opacity: animatedOnce ? 1 : 0,
         y: animatedOnce ? -1.6 : -4.6,
-        config: { duration: 10000, easing: easings.easeInOutCubic },
+        config: { duration: 700, easing: easings.easeInOutCubic },
         delay: 1800,
     });
 
-    useMemo(() => {
-        model.scene.traverse((object: any) => {
-            if (object.isMesh && object.material) {
-                const clonedMaterial = object.material.clone();
-                clonedMaterial.transparent = true;
-                clonedMaterial.depthWrite = false;
-                object.material = clonedMaterial;
-                clonedMaterial.onBeforeCompile = (shader: any) => {
-                    shader.uniforms.uOpacity = { value: 1.0 };
-                    shader.fragmentShader = `
-                        uniform float uOpacity;
-                        ${shader.fragmentShader.replace(
-                          `gl_FragColor = vec4( outgoingLight, diffuseColor.a );`,
-                          `gl_FragColor = vec4( outgoingLight, diffuseColor.a * uOpacity );`
-                        )}
-                    `;
-                    materialsRef.current.push(shader.uniforms.uOpacity);
-                };
+    const uniforms = useRef({ alpha: { value: 0 } })
+
+
+
+    const model = useMemo(() => {
+        scene.clone().traverse((object: any) => {
+            if (object.isMesh) {
+                const material = object.material.clone()
+                material.transparent = true
+    
+                object.castShadow = true
+                object.recieveShadow = true
+    
+                material.onBeforeCompile = (_shader: THREE.Shader) => {
+                    _shader.uniforms = { ..._shader.uniforms, ...uniforms.current  }
+    
+                    // Injection
+                    _shader.fragmentShader = _shader.fragmentShader.replace('#include <common>', `
+                        #include <common>
+                        uniform float alpha;
+                    `)
+                    _shader.fragmentShader = _shader.fragmentShader.replace('#include <dithering_fragment>', `
+                        #include <dithering_fragment>
+                        gl_FragColor.a *= alpha;
+                    `)
+                }
+                object.material = material
             }
-        });
-    }, [model]);
+        })
+        return scene
+    }, [scene])
 
     useSpringTrigger({
         trigger: containerRef,
@@ -194,9 +205,11 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
             }
         }
 
-        materialsRef.current.forEach((uniform: any) => {
-            uniform.value = effect.opacity.get();
-        });
+        // materialsRef.current.forEach((uniform: any) => {
+            // uniform.value = effect.opacity.get();
+        // });
+
+        uniforms.current.alpha.value = effect.opacity.get()
     });
 
     return (
@@ -204,7 +217,7 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
             ref={modelRef}
             scale={20}
             rotation={[0.9, 3.3, 0]}
-            object={model.scene.clone()}
+            object={model}
         />
     );
 }
@@ -431,3 +444,30 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
 //     );
 // }
 
+
+
+
+///////////////////////
+
+
+    // useMemo(() => {
+    //     model.scene.traverse((object: any) => {
+    //         if (object.isMesh && object.material) {
+    //             const clonedMaterial = object.material.clone();
+    //             clonedMaterial.transparent = true;
+    //             clonedMaterial.depthWrite = false;
+    //             object.material = clonedMaterial;
+    //             clonedMaterial.onBeforeCompile = (shader: any) => {
+    //                 shader.uniforms.uOpacity = { value: 1.0 };
+    //                 shader.fragmentShader = `
+    //                     uniform float uOpacity;
+    //                     ${shader.fragmentShader.replace(
+    //                       `gl_FragColor = vec4( outgoingLight, diffuseColor.a );`,
+    //                       `gl_FragColor = vec4( outgoingLight, diffuseColor.a * uOpacity );`
+    //                     )}
+    //                 `;
+    //                 materialsRef.current.push(shader.uniforms.uOpacity);
+    //             };
+    //         }
+    //     });
+    // }, [model]);

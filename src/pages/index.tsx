@@ -26,12 +26,13 @@ export default function Home() {
 
     const width = useWindowWidth()
 
+    
     return (
         <div ref={containerRef} style={{ height: '100%', width: '100%' }}>
             <div style={{position: 'relative', height: '100%'}}>
-                {width > 1024 && <div style={{position: 'sticky', top: 0, left: 0, marginBottom: '100vh', marginTop: '-100vh'}}>
+                {width > 1024 ? <div style={{position: 'sticky', top: 0, left: 0, marginBottom: '100vh', marginTop: '-100vh'}}>
                     <Blanket firstContainerRef={metaContainerRef} firstCustomRef={customizableFirstRef} secondCustomRef={customizaSecondRef} thirdCustomRef={customizaThirdRef} fourthCustomRef={customizalFourthRef} containerRef={containerRef}></Blanket>
-                </div>}
+                </div> : <></>}
                 <div ref={metaContainerRef}>
                     <TradingCompanion />
                     <WhyMetaDeck />

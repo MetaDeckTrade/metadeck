@@ -93,7 +93,7 @@ const dataTable3 = [
     },
 ]
 
-export default function WrapperExplore() {
+export default function WrapperExplore({scene}: any) {
     const stickyRef = useRef(null);
     const triggerRef = useRef<HTMLDivElement>(null!)
     const refTitle = useRef<HTMLDivElement | null>(null)
@@ -245,9 +245,9 @@ export default function WrapperExplore() {
         <Wrapper ref={containerRef}>
             <div style={{ position: 'absolute', top: '0', left: '0', height: '100%' }}></div>
             <Wrapper >
-                {width > 1024 && <div style={{position: 'sticky', top: 0, left: 0, zIndex: '1000', height: '100%', marginBottom: '100vh', marginTop: '-100vh'}}>
+                {width > 1024 ? <div style={{position: 'sticky', top: 0, left: 0, zIndex: '1000', height: '100%', marginBottom: '100vh', marginTop: '-100vh'}}>
                     <BlanketWithButtons blockNumber={buttonNumber} containerRef={containerRef}></BlanketWithButtons>
-                </div>}
+                </div> : <></>}
                 <WrapperImageContainer ref={testRef}>
                     <div >
                         <WrapperImage>

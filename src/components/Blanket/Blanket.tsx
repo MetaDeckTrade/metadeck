@@ -1,3 +1,5 @@
+'use client'
+
 import { Suspense, useRef, MutableRefObject} from 'react'
 import Model from './Model/Model'
 import dynamic from 'next/dynamic'
@@ -7,7 +9,7 @@ import { useWindowWidth } from '@react-hook/window-size'
 
 const PageView = dynamic(() => import('@/layouts/CanvasLayout/components/PageView').then((mod) => mod.PageView), {
     ssr: false,
-    loading: () => (<div>Loading Page Scene...</div>),
+
 })
 
 interface Blanket {
@@ -34,8 +36,8 @@ export default function Blanket({containerRef, firstContainerRef, firstCustomRef
                     <directionalLight color='white' intensity={0.8} position={[0, 0, 10]}></directionalLight>
                     <pointLight position={[-10, -10, -10]} color='blue' />
                     <PerspectiveCamera makeDefault fov={40} position={[0, 0, width < 1440 ? 9 : 7]} />
+                    <Preload all></Preload>
                 </Suspense>
-                <Preload all></Preload>
             </PageView>
         </div>
     )    
