@@ -43,6 +43,8 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
 
     const inViewBlanket = useGlobalStore((state: any) => (state.inViewBlanket))
 
+
+    
     const [stage, setStage] = useState<number>(0);
     const [progress, setProgress] = useState<any>(progressPc);
 

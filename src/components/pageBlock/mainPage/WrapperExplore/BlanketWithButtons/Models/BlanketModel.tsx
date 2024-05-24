@@ -30,6 +30,12 @@ export default function BlanketModal({ inView, rotation, position, containerRef}
 
     const [animatedOnce, setAnimatedOnce] = useState(false);
 
+    const model = useMemo(() => {
+        const model = scene.clone()
+
+        return model
+    }, [scene])
+
     useEffect(() => {
         if (!inView) return;
         if (inView) {
@@ -87,7 +93,7 @@ export default function BlanketModal({ inView, rotation, position, containerRef}
             scale={20}
             position={position}
             rotation={rotation}
-            object={scene.clone()}
+            object={model}
         />
     );
 }

@@ -256,14 +256,11 @@ export default function WrapperExplore({scene}: any) {
 
     const containerRef = useRef<any>(null)
     const blockRef = useRef<any>(null)
-    const width = useWindowWidth()
 
     return (
         <Wrapper id='explore' ref={containerRef}>
             <div style={{position: 'absolute', height: '100vh', top: '0', left: '0', width: '100%'}} ref={blockRef}></div>
             <Wrapper >
-                {/* <div style={{position: 'sticky', top: 0, left: 0, zIndex: '1000', height: '100%', marginBottom: '100vh', marginTop: '-100vh'}}>
-                </div> */}
                 <StlyedWrapper>
                     <div style={{ position: 'relative', height: '100%', width: '100%'}}>
                         <div style={{position: 'sticky', top: 0, left: 0, marginBottom: '100vh', marginTop: '-100vh'}}>
