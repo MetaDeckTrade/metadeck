@@ -13,6 +13,7 @@ export const WhyMetaDeckStyle = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: ${rm(160)};
+    z-index: 5;
     ${media.lg`
         gap: ${rm(140)};
         padding: ${rm(100)} ${rm(40)} ${rm(120)} ${rm(40)};

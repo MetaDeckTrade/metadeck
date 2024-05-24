@@ -1,17 +1,18 @@
 
 import { SplitText } from "@cyriacbr/react-split-text"
-import { useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useInView } from "react-intersection-observer"
 import styled, { css } from 'styled-components'
 import { colors, fonts } from '@/styles'
 import { media, responsive, rm } from '@/styles/utils'
+import { useWindowWidth } from "@react-hook/window-size"
 const StyledContainer = styled(SplitText)`
     color: ${colors.white2};
     font-size: ${rm(24)};
     line-height: 130%;
     letter-spacing: 0.01em;
     opacity: 0.6;
-    ${(props : any) => props.tradingCompanion &&
+    ${(props: any) => props.tradingCompanion &&
         css`
             position: relative;
             width: ${rm(585)} !important;
@@ -31,7 +32,7 @@ const StyledContainer = styled(SplitText)`
                 `
     }
     
-    ${(props : any) => props.whyMetaDeck &&
+    ${(props: any) => props.whyMetaDeck &&
         css`
             position: relative;
             width: ${rm(613)} !important;
@@ -73,8 +74,8 @@ const StyledContainer = styled(SplitText)`
         transition: .75s transform ease 0.5s, 1s opacity ease 0.5s;
     }
     
-    ${(props : any) => props.loaded && props.animatedOnce &&
-            css`
+    ${(props: any) => props.loaded && props.animatedOnce &&
+        css`
                 > div > div {
                     transform: translate(0, 0) !important;
                     opacity: 1 !important;
@@ -92,11 +93,20 @@ const StyledContainer = styled(SplitText)`
         display: inline !important;
     } 
     `
+
 const LineAnimation = ({ delay = 0, children, ...props }: any) => {
     const { ref, inView } = useInView()
-
     const [loaded, setLoaded] = useState(false);
     const [animatedOnce, setAnimatedOnce] = useState(false);
+
+    const [plug, setPlug] = useState(0)
+    const innerWidth = useWindowWidth()
+    useEffect(() => {
+        if (!innerWidth) { return }
+        setTimeout(() => {
+            setPlug(innerWidth)
+        }, 200)
+    }, [innerWidth])
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -113,20 +123,20 @@ const LineAnimation = ({ delay = 0, children, ...props }: any) => {
     }, [inView])
 
     return (
-        <StyledContainer
-            ref={ref}
-            LineWrapper={lineText}
-            loaded={loaded}
-            animatedOnce={animatedOnce}
-            {...props}
-        >
-            {children}
-        </StyledContainer>
-
+    
+                    <StyledContainer
+                        ref={ref}
+                        LineWrapper={LineText}
+                        loaded={loaded}
+                        animatedOnce={animatedOnce}
+                        {...props}
+                    >
+                        {children}
+                    </StyledContainer>
     )
 }
 
-function lineText({ children }: any) {
+function LineText({ children }: any) {
     return (
         <div>
             <div>

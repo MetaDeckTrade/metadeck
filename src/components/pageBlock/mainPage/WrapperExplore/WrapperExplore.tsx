@@ -7,6 +7,8 @@ import { animated } from "@react-spring/web";
 import AnimatiosPharagraphTwoT from '@/components/UI/animation/animationText/AnimationPatagraphTwo/AnimationPatagraphTwo';
 import useInnerWidth from '@/hooks/useWidthWindow';
 import Image from 'next/image';
+import BlanketWithButtons from './BlanketWithButtons/BlanketWithButtons';
+import { useWindowWidth } from '@react-hook/window-size';
 const dataTable = [
     {
         text: 'Buy 1',
@@ -91,11 +93,12 @@ const dataTable3 = [
     },
 ]
 
-export default function WrapperExplore() {
+export default function WrapperExplore({scene}: any) {
     const stickyRef = useRef(null);
     const triggerRef = useRef<HTMLDivElement>(null!)
     const refTitle = useRef<HTMLDivElement | null>(null)
     const [numerBlock, setnumerBlock] = useState(0)
+    const [buttonNumber, setButtonNumber] = useState(0)
     const { ref: yellowRef, inView: yellowBlock } = useInView()
     const { ref: grinRef, inView: grinBlock } = useInView()
     const { ref: start, inView: startBlock } = useInView()
@@ -104,6 +107,9 @@ export default function WrapperExplore() {
     const refTable = useRef(null)
     const refWrapperTable = useRef(null)
     const innerWidth  = useInnerWidth()
+
+    const [ref, inView] = useInView()
+
     useEffect(() => {
         if(!refTable.current || !refWrapperTable.current) {return} 
         // const wrapperHeight = refWrapperTable.current.getBoundingClientRect().height
@@ -113,8 +119,6 @@ export default function WrapperExplore() {
         const heightElement = refTable.current.getBoundingClientRect().height
         if(wrapperHeight && heightElement){
             const newPadding = wrapperHeight - heightElement
-            console.log(wrapperHeight)
-            console.log(heightElement)
 
             let padding;
             if(innerWidth > 1440){
@@ -126,7 +130,7 @@ export default function WrapperExplore() {
             } else if (innerWidth <= 480){
                 padding = 120
             }
-             else if (wrapperHeight < 900) {
+             if (wrapperHeight < 900) {
                 padding = 80
                 
             }
@@ -187,6 +191,22 @@ export default function WrapperExplore() {
     }, [yellowBlock, grinBlock, startBlock, refWrapper])
 
 
+    useEffect(() => {
+        if (numerBlock === 0 && !inView) {
+            setButtonNumber(1)
+        }
+        else if (numerBlock === 1 && !inView) {
+            setButtonNumber(2)
+        }
+        else if (numerBlock === 2 && !inView) {
+            setButtonNumber(3)
+        }
+        else {
+            setButtonNumber(0)
+        }
+    }, [yellowBlock, grinBlock, startBlock, refWrapper, numerBlock])
+
+
     const [heightrefTitle, setheightrefTitle] = useState(0)
     useEffect(() => {
         const calculateStickyHeight = () => {
@@ -216,10 +236,16 @@ export default function WrapperExplore() {
         };
     }, []);
 
+    const containerRef = useRef<any>(null)
+    const width = useWindowWidth()
+
     return (
-        <Wrapper >
+        <Wrapper ref={containerRef}>
             <div style={{ position: 'absolute', top: '0', left: '0', height: '100%' }}></div>
             <Wrapper >
+                <div style={{position: 'sticky', top: 0, left: 0, zIndex: '1000', height: '100%', marginBottom: '100vh', marginTop: '-100vh'}}>
+                    <BlanketWithButtons blockNumber={buttonNumber} containerRef={containerRef}></BlanketWithButtons>
+                </div>
                 <WrapperImageContainer ref={testRef}>
                     <div >
                         <WrapperImage>
@@ -237,6 +263,7 @@ export default function WrapperExplore() {
                     </TitleWrapper>
                     <Wrapper ref={refWrapperTable}> 
                         <Functionality id='functionality' style={{ marginTop: `calc(-100vh + ${heightrefTitle}px)` }}>
+                            <div style={{width: '100%'}} ref={ref}></div>
                             <FunctionalityWrapperTexxt>
                                 <FunctionalityTitle>Functionality at Your Fingertips</FunctionalityTitle>
                                 <FunctionalitySubtitle>From customizable macro keys to preset trading functions, every button on MetaDeck opens up a new possibility. Here’s how MetaDeck can serve your trading needs:</FunctionalitySubtitle>

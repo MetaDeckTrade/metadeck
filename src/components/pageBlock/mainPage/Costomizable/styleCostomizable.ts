@@ -10,7 +10,7 @@ position: relative;
 `
 
 export const ContainerStyled = styled.div`
-
+    
     position: relative;
    
     width: 100%;
@@ -20,8 +20,8 @@ export const ContainerStyled = styled.div`
     align-items: flex-start;
     gap: ${rm(160)};
     justify-content: space-between;
-    z-index: 3;
-    background-color: ${colors.blue2};
+    z-index: 3; //6
+    /* background-color: ${colors.blue2}; */
 
     ${media.lg`
        padding: ${rm(0)} ${rm(40)} ${rm(120)} ${rm(40)};
