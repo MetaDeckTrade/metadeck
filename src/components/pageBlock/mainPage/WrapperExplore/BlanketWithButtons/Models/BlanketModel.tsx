@@ -9,6 +9,8 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { easings } from "@react-spring/web";
 import { lerp } from "three/src/math/MathUtils.js";
+import { coordinatesRef } from "@/pages/_app";
+import useGlobalStore from "@/store/store";
 
 interface Model {
     containerRef: MutableRefObject<HTMLElement | HTMLDivElement | null>,
@@ -17,10 +19,12 @@ interface Model {
     rotation: Array<number>,
 }
 
-export default function BlanketModal({ inView, rotation, position}: Model) {
+export default function BlanketModal({ inView, rotation, position, containerRef}: Model) {
     const { scene } = useGLTF('/models/model.glb');
     const modelRef = useRef<THREE.Object3D>(null);
+    const progressRef = useRef<number>(0)
 
+    const inViewButtonBlanket = useGlobalStore((state: any) => (state.inViewButtonBlanket))
 
     const width = useWindowWidth();
 
@@ -33,50 +37,48 @@ export default function BlanketModal({ inView, rotation, position}: Model) {
         }
     }, [inView]);
 
-    const effect = useSpring({
-        opacity: animatedOnce ? 1 : 0,
-        y: animatedOnce ? position[1] : -4.6,
-        config: { duration: 700, easing: easings.easeInOutCubic},
-        delay: 300,
+    useEffect(() => {
+        if(!inViewButtonBlanket && modelRef.current) {
+            modelRef.current.visible = false
+        } else if (modelRef.current && inViewButtonBlanket) {
+            modelRef.current.visible = true
+        }
+
+    }, [inViewButtonBlanket])
+
+
+
+
+    const { values: progressValues } = useSpringTrigger({
+        trigger: containerRef,
+        start: 'bottom bottom',
+        end: 'bottom top',
+        scrub: true,
+        from: {
+            x: `${rotation[0]}`, y: `${rotation[1]}`, z: `${rotation[2]}`,
+            positionX: `${position[0]}`, positionY: `${position[1]}`, positionZ: `${position[2]}`,
+        },
+        to: {
+            x: `${rotation[0]}`, y: `${rotation[1]}`, z: `${rotation[2]}`,
+            positionX: "0", positionY: `${position[1] + 0.5}`, positionZ: `${position[2]}`,
+        },
+        onChange: (state) => {
+            progressRef.current = state.value.progress;
+        }
     });
-
-    const uniforms = useRef({ alpha: { value: 0 } })
-
-
-
-    const model = useMemo(() => {
-        const clonedScene = scene.clone()
-
-        clonedScene.traverse((object: any) => {
-            if (object.isMesh) {
-                const material = object.material.clone()
-                material.transparent = true
-    
-                object.castShadow = true
-                object.recieveShadow = true
-    
-                material.onBeforeCompile = (_shader: THREE.Shader) => {
-                    _shader.uniforms = { ..._shader.uniforms, ...uniforms.current  }
-    
-                    // Injection
-                    _shader.fragmentShader = _shader.fragmentShader.replace('#include <common>', `
-                        #include <common>
-                        uniform float alpha;
-                    `)
-                    _shader.fragmentShader = _shader.fragmentShader.replace('#include <dithering_fragment>', `
-                        #include <dithering_fragment>
-                        gl_FragColor.a *= alpha;
-                    `)
-                }
-                object.material = material
-            }
-        })
-        return clonedScene
-    }, [scene])
 
 
     useFrame(() => {
-        uniforms.current.alpha.value = effect.opacity.get()
+        if(!inViewButtonBlanket) return
+
+
+        if(modelRef.current && width < 1024) {
+            modelRef.current.rotation.set(+progressValues.x.get(), +progressValues.y.get(), +progressValues.z.get())
+            modelRef.current.position.set(+progressValues.positionX.get(), +progressValues.positionY.get(), +progressValues.positionZ.get())
+        } else if(modelRef.current) {
+            modelRef.current.rotation.x = rotation[0] + coordinatesRef.x * 0.01
+            modelRef.current.rotation.y = rotation[1] + coordinatesRef.y * 0.01
+        }
     })
 
     return (
@@ -85,7 +87,7 @@ export default function BlanketModal({ inView, rotation, position}: Model) {
             scale={20}
             position={position}
             rotation={rotation}
-            object={model}
+            object={scene.clone()}
         />
     );
 }

@@ -1,10 +1,12 @@
 import NetworkIcons from '@/components/UI/NetworkIcons/NetworkIcons'
 import { Container, ContainerInfo, ContainerNetwork, Description, Subtitle } from './style'
+import FooterBlanket from './FooterBlanket/FooterBlanket'
 
 export default function JoinMetaDeckCommunity() {
 
     return (
         <Container id='contact'>
+            <FooterBlanket></FooterBlanket>
             <ContainerInfo>
                 <h1>Join the MetaDeck Community</h1>
                 <Subtitle>Connect, Learn, and Grow</Subtitle>

@@ -9,6 +9,8 @@ import useInnerWidth from '@/hooks/useWidthWindow';
 import Image from 'next/image';
 import BlanketWithButtons from './BlanketWithButtons/BlanketWithButtons';
 import { useWindowWidth } from '@react-hook/window-size';
+import styled from 'styled-components';
+import { media, rm } from '@/styles/utils';
 const dataTable = [
     {
         text: 'Buy 1',
@@ -92,6 +94,22 @@ const dataTable3 = [
         delay: 250,
     },
 ]
+
+const StlyedWrapper = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    ${media.md`
+        padding-bottom: 116vh !important;
+    `}
+
+    ${media.xsm`
+        padding-bottom: 0 !important;
+    `}
+`
 
 export default function WrapperExplore({scene}: any) {
     const stickyRef = useRef(null);
@@ -237,15 +255,23 @@ export default function WrapperExplore({scene}: any) {
     }, []);
 
     const containerRef = useRef<any>(null)
+    const blockRef = useRef<any>(null)
     const width = useWindowWidth()
 
     return (
         <Wrapper ref={containerRef}>
+            <div style={{position: 'absolute', height: '100vh', top: '0', left: '0', width: '100%'}} ref={blockRef}></div>
             <div style={{ position: 'absolute', top: '0', left: '0', height: '100%' }}></div>
             <Wrapper >
-                <div style={{position: 'sticky', top: 0, left: 0, zIndex: '1000', height: '100%', marginBottom: '100vh', marginTop: '-100vh'}}>
-                    <BlanketWithButtons blockNumber={buttonNumber} containerRef={containerRef}></BlanketWithButtons>
-                </div>
+                {/* <div style={{position: 'sticky', top: 0, left: 0, zIndex: '1000', height: '100%', marginBottom: '100vh', marginTop: '-100vh'}}>
+                </div> */}
+                <StlyedWrapper>
+                    <div style={{ position: 'relative', height: '100%', width: '100%'}}>
+                        <div style={{position: 'sticky', top: 0, left: 0, marginBottom: '100vh', marginTop: '-100vh'}}>
+                            <BlanketWithButtons blockNumber={buttonNumber} containerRef={containerRef} blockRef={blockRef}></BlanketWithButtons>
+                        </div>
+                    </div>
+                </StlyedWrapper>
                 <WrapperImageContainer ref={testRef}>
                     <div >
                         <WrapperImage>

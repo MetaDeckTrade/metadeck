@@ -9,19 +9,26 @@ export const Container = styled.div`
     width: 100%;
     padding: ${rm(90)} ${rm(60)} ${rm(100)} ${rm(60)};
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    padding-left: 0;
 
     ${media.lg`
        padding: ${rm(70)} ${rm(40)} ${rm(120)} ${rm(40)};
     `}
 
-${media.md`
+    ${media.md`
        padding: ${rm(63)} ${rm(30)} ${rm(160)} ${rm(30)};
+       padding-right: 0;
+       flex-direction: row-reverse;
     `}
 
-${media.xsm`
+    ${media.xsm`
        padding: ${rm(40)} ${rm(10)} ${rm(388)} ${rm(10)};
+       padding-right: 0;
+       padding-left: 0;
+       flex-direction: column;
     `}
+
 `
 
 export const ContainerInfo = styled.div`
@@ -36,6 +43,7 @@ export const ContainerInfo = styled.div`
          `}
         ${media.xsm`
             gap: ${rm(20)};
+            margin-left: ${rm(10)}
         `}
 
         >h1{
