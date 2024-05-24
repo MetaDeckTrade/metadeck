@@ -6,6 +6,8 @@ import { useRef, MutableRefObject, useState, useEffect, useMemo } from 'react';
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { easings } from "@react-spring/web";
+import { coordinatesRef } from "@/pages/_app";
+import useGlobalStore from "@/store/store";
 
 interface Model {
     containerRef: MutableRefObject<HTMLElement | HTMLDivElement | null>,
@@ -22,6 +24,9 @@ export default function ButtonModels({ containerRef, inView, rotation, position,
     const modelRef = useRef<THREE.Group>(null);
     const width = useWindowWidth();
 
+    const inViewButtonBlanket = useGlobalStore((state: any) => (state.inViewButtonBlanket))
+
+
     const effect = useSpring({
         scale: blockNumber === activeNumber ? 1 : 0,
         config: { duration: 300, easing: easings.easeInOutCubic },
@@ -32,42 +37,35 @@ export default function ButtonModels({ containerRef, inView, rotation, position,
         config: { duration: 500, easing: easings.easeInOutCubic },
     });
 
-    const uniforms = useRef({ alpha: { value: 0 } })
+    useEffect(() => {
+        if(!inViewButtonBlanket && modelRef.current) {
+            modelRef.current.visible = false
+        } else if (modelRef.current && inViewButtonBlanket) {
+            modelRef.current.visible = true
+        }
+    }, [inViewButtonBlanket])
 
 
+    const { values: progressValues } = useSpringTrigger({
+        trigger: containerRef,
+        start: 'bottom bottom',
+        end: 'bottom top',
+        scrub: true,
+        from: {
+            x: `${rotation[0]}`, y: `${rotation[1]}`, z: `${rotation[2]}`,
+            positionX: `${position[0]}`, positionY: `${position[1]}`, positionZ: `${position[2]}`,
+        },
+        to: {
+            x: `${rotation[0]}`, y: `${rotation[1]}`, z: `${rotation[2]}`,
+            positionX: `${position[0] + (width > 576 ? 1.9 : 0)}`, positionY: `${position[1] + (width > 576 ? 0.5 : 0.3)}`, positionZ: `${position[2]}`,
+        },
+    });
 
-    // const model = useMemo(() => {
-    //     const clonedScene =  scene.clone()
-
-    //     clonedScene.traverse((object: any) => {
-    //         if (object.isMesh) {
-    //             const material = object.material
-    //             material.transparent = true
-    
-    //             object.castShadow = true
-    //             object.recieveShadow = true
-    
-    //             material.onBeforeCompile = (_shader: THREE.Shader) => {
-    //                 _shader.uniforms = { ..._shader.uniforms, ...uniforms.current  }
-    
-    //                 // Injection
-    //                 _shader.fragmentShader = _shader.fragmentShader.replace('#include <common>', `
-    //                     #include <common>
-    //                     uniform float alpha;
-    //                 `)
-    //                 _shader.fragmentShader = _shader.fragmentShader.replace('#include <dithering_fragment>', `
-    //                     #include <dithering_fragment>
-    //                     gl_FragColor.a *= alpha;
-    //                 `)
-    //             }
-    //             object.material = material
-    //         }
-    //     })
-    //     return clonedScene
-    // }, [scene])
 
 
     useFrame(() => {
+        if(!inViewButtonBlanket) return
+
         if (modelRef.current) {
             modelRef.current.position.z = positionSpring.z.get();
             modelRef.current?.scale.set(effect.scale.get(), effect.scale.get(), effect.scale.get())
@@ -78,10 +76,16 @@ export default function ButtonModels({ containerRef, inView, rotation, position,
             } else {
                 modelRef.current.visible = true
             }
+
+            if(width < 1024) {
+                modelRef.current.rotation.set(+progressValues.x.get(), +progressValues.y.get(), +progressValues.z.get())
+                modelRef.current.position.set(+progressValues.positionX.get(), +progressValues.positionY.get(), +progressValues.positionZ.get())
+            } else {
+                modelRef.current.rotation.x = rotation[0] + coordinatesRef.x * 0.03
+                modelRef.current.rotation.y = rotation[1] + coordinatesRef.y * 0.03
+            }
+            
         }
-
-
-        // uniforms.current.alpha.value = effect.opacity.get()
     });
 
     return (

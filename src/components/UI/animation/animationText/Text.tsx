@@ -1,7 +1,7 @@
 import React, { useEffect, memo, useState, useRef } from 'react'
 import { NextPage } from 'next';
 import { useInView } from 'react-intersection-observer';
-import { animated, useIsomorphicLayoutEffect } from 'react-spring';
+import { animated, useIsomorphicLayoutEffect } from '@react-spring/web';
 // import { useAssetsLoader } from '@/layouts/AssetsLoaderLayout/AssetsLoaderLayout';
 import styled from "styled-components";
 

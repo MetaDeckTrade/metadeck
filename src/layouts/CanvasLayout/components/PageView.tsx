@@ -1,6 +1,7 @@
-import { forwardRef, useImperativeHandle, useRef } from 'react'
+import { forwardRef, useImperativeHandle, useLayoutEffect, useRef } from 'react'
 import { OrbitControls, View as ViewImpl } from '@react-three/drei'
 import { Three } from './Three'
+import { useIsomorphicLayoutEffect } from '@react-spring/web'
 
 const style = {
     position: 'relative',
@@ -13,7 +14,9 @@ const style = {
 
 const PageView = forwardRef(({ children, orbit, ...props }: any, ref) => {
   const localRef = useRef(null)
+  const targetRef = useRef<HTMLElement | null>(null)
   useImperativeHandle(ref, () => localRef.current)
+
 
   return (
     <>
