@@ -31,7 +31,7 @@ export default function Blanket({containerRef, firstContainerRef, firstCustomRef
             <PageView style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: '-1'}}>
                 <Suspense fallback>
                     <Model firstCustomRef={firstCustomRef} secondCustomRef={secondCustomRef} thirdCustomRef={thirdCustomRef} fourthCustomRef={fourthCustomRef} firstContainerRef={firstContainerRef} inView={inView} containerRef={containerRef}></Model>
-                    <ambientLight intensity={1} />
+                    <ambientLight intensity={.4} />
                     <pointLight position={[20, 30, 10]}  intensity={1}/>
                     <directionalLight color='white' intensity={0.8} position={[0, 0, 10]}></directionalLight>
                     <pointLight position={[-10, -10, -10]} color='blue' />

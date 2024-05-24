@@ -4,7 +4,7 @@ import LineAnimation from "../animation/animationText/AnimationLine/AnimationLin
 import React from 'react';
 import styled from "styled-components";
 import { media, responsive, rm } from '../../../styles/utils'
-import { orbitronBold } from "@/styles/fonts";
+import { inter, orbitronBold } from "@/styles/fonts";
 import { colors } from "@/styles";
 
 interface Types {
@@ -64,6 +64,7 @@ const StyleLineAnimation = styled(LineAnimation)`
 position: relative;
 width: ${rm(424)} !important;
 overflow: hidden;
+${inter()}
 ${media.xsm`
 width: 100% !important;
 `}

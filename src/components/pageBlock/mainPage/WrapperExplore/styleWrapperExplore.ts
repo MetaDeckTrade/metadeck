@@ -2,7 +2,7 @@ import AnimatiosWords from "@/components/UI/animation/animationText/AnimationWor
 import { colors } from "@/styles";
 import { inter, orbitronBold } from "@/styles/fonts";
 import { heightLvh, media, rm } from "@/styles/utils";
-import { animated } from "@react-spring/web";
+import { CSS, animated } from "@react-spring/web";
 import styled, { css } from "styled-components";
 
 export const WrapperImageMb = styled(animated.div)`
@@ -201,6 +201,11 @@ export const WrapperTable = styled.div`
         flex-direction: column;
         gap: ${rm(120)};        
         /* margin-bottom: ${rm(200)}; */
+        ${css`
+        @media (min-aspect-ratio: 3/2) {
+            
+        }
+        `}
         ${media.lg`
             gap: ${rm(100)};        
         `}

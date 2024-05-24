@@ -27,6 +27,12 @@ const progressPc = {
     3: 0.235,
 }
 
+const progressLg = {
+    1: 0,
+    2: 0.13,
+    3: 0.235,
+}
+
 export default function Model({ containerRef, inView, firstContainerRef, firstCustomRef, secondCustomRef, thirdCustomRef, fourthCustomRef}: ModelProps) {
     const {scene} = useGLTF('/models/model.glb');
     const modelRef = useRef<THREE.Object3D>(null);
@@ -44,6 +50,10 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         setAnimatedOnce(true);
         console.log(animatedOnce)
     }, [inView]);
+
+    useEffect(() => {
+        // setProgress(progressLg)
+    }, [])
 
     const effect = useSpring({
         opacity: animatedOnce ? 1 : 0,

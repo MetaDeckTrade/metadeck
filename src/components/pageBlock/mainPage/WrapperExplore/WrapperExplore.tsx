@@ -119,8 +119,6 @@ export default function WrapperExplore({scene}: any) {
         const heightElement = refTable.current.getBoundingClientRect().height
         if(wrapperHeight && heightElement){
             const newPadding = wrapperHeight - heightElement
-            console.log(wrapperHeight)
-            console.log(heightElement)
 
             let padding;
             if(innerWidth > 1440){
@@ -132,7 +130,7 @@ export default function WrapperExplore({scene}: any) {
             } else if (innerWidth <= 480){
                 padding = 120
             }
-             else if (wrapperHeight < 900) {
+             if (wrapperHeight < 900) {
                 padding = 80
                 
             }
@@ -245,9 +243,9 @@ export default function WrapperExplore({scene}: any) {
         <Wrapper ref={containerRef}>
             <div style={{ position: 'absolute', top: '0', left: '0', height: '100%' }}></div>
             <Wrapper >
-                {width > 1024 ? <div style={{position: 'sticky', top: 0, left: 0, zIndex: '1000', height: '100%', marginBottom: '100vh', marginTop: '-100vh'}}>
+                <div style={{position: 'sticky', top: 0, left: 0, zIndex: '1000', height: '100%', marginBottom: '100vh', marginTop: '-100vh'}}>
                     <BlanketWithButtons blockNumber={buttonNumber} containerRef={containerRef}></BlanketWithButtons>
-                </div> : <></>}
+                </div>
                 <WrapperImageContainer ref={testRef}>
                     <div >
                         <WrapperImage>

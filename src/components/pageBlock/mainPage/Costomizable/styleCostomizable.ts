@@ -10,7 +10,7 @@ position: relative;
 `
 
 export const ContainerStyled = styled.div`
-
+    
     position: relative;
    
     width: 100%;
