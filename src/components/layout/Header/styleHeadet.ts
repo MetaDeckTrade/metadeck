@@ -32,7 +32,7 @@ export const StyleHeaderContainer = styled(animated.div)`
     `}
 `
 
-export const LogoWrapper = styled(Link)`
+export const LogoWrapper = styled.a`
     position: relative;
     display: flex;
     align-items: center;

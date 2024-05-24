@@ -27,22 +27,26 @@ export default function Home() {
 
     
     return (
-        <div ref={containerRef} style={{ height: '100%', width: '100%' }}>
-            <div style={{position: 'relative', height: '100%'}}>
-                <div style={{position: 'sticky', top: 0, left: 0, marginBottom: '100vh', marginTop: '-100vh'}}>
-                    <Blanket firstContainerRef={metaContainerRef} firstCustomRef={customizableFirstRef} secondCustomRef={customizaSecondRef} thirdCustomRef={customizaThirdRef} fourthCustomRef={customizalFourthRef} containerRef={containerRef}></Blanket>
+        <>
+            <Head>
+                <title>Meta Deck | The Ultimate Trading Companion</title>
+            </Head>
+            <div ref={containerRef} style={{ height: '100%', width: '100%' }}>
+                <div style={{position: 'relative', height: '100%'}}>
+                    <div style={{position: 'sticky', top: 0, left: 0, marginBottom: '100vh', marginTop: '-100vh'}}>
+                        <Blanket firstContainerRef={metaContainerRef} firstCustomRef={customizableFirstRef} secondCustomRef={customizaSecondRef} thirdCustomRef={customizaThirdRef} fourthCustomRef={customizalFourthRef} containerRef={containerRef}></Blanket>
+                    </div>
+                    <div ref={metaContainerRef}>
+                        <TradingCompanion />
+                        <WhyMetaDeck />
+                    </div>
+                    <Costomizable firstRef={customizableFirstRef} secondRef={customizaSecondRef} thirdRef={customizaThirdRef} fourthRef={customizalFourthRef}/>
                 </div>
-                <div ref={metaContainerRef}>
-                    <TradingCompanion />
-                    <WhyMetaDeck />
-                </div>
-                <Costomizable firstRef={customizableFirstRef} secondRef={customizaSecondRef} thirdRef={customizaThirdRef} fourthRef={customizalFourthRef}/>
+                <CompatibleWhereCounts />
+                <WrapperExplore />
+                <SuccessStories />
+                <JoinMetaDeckCommunity />
             </div>
-            <CompatibleWhereCounts />
-            <WrapperExplore />
-            <SuccessStories />
-            <JoinMetaDeckCommunity />
-
-        </div>
+        </>
     )
 }

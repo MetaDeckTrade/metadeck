@@ -27,6 +27,29 @@ export const WhyMetaDeckStyle = styled.div`
     ${media.xsm`
     padding: ${rm(30)} ${rm(10)} ${rm(80)} ${rm(10)};
     `}
+
+    .text {
+        position: relative;
+            width: ${rm(613)} !important;
+            overflow: hidden;
+            line-height: 120% !important;
+            font-size: ${rm(32)} !important;
+            opacity: 0.75 !important;
+            text-transform: uppercase;
+            letter-spacing: 0.1em !important;
+
+            ${media.lg`
+                width: ${rm(460)} !important;
+                font-size: ${rm(30)} !important;
+            `}
+            ${media.md`
+                width: ${rm(613)} !important;
+            `}
+           ${media.xsm`
+                width: ${rm(314)} !important;
+                font-size: ${rm(20)} !important;
+            `}
+    }
 `
 
 export const WhyMetaDeckImage = styled(Image)`

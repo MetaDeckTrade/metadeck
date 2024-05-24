@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Functionality, FunctionalitySubtitle, FunctionalityTitle, FunctionalityWrapperTexxt, Table, Title, TitleTable, TitleWrapper, WpapperInfo, Wrapper, WrapperImage, WrapperImageContainer, WrapperInfoTable, WrapperTable, WrapperText, WrapperTitle } from './styleWrapperExplore';
 import { useSpringTrigger } from '@/hooks/useSpringTrigger';
 import SimplicityMeetsPower from '../SimplicityMeetsPower/SimplicityMeetsPower';
@@ -6,9 +6,8 @@ import { useInView } from 'react-intersection-observer';
 import { animated } from "@react-spring/web";
 import AnimatiosPharagraphTwoT from '@/components/UI/animation/animationText/AnimationPatagraphTwo/AnimationPatagraphTwo';
 import useInnerWidth from '@/hooks/useWidthWindow';
-import Image from 'next/image';
 import BlanketWithButtons from './BlanketWithButtons/BlanketWithButtons';
-import { useWindowWidth } from '@react-hook/window-size';
+
 const dataTable = [
     {
         text: 'Buy 1',
@@ -237,10 +236,9 @@ export default function WrapperExplore({scene}: any) {
     }, []);
 
     const containerRef = useRef<any>(null)
-    const width = useWindowWidth()
 
     return (
-        <Wrapper ref={containerRef}>
+        <Wrapper id='explore' ref={containerRef}>
             <div style={{ position: 'absolute', top: '0', left: '0', height: '100%' }}></div>
             <Wrapper >
                 <div style={{position: 'sticky', top: 0, left: 0, zIndex: '1000', height: '100%', marginBottom: '100vh', marginTop: '-100vh'}}>
@@ -328,7 +326,7 @@ export default function WrapperExplore({scene}: any) {
                 </Wrapper>
             </Wrapper >
 
-            <SimplicityMeetsPower />
+            <SimplicityMeetsPower  />
         </Wrapper>
     )
 }

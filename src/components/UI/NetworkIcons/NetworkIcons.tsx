@@ -34,7 +34,7 @@ export default function NetworkIcons({ name,  className }: { name: string , clas
         switch (name) {
             case 'telegram':
                 return (
-                    <StyleLineAnimation href={'https://web.telegram.org/a/'} >
+                    <StyleLineAnimation href={'https://web.telegram.org/a/'} target="_blank" >
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M32 32H12L0 20V0H32V32Z" fill="currentColor" />
                             <path d="M8.23209 14.878C13.859 12.2761 21.1402 9.10391 22.1457 8.66476C24.782 7.51571 25.5911 7.7357 25.1878 10.2809C24.898 12.1102 24.0624 18.1661 23.3958 21.9356C23.0006 24.1711 22.1135 24.436 20.7192 23.4688C20.0486 23.0034 16.6636 20.6503 15.9287 20.0978C15.2581 19.5944 14.3332 18.9885 15.4932 17.7955C15.9061 17.3707 18.6117 14.6546 20.72 12.5409C20.9961 12.2634 20.6492 11.8073 20.3304 12.0299C17.4888 14.0107 13.5491 16.7598 13.0476 17.1177C12.2901 17.6584 11.5624 17.9063 10.2567 17.512C9.26973 17.2142 8.30615 16.8588 7.93102 16.7234C6.48605 16.2022 6.82898 15.527 8.23209 14.878Z" fill="black" />
@@ -43,7 +43,7 @@ export default function NetworkIcons({ name,  className }: { name: string , clas
                 )
             case 'youtube':
                 return (
-                    <StyleLineAnimation  href={'https://www.youtube.com/'}>
+                    <StyleLineAnimation  href={'https://www.youtube.com/'} target="_blank">
                         <svg width="31" height="32" viewBox="0 0 31 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 0H31V12V32H0V0Z" fill="currentColor" />
                             <g clipPath="url(#clip0_148_3)">
@@ -65,7 +65,7 @@ export default function NetworkIcons({ name,  className }: { name: string , clas
                 )
             case 'twitter':
                 return (
-                    <StyleLineAnimation href={'https://twitter.com/'}  >
+                    <StyleLineAnimation href={'https://twitter.com/'} target="_blank"  >
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 0H20L32 12V32H0V0Z" fill="currentColor" />
                             <g clipPath="url(#clip0_148_4)">

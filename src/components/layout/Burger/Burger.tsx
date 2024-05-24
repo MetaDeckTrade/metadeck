@@ -1,26 +1,26 @@
 import useGlobalStore from "@/store/store"
 import { useEffect } from "react";
 import LinkHeader from "@/components/UI/LinkHeader/LinkHeader";
-import { useSpring } from "@react-spring/web";
+import { easings, useSpring } from "@react-spring/web";
 import Button from "@/components/UI/Button/Button";
 import NetworkIcons from "@/components/UI/NetworkIcons/NetworkIcons";
 import { Container, WrapperNetwork } from "./style";
 const dataLink = [
     {
-        link: '/',
-        name: 'menu',
+        link: '#advantage',
+        name: 'why',
     },
     {
-        link: '/',
-        name: 'menu',
+        link: '#explore',
+        name: 'explore',
     },
     {
-        link: '/',
-        name: 'menu',
+        link: '#how',
+        name: 'how',
     },
     {
-        link: '/',
-        name: 'menu',
+        link: '#contact',
+        name: 'community',
     },
 ]
 interface TypesLink {
@@ -46,7 +46,7 @@ export default function Burger(){
         to: {
             y: burger ? '0%' : '-100%',
         },
-        config: { duration: 700 },
+        config: { duration: 500, easing: easings.easeOutCubic },
 
     })
 
