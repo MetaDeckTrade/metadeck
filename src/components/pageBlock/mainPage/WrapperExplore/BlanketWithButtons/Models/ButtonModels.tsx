@@ -88,6 +88,8 @@ export default function ButtonModels({ containerRef, inView, rotation, position,
         }
     });
 
+    //Vadim krytoi
+
     return (
         <group ref={modelRef}
             position={position}
