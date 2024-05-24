@@ -25,7 +25,7 @@ export const Container = styled.div`
     `}
 `
 
-export const LinkFooterStyle = styled(Link)`
+export const LinkFooterStyle = styled.a`
     position: relative;
     opacity: 0.75;
     line-height: 150%;

@@ -43,7 +43,7 @@ export default function Document() {
                 {/* <link rel='mask-icon' color='#000000' href='/icons/safari-pinned-tab.svg' /> */}
                 <link rel='apple-touch-startup-image' href='/icons/apple-icon-120x120.png' />
 
-                {/* <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png" />
+                <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png" />
                 <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png" />
                 <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png" />
                 <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png" />
@@ -52,10 +52,10 @@ export default function Document() {
                 <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png" />
                 <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png" />
                 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png" />
-                <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-icon-192x192.png" /> */}
-                {/* <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" /> */}
-                {/* <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png" /> */}
-                {/* <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" /> */}
+                <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-icon-192x192.png" />
+                <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+                <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png" />
+                <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
                 <link rel="manifest" href="/manifest.json" />
                 <meta name="msapplication-TileColor" content="#ffffff" />
                 <meta name="msapplication-TileImage" content="/icons/favicon-32x32.png" />
@@ -64,9 +64,6 @@ export default function Document() {
                 <link fetchPriority='high' rel="preconnect" href="https://fonts.googleapis.com" />
                 <link fetchPriority='high' rel="preconnect" href="https://fonts.gstatic.com" />
                 <link fetchPriority='high' href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet"></link>
-
-                <link fetchPriority='high' rel="preconnect" href="https://fonts.googleapis.com" />
-                <link fetchPriority='high' rel="preconnect" href="https://fonts.gstatic.com" />
                 <link fetchPriority='high' href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Orbitron:wght@400..900&display=swap" rel="stylesheet" />
                 {/* Meta Tags for HTML pages on Mobile */}
                 {/* <meta name="format-detection" content="telephone=yes"/>
@@ -81,10 +78,6 @@ export default function Document() {
                     Be sure validate your Twitter card markup on the documentation site. */}
                 <meta name='twitter:card' content='summary' />
                 <meta name='twitter:site' content={twitter} />
-
-                <link fetchPriority='high' rel="preconnect" href="https://fonts.googleapis.com" />
-                <link fetchPriority='high' rel="preconnect" href="https://fonts.gstatic.com" />
-                <link fetchPriority='high' href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet" />
             </Head>
             <body>
                 <Main />

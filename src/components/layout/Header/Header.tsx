@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import useGlobalStore from '@/store/store';
 import { LogoWrapper, NavigationsContainer, NavigationsContainerMobile, StyleHeaderContainer, SvgStyle } from './styleHeadet';
+import { lenis } from '@/layouts/ScrollLayout/ScrollLayout';
 
 interface TypesLink {
     link: string;
@@ -12,20 +13,20 @@ interface TypesLink {
 }
 const dataLink = [
     {
-        link: '/',
-        name: 'menu',
+        link: '#advantage',
+        name: 'why',
     },
     {
-        link: '/',
-        name: 'menu',
+        link: '#explore',
+        name: 'explore',
     },
     {
-        link: '/',
-        name: 'menu',
+        link: '#how',
+        name: 'how',
     },
     {
-        link: '/',
-        name: 'menu',
+        link: '#contact',
+        name: 'community',
     },
 ]
 export default function Header() {
@@ -33,6 +34,7 @@ export default function Header() {
     const burger = useGlobalStore(state => state.burger)
     const setburger = useGlobalStore(state => state.setburger)
     const [booted, setbooted] = useState(false)
+    
 
     useEffect(() => {
         setbooted(true)
@@ -48,7 +50,7 @@ export default function Header() {
 
     return (
         <StyleHeaderContainer style={effect}>
-            <LogoWrapper href={'/'}>
+            <LogoWrapper onClick={() => lenis.current?.scrollTo('#about')}>
                 <Image src={'/img/subtract.svg'} width={72.24} height={36} alt='logo' />
                 <p >Meta Deck</p>
             </LogoWrapper>

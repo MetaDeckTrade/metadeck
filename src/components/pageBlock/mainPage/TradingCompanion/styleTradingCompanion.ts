@@ -28,6 +28,24 @@ export const ContainerStyle = styled.div`
     padding: calc(${rm(90)} + ${rm(40)}) ${rm(10)} ${rm(600)} ${rm(10)};
     `}
 
+    .text {
+        position: relative;
+            width: ${rm(585)} !important;
+            overflow: hidden;
+            ${fonts.inter}
+            ${media.lg`
+                width: ${rm(445)} !important;
+            `}
+            ${media.md`
+                width: ${rm(474)} !important;
+                margin-top: ${rm(20)};
+            `}
+            ${media.xsm`
+                width: 100% !important;
+                margin-top: ${rm(0)};
+            `}
+    }
+
 `
 export const Ellipse1 = styled(Image)`
 position: absolute;

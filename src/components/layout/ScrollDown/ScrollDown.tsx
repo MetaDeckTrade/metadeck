@@ -1,6 +1,7 @@
 import { useCallback, useContext, useState, createContext, useEffect } from 'react'
 import { Container } from './style'
 import { useSpring } from '@react-spring/web'
+import { lenis } from '@/layouts/ScrollLayout/ScrollLayout'
 // @ts-ignore
 const ButtonScrollContext = createContext()
 
@@ -11,10 +12,7 @@ export default function ScrollDown({children} : any) {
     }, [])
 
     const handleNextClick = useCallback(() => {
-        window.scrollTo({
-            top: window.scrollY + window.innerHeight / 1.5,
-            behavior: "smooth",
-        });
+        lenis.current?.scrollTo(window.scrollY + window.innerHeight / 1.5)
     }, [])
     const [booted, setbooted] = useState(false)
     useEffect(() => {

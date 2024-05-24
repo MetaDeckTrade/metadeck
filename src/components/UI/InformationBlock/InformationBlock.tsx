@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { media, responsive, rm } from '../../../styles/utils'
 import { inter, orbitronBold } from "@/styles/fonts";
 import { colors } from "@/styles";
+import Text from "../animation/animationText/Text";
 
 interface Types {
     number: string,
@@ -60,7 +61,7 @@ max-width: 100%;
 `}
 `
 
-const StyleLineAnimation = styled(LineAnimation)`
+const StyleLineAnimation = styled(Text)`
 position: relative;
 width: ${rm(424)} !important;
 overflow: hidden;
@@ -70,7 +71,7 @@ width: 100% !important;
 `}
 `
 export default function InformationBlock({ number, delay = 0, title, text, ...props }: Types) {
-   
+
     return (
         <ContainerStyle  {...props}>
             <AnimationBlockY duration={600} delay={delay}>
@@ -84,7 +85,7 @@ export default function InformationBlock({ number, delay = 0, title, text, ...pr
             <StyleAnimatiosPharagraphTwo
                 duration={600}
                 text={title} delay={200 + delay} />
-            <StyleLineAnimation delay={delay + 400} >
+            <StyleLineAnimation mode='once' delay={delay + 400} >
                 {text}
             </StyleLineAnimation>
         </ContainerStyle>
