@@ -92,6 +92,7 @@ export default function ButtonModels({ containerRef, inView, rotation, position,
         <group ref={modelRef}
             position={position}
             rotation={rotation}
+            scale={0}
         >
             <primitive
                 object={scene.clone()}
