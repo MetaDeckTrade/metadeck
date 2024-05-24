@@ -28,7 +28,7 @@ export default function ButtonModels({ containerRef, inView, rotation, position,
     });
 
     const positionSpring = useSpring({
-        z: blockNumber === activeNumber ? position[2] : -1,
+        z: blockNumber === activeNumber ? position[2] + 0.3 : -1,
         config: { duration: 500, easing: easings.easeInOutCubic },
     });
 
@@ -69,9 +69,6 @@ export default function ButtonModels({ containerRef, inView, rotation, position,
         if (modelRef.current) {
             modelRef.current.position.z = positionSpring.z.get();
         }
-        // materialsRef.current.forEach((uniform: any) => {
-        //     uniform.value = effect.opacity.get();
-        // });
 
         uniforms.current.alpha.value = effect.opacity.get()
     });
