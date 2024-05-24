@@ -77,7 +77,7 @@ export default function BlanketModal({ inView, rotation, position, containerRef}
     useFrame(() => {
         if(!inViewButtonBlanket) return
 
-
+// 
         if(modelRef.current && width < 1024) {
             modelRef.current.rotation.set(+progressValues.x.get(), +progressValues.y.get(), +progressValues.z.get())
             modelRef.current.position.set(+progressValues.positionX.get(), +progressValues.positionY.get(), +progressValues.positionZ.get())
