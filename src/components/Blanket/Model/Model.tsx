@@ -1,7 +1,7 @@
 import { useSpringTrigger } from "@/hooks/useSpringTrigger";
 import { useWindowWidth } from "@react-hook/window-size";
 import { useSpring } from "@react-spring/three";
-import { Preload, useGLTF } from "@react-three/drei";
+import { Float, Preload, useGLTF } from "@react-three/drei";
 import { useRef, MutableRefObject, useState, useEffect, useMemo } from 'react';
 import { useInView } from "react-intersection-observer";
 import { useFrame } from "@react-three/fiber";
@@ -184,7 +184,7 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
     useFrame(({ pointer, size }) => {
         if(!inViewBlanket) return
 
-        if (modelRef.current && width > 576) {
+        if (modelRef.current) {
             if (progressRef.current < progress[1]) {
                 modelRef.current.rotation.set(
                     lerp(modelRef.current.rotation.x, +progressValues.x.get(), 0.05),
@@ -231,22 +231,26 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
                 );
             }
 
-            modelRef.current.rotation.set(
-                modelRef.current.rotation.x + coordinatesRef.x * 0.005,
-                modelRef.current.rotation.y + coordinatesRef.y * 0.005,
-                modelRef.current.rotation.z
-            );
+            if(width > 1024) {
+                modelRef.current.rotation.set(
+                    modelRef.current.rotation.x + coordinatesRef.x * 0.005,
+                    modelRef.current.rotation.y + coordinatesRef.y * 0.005,
+                    modelRef.current.rotation.z
+                );
+            }
         }
 
         uniforms.current.alpha.value = effect.opacity.get()
     });
 
     return (
+        <Float>
         <primitive
             ref={modelRef}
             scale={20}
             rotation={[0.9, 3.3, 0]}
             object={model}
         />
+        </Float>
     );
 }

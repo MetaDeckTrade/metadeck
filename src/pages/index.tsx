@@ -28,9 +28,9 @@ const StlyedWrapper = styled.div`
     `}
 
     ${media.xsm`
-        height: 100vh;
+        /* height: 100vh; */
         padding-bottom: 0;
-        top: ${rm(600)} !important;
+        top: ${rm(450)} !important;
     `}
 `
 

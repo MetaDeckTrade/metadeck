@@ -21,11 +21,11 @@ interface Blanket {
 const StyledFooterBlanket = styled.div`
     position: relative;
     width: 100%;
-    height: ${rm(700)};
+    height: ${rm(900)};
     position: relative;
 
     ${media.xsm`
-        height: ${rm(400)}
+        height: ${rm(500)}
     `}
 `
 
@@ -49,12 +49,12 @@ export default function FooterBlanket({blockRef}: Blanket) {
         <StyledFooterBlanket ref={ref}>
             <PageView style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: '17'}}>
                 <Suspense fallback>
-                    <FooterModel position={[width > 1024 ? -1.1 : (width < 576 ? 0 : 1), 0, -1.3]} rotation={[0.8, 3.4, 0.1]}></FooterModel>
-                    <directionalLight color='white' intensity={0.5} position={[0, 0, 10]}></directionalLight>
-                    <ambientLight intensity={1} />
-                    <pointLight position={[20, 30, 10]}  intensity={1} />
+                    <FooterModel position={[width > 1024 ? -0.7 : (width < 576 ? 0 : 1), width > 1024 ? -0.5 : (width < 576 ? -0.4 : -0.2), -1.3]} rotation={[0.8, 3.4, 0.1]}></FooterModel>
+                    <ambientLight intensity={4} />
+                    <pointLight position={[1.855, 3.411, -1.345]}  intensity={1} decay={2.54}/>
+                    <directionalLight color='white' intensity={0.8} position={[0, 0, 10]}></directionalLight>
                     <pointLight position={[-10, -10, -10]} color='blue' />
-                    <PerspectiveCamera makeDefault fov={40} position={[0, 0, 4]} />
+                    <PerspectiveCamera makeDefault fov={40} position={[0, 0, width > 1024 ? 4 : 6]} />
                 </Suspense>
                 <Preload all></Preload>
             </PageView>

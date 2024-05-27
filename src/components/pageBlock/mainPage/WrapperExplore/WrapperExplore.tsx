@@ -13,6 +13,34 @@ import { media, rm } from '@/styles/utils';
 
 const dataTable = [
     {
+        text: 'Change wallet',
+        duration: 300,
+        delay: 50,
+    },
+    {
+        text: 'Custom 2',
+        duration: 300,
+        delay: 100,
+    },
+    {
+        text: 'Custom 3',
+        duration: 300,
+        delay: 150,
+    },
+    {
+        text: 'Custom 4',
+        duration: 300,
+        delay: 200,
+    },
+    {
+        text: 'Custom 5',
+        duration: 300,
+        delay: 250,
+    }
+]
+
+const dataTable2 = [
+    {
         text: 'Buy 1',
         duration: 300,
         delay: 50,
@@ -33,35 +61,7 @@ const dataTable = [
         delay: 200,
     },
     {
-        text: 'Buy 5',
-        duration: 300,
-        delay: 250,
-    }
-]
-
-const dataTable2 = [
-    {
-        text: 'Buy 4',
-        duration: 300,
-        delay: 50,
-    },
-    {
-        text: 'Buy 25',
-        duration: 300,
-        delay: 100,
-    },
-    {
-        text: 'Buy 32',
-        duration: 300,
-        delay: 150,
-    },
-    {
-        text: 'Buy 44',
-        duration: 300,
-        delay: 200,
-    },
-    {
-        text: 'Buy 55',
+        text: 'Max tx',
         duration: 300,
         delay: 250,
     },
@@ -69,27 +69,27 @@ const dataTable2 = [
 
 const dataTable3 = [
     {
-        text: 'Buy 44',
+        text: 'Sell initial',
         duration: 300,
         delay: 50,
     },
     {
-        text: 'Buy 225',
+        text: 'Sell 25%',
         duration: 300,
         delay: 100,
     },
     {
-        text: 'Buy 34',
+        text: 'Sell 50%',
         duration: 300,
         delay: 150,
     },
     {
-        text: 'Buy 44',
+        text: 'Sell 75%',
         duration: 300,
         delay: 200,
     },
     {
-        text: 'Buy 55',
+        text: 'Sell all',
         duration: 300,
         delay: 250,
     },
@@ -103,7 +103,7 @@ const StlyedWrapper = styled.div`
     width: 100%;
 
     ${media.md`
-        padding-bottom: 116vh !important;
+        /* padding-bottom: 116vh !important; */
     `}
 
     ${media.xsm`
@@ -112,6 +112,7 @@ const StlyedWrapper = styled.div`
 `
 
 export default function WrapperExplore({scene}: any) {
+
     const stickyRef = useRef(null);
     const triggerRef = useRef<HTMLDivElement>(null!)
     const refTitle = useRef<HTMLDivElement | null>(null)
@@ -186,15 +187,24 @@ export default function WrapperExplore({scene}: any) {
         from: { y: '70%' },
         to: { y: '0%' },
     })
+
     useEffect(() => {
-        if (yellowBlock && numerBlock !== 1 && refWrapper.current) {
+        setTimeout(() => {
+            setButtonNumber(0)
+        }, 100)
+    }, [])
+
+    useEffect(() => {
+        console.log(grinBlock)
+
+        if (yellowBlock && !grinBlock && numerBlock !== 1 && refWrapper.current) {
             // @ts-expect-error
             refWrapper.current.textContent = `10 / 15`
             setnumerBlock(1)
             setdataTableList([...dataTable3])
 
         }
-        if (grinBlock && numerBlock !== 2 && refWrapper.current) {
+        if (grinBlock  && numerBlock !== 2 && refWrapper.current) {
             setnumerBlock(2)
             // @ts-expect-error
             refWrapper.current.textContent = `15 / 15`
@@ -294,7 +304,7 @@ export default function WrapperExplore({scene}: any) {
                         <WpapperInfo bgcolor={numerBlock} >
 
                             <div ref={yellowRef} style={{ position: 'absolute', top: '50%', transform: 'translate(-50%, 0%)', right: 0, height: '1px', width: '1px', pointerEvents: 'none' }}></div>
-                            <div ref={grinRef} style={{ position: 'absolute', bottom: '0%', right: 0, height: '1px', width: '1px', pointerEvents: 'none' }}></div>
+                            <div ref={grinRef} style={{ position: 'absolute', bottom: '0%', right: 0, height: '70vh', width: '100%', pointerEvents: 'none' }}></div>
                             <div ref={start} style={{ position: 'absolute', top: '0%', right: 0, height: '1px', width: '1px', pointerEvents: 'none' }}></div>
                             {/* <Image src={'/img/image187.png'}  width={1920} height={375} alt=''/> */}
                             <WrapperInfoTable>
