@@ -30,7 +30,11 @@ const StlyedWrapper = styled.div`
     ${media.xsm`
         /* height: 100vh; */
         padding-bottom: 0;
-        top: ${rm(450)} !important;
+        top: ${rm(0)} !important;
+
+        >:first-child{
+            top: ${rm(450)}
+        }
     `}
 `
 

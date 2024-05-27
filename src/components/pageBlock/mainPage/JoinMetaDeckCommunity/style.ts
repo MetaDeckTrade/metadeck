@@ -28,7 +28,7 @@ export const Container = styled.div`
        padding: ${rm(40)} ${rm(10)} ${rm(388)} ${rm(10)};
        padding-right: 0;
        padding-left: 0;
-       padding-bottom: ${rm(40)};
+       padding-bottom: ${rm(0)};
        flex-direction: column;
     `}
 
