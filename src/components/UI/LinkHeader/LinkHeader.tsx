@@ -6,10 +6,11 @@ import { lenis } from '@/layouts/ScrollLayout/ScrollLayout';
 
 interface Types{
     href: string,
-    name: string
+    name: string,
+    onClick?: any
 }
 
-export default function LinkHeader({href, name} : Types){
+export default function LinkHeader({href, name, onClick} : Types){
     const StyleLineAnimation = styled.a`
         text-transform: uppercase;
         line-height: 150%;
@@ -32,7 +33,10 @@ export default function LinkHeader({href, name} : Types){
         <>
             {
                 href ? 
-                    <StyleLineAnimation onClick={() => lenis.current?.scrollTo(href)} >
+                    <StyleLineAnimation onClick={() => {
+                        lenis.current?.scrollTo(href)
+                        onClick()
+                    }} >
                         {name}
                     </StyleLineAnimation>
                 : null

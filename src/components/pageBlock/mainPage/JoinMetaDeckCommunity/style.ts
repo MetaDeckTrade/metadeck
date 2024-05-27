@@ -11,9 +11,11 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     padding-left: 0;
+    align-items: center;
 
     ${media.lg`
        padding: ${rm(70)} ${rm(40)} ${rm(120)} ${rm(40)};
+       padding-left: 0;
     `}
 
     ${media.md`
@@ -26,6 +28,7 @@ export const Container = styled.div`
        padding: ${rm(40)} ${rm(10)} ${rm(388)} ${rm(10)};
        padding-right: 0;
        padding-left: 0;
+       padding-bottom: ${rm(40)};
        flex-direction: column;
     `}
 

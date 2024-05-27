@@ -29,6 +29,7 @@ interface TypesLink {
 }
 export default function Burger(){
     const burger = useGlobalStore(state => state.burger)
+    const setBurger = useGlobalStore(state => state.setburger)
 
     useEffect(() => {
         if (burger) {
@@ -57,7 +58,7 @@ export default function Burger(){
                     dataLink?.length ?
                         dataLink.map((_: TypesLink, i: number) => {
                             if (_.link && _.name) {
-                                return <LinkHeader name={_.name} href={_.link} key={i} />;
+                                return <LinkHeader onClick={() => {setBurger(false)}} name={_.name} href={_.link} key={i} />;
                             }
                             return null;
                         })

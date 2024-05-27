@@ -63,33 +63,44 @@ export default function ButtonModels({ containerRef, inView, rotation, position,
 
 
 
-    useFrame(() => {
-        if(!inViewButtonBlanket) return
+    useFrame((state) => {
+        if (!modelRef.current || !inViewButtonBlanket) return;
 
-        if (modelRef.current) {
-            modelRef.current.position.z = positionSpring.z.get();
-            modelRef.current?.scale.set(effect.scale.get(), effect.scale.get(), effect.scale.get())
+        const time = state.clock.getElapsedTime();
+        const baseRotationX = rotation[0] + Math.sin(time * 0.5) * 0.05;  // Small oscillation in X
+        const baseRotationY = rotation[1] + Math.sin(time * 0.3) * 0.05;  // Small oscillation in Y
+        const baseRotationZ = rotation[2] + Math.sin(time * 0.4) * 0.05;  // Small oscillation in Z
 
+        modelRef.current.position.z = positionSpring.z.get();
+        modelRef.current.scale.set(effect.scale.get(), effect.scale.get(), effect.scale.get());
 
-            if(effect.scale.get() < .3) {
-                modelRef.current.visible = false
-            } else {
-                modelRef.current.visible = true
-            }
+        if (effect.scale.get() < 0.3) {
+            modelRef.current.visible = false;
+        } else {
+            modelRef.current.visible = true;
+        }
 
-            if(width < 1024) {
-                modelRef.current.rotation.set(+progressValues.x.get(), +progressValues.y.get(), +progressValues.z.get())
-                modelRef.current.position.set(+progressValues.positionX.get(), +progressValues.positionY.get(), +progressValues.positionZ.get())
-            } else {
-                modelRef.current.rotation.x = rotation[0] + coordinatesRef.x * 0.03
-                modelRef.current.rotation.y = rotation[1] + coordinatesRef.y * 0.03
-            }
-            
+        if (width < 1024) {
+            modelRef.current.rotation.set(
+                +progressValues.x.get(),
+                +progressValues.y.get(),
+                +progressValues.z.get()
+            );
+            modelRef.current.position.set(
+                +progressValues.positionX.get(),
+                +progressValues.positionY.get(),
+                +progressValues.positionZ.get()
+            );
+        } else {
+            modelRef.current.rotation.set(
+                baseRotationX + coordinatesRef.x * 0.03,
+                baseRotationY + coordinatesRef.y * 0.03,
+                baseRotationZ
+            );
         }
     });
 
-    //Vadim krytoi
-
+    
     return (
         <group ref={modelRef}
             position={position}

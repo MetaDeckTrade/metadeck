@@ -34,13 +34,27 @@ export default function FooterModel({ rotation, position}: Model) {
         }
     }, [footerBlanket])
 
-    useFrame(() => {
+    useFrame((state) => {
 
         if(!footerBlanket) return
 
+        const time = state.clock.getElapsedTime();
+        const baseRotationX = rotation[0] + Math.sin(time * 0.5) * 0.05;
+        const baseRotationY = rotation[1] + Math.sin(time * 0.3) * 0.05;  
+        const baseRotationZ = rotation[2] + Math.sin(time * 0.4) * 0.05; 
+
         if(modelRef.current && width > 1024) {
-            modelRef.current.rotation.x = rotation[0] + coordinatesRef.x * 0.1
-            modelRef.current.rotation.y = rotation[1] + coordinatesRef.y * 0.1
+            modelRef.current.rotation.set(
+                baseRotationX + coordinatesRef.x * 0.05,
+                baseRotationY + coordinatesRef.y * 0.05,
+                baseRotationZ
+            );
+        } else if (modelRef.current) {
+            modelRef.current.rotation.set(
+                baseRotationX,
+                baseRotationY,
+                baseRotationZ
+            );
         }
 
     })
@@ -48,7 +62,7 @@ export default function FooterModel({ rotation, position}: Model) {
     return (
         <primitive
             ref={modelRef}
-            scale={18}
+            scale={width > 576 ? 20 : 30}
             position={position}
             rotation={rotation}
             object={scene.clone()}

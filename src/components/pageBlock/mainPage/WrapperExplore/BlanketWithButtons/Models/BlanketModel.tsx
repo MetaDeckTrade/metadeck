@@ -74,18 +74,33 @@ export default function BlanketModal({ inView, rotation, position, containerRef}
     });
 
 
-    useFrame(() => {
-        if(!inViewButtonBlanket) return
+ useFrame((state) => {
+        if (!modelRef.current) return;
 
-        if(modelRef.current && width < 1024) {
-            modelRef.current.rotation.set(+progressValues.x.get(), +progressValues.y.get(), +progressValues.z.get())
-            modelRef.current.position.set(+progressValues.positionX.get(), +progressValues.positionY.get(), +progressValues.positionZ.get())
-        } else if(modelRef.current) {
-            modelRef.current.rotation.x = rotation[0] + coordinatesRef.x * 0.01
-            modelRef.current.rotation.y = rotation[1] + coordinatesRef.y * 0.01
+        const time = state.clock.getElapsedTime();
+        const baseRotationX = rotation[0] + Math.sin(time * 0.5) * 0.05;  // Small oscillation in X
+        const baseRotationY = rotation[1] + Math.sin(time * 0.3) * 0.05;  // Small oscillation in Y
+        const baseRotationZ = rotation[2] + Math.sin(time * 0.4) * 0.05;  // Small oscillation in Z
+
+        if (width < 1024) {
+            modelRef.current.rotation.set(
+                +progressValues.x.get(),
+                +progressValues.y.get(),
+                +progressValues.z.get()
+            );
+            modelRef.current.position.set(
+                +progressValues.positionX.get(),
+                +progressValues.positionY.get(),
+                +progressValues.positionZ.get()
+            );
+        } else {
+            modelRef.current.rotation.set(
+                baseRotationX + coordinatesRef.x * 0.01,
+                baseRotationY + coordinatesRef.y * 0.01,
+                baseRotationZ
+            );
         }
-    })
-
+    });
     return (
         <primitive
             ref={modelRef}
