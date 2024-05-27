@@ -22,7 +22,7 @@ export const Container = styled(animated.div)`
         position: relative;
         display: flex;
         flex-direction: column;
-        gap: ${rm(60)};
+        gap: ${rm(20)};
     }
     >:nth-child(2){
         font-size: ${rm(16)};

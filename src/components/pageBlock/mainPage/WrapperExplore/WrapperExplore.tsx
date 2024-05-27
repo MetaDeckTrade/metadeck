@@ -195,8 +195,6 @@ export default function WrapperExplore({scene}: any) {
     }, [])
 
     useEffect(() => {
-        console.log(grinBlock)
-
         if (yellowBlock && !grinBlock && numerBlock !== 1 && refWrapper.current) {
             // @ts-expect-error
             refWrapper.current.textContent = `10 / 15`

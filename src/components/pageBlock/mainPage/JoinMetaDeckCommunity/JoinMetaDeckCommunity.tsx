@@ -1,12 +1,39 @@
 import NetworkIcons from '@/components/UI/NetworkIcons/NetworkIcons'
 import { Container, ContainerInfo, ContainerNetwork, Description, Subtitle } from './style'
 import FooterBlanket from './FooterBlanket/FooterBlanket'
+import styled from 'styled-components'
+import { useWindowWidth } from '@react-hook/window-size'
+import Image from 'next/image'
+import { media, rm } from '@/styles/utils'
+
+const StyledMobileImage = styled.div`
+    display: none;
+    width: 100%;
+    height: ${rm(400)};
+    position: relative;
+    overflow: hidden;
+
+    ${media.xsm`
+        display: flex;
+    `}
+
+    img{
+        position: absolute;
+        top: ${rm(60)};
+        left: 0;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+`
 
 export default function JoinMetaDeckCommunity() {
 
+    const width = useWindowWidth()
+
     return (
         <Container id='contact'>
-            <FooterBlanket></FooterBlanket>
+            {width > 576 && <FooterBlanket></FooterBlanket>}
             <ContainerInfo>
                 <h1>Join the MetaDeck Community</h1>
                 <Subtitle>Connect, Learn, and Grow</Subtitle>
@@ -17,6 +44,9 @@ export default function JoinMetaDeckCommunity() {
                     <NetworkIcons name='twitter' />
                 </ContainerNetwork>
             </ContainerInfo>
+            <StyledMobileImage>
+                <Image src='/img/mobileBlanketImage.png' alt='blanketImageMobile' width={500} height={400}></Image>
+            </StyledMobileImage>
         </Container>
     )
 }
