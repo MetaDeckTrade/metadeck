@@ -129,38 +129,38 @@ export default function WrapperExplore({scene}: any) {
 
     const [ref, inView] = useInView()
 
-    useEffect(() => {
-        if(!refTable.current || !refWrapperTable.current) {return} 
-        // const wrapperHeight = refWrapperTable.current.getBoundingClientRect().height
-        const wrapperHeight = window.innerHeight
+    // useEffect(() => {
+    //     if(!refTable.current || !refWrapperTable.current) {return} 
+    //     // const wrapperHeight = refWrapperTable.current.getBoundingClientRect().height
+    //     const wrapperHeight = window.innerHeight
 
-        // @ts-expect-error
-        const heightElement = refTable.current.getBoundingClientRect().height
-        if(wrapperHeight && heightElement){
-            const newPadding = wrapperHeight - heightElement
+    //     // @ts-expect-error
+    //     const heightElement = refTable.current.getBoundingClientRect().height
+    //     if(wrapperHeight && heightElement){
+    //         const newPadding = wrapperHeight - heightElement
 
-            let padding;
-            if(innerWidth > 1440){
-                padding = 227
-            } else if(innerWidth <= 1440 && innerWidth > 1024){
-                padding = 192
-            } else if (innerWidth <= 1024 && innerWidth > 480) {
-                padding = 205
-            } else if (innerWidth <= 480){
-                padding = 120
-            }
-             if (wrapperHeight < 900) {
-                padding = 80
+    //         let padding;
+    //         if(innerWidth > 1440){
+    //             padding = 227
+    //         } else if(innerWidth <= 1440 && innerWidth > 1024){
+    //             padding = 192
+    //         } else if (innerWidth <= 1024 && innerWidth > 480) {
+    //             padding = 205
+    //         } else if (innerWidth <= 480){
+    //             padding = 120
+    //         }
+    //          if (wrapperHeight < 900) {
+    //             padding = 80
                 
-            }
-            if(padding && newPadding && refTable.current ){
-                // @ts-expect-error
-                refTable.current.style.paddingTop = `${newPadding -  padding}px`
-            }
-        }
+    //         }
+    //         if(padding && newPadding && refTable.current ){
+    //             // @ts-expect-error
+    //             refTable.current.style.paddingTop = `${newPadding -  padding}px`
+    //         }
+    //     }
 
 
-    },[refTable, refWrapperTable, innerWidth])
+    // },[refTable, refWrapperTable, innerWidth])
 
     const { values: titleValues } = useSpringTrigger({
         trigger: triggerRef,

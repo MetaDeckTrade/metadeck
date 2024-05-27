@@ -178,20 +178,12 @@ position: sticky;
     width: 100%;
     /* padding-top: ${rm(380)}; */
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: flex-end;
-    padding-bottom: ${rm(200)};
+    ${heightLvh(100)}
     ${media.lg`
-            gap: ${rm(100)};        
-        `}
-         /* ${media.md`
-            padding-top: ${rm(1030)};
-        `} */
-        ${media.xsm`
-    padding-bottom: ${rm(100)};
-
-            /* padding-top: ${rm(291)}; */
-        `}
+        gap: ${rm(100)};        
+    `}
 `
 
 export const WrapperTable = styled.div`
@@ -199,13 +191,8 @@ export const WrapperTable = styled.div`
         width: 50%;
         display: flex;
         flex-direction: column;
-        gap: ${rm(120)};        
-        /* margin-bottom: ${rm(200)}; */
-        ${css`
-        @media (min-aspect-ratio: 3/2) {
-            
-        }
-        `}
+        gap: ${rm(120)};   
+        padding-bottom: ${rm(100)};
         ${media.lg`
             gap: ${rm(100)};        
         `}
@@ -225,6 +212,7 @@ export const WrapperTable = styled.div`
             justify-content: space-between;
             padding-left: ${rm(75)};
             padding-right: ${rm(10)};
+            padding-bottom: ${rm(32)};
         `}
         
 `
@@ -234,8 +222,9 @@ export const TitleTable = styled.p`
             font-size: ${rm(36)};
             color: ${colors.blue1};
             ${orbitronBold()}
-            ${media.xsm`
-                 font-size: ${rm(32)};
+            white-space: nowrap;
+            ${media.md`
+                font-size: ${rm(24)};
             `}
 `
 
@@ -317,6 +306,9 @@ export const WrapperText = styled(animated.div)`
                 opacity: 0.8;
                 ${media.lg`
                     font-size: ${rm(30)};
+                `}
+                ${media.md`
+                    font-size: ${rm(20)};
                 `}
             }
         }
