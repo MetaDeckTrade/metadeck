@@ -35,7 +35,7 @@ export default function LinkHeader({href, name, onClick} : Types){
                 href ? 
                     <StyleLineAnimation onClick={() => {
                         lenis.current?.scrollTo(href)
-                        onClick()
+                        onClick ? onClick() : null
                     }} >
                         {name}
                     </StyleLineAnimation>
