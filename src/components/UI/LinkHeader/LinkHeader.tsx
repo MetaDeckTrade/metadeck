@@ -25,7 +25,7 @@ export default function LinkHeader({href, name, onClick} : Types){
         }
         
         ${media.md`
-            font-size: ${rm(32)};
+            font-size: ${rm(32)}; 
         `}
     `
 
