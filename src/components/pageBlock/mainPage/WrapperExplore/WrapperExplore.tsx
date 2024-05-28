@@ -18,22 +18,22 @@ const dataTable = [
         delay: 50,
     },
     {
-        text: 'Custom 2',
+        text: 'Custom 1',
         duration: 300,
         delay: 100,
     },
     {
-        text: 'Custom 3',
+        text: 'Custom 2',
         duration: 300,
         delay: 150,
     },
     {
-        text: 'Custom 4',
+        text: 'Custom 3',
         duration: 300,
         delay: 200,
     },
     {
-        text: 'Custom 5',
+        text: 'Custom 4',
         duration: 300,
         delay: 250,
     }
