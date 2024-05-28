@@ -57,8 +57,8 @@ export default function App({ Component, pageProps }: AppProps) {
                                 <Lvh />
                                 <AdaptiveGrid baseWidth={1920} />
                                 <Component {...pageProps} />
+                                <Footer />
                             </CanvasLayout>
-                            <Footer />
                         </ScrollDown>
                     </ScrollLayout>
                     : <></>

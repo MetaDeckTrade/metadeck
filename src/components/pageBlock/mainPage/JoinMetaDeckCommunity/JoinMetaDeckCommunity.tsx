@@ -9,9 +9,10 @@ import { media, rm } from '@/styles/utils'
 const StyledMobileImage = styled.div`
     display: none;
     width: 100%;
-    height: ${rm(400)};
+    height: ${rm(330)};
     position: relative;
     overflow: hidden;
+    margin-top: ${rm(60)};
 
     ${media.xsm`
         display: flex;
@@ -19,7 +20,7 @@ const StyledMobileImage = styled.div`
 
     img{
         position: absolute;
-        top: ${rm(60)};
+        top: 0;
         left: 0;
         object-fit: cover;
         width: 100%;

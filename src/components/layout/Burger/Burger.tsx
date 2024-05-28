@@ -48,7 +48,6 @@ export default function Burger(){
             y: burger ? '0%' : '-100%',
         },
         config: { duration: 500, easing: easings.easeOutCubic },
-
     })
 
     return(
