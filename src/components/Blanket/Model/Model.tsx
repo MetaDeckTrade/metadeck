@@ -19,6 +19,7 @@ interface ModelProps {
     secondCustomRef: MutableRefObject<HTMLElement | HTMLDivElement | null>,
     thirdCustomRef: MutableRefObject<HTMLElement | HTMLDivElement | null>,
     fourthCustomRef: MutableRefObject<HTMLElement | HTMLDivElement | null>,
+    lastContainerRef: MutableRefObject<HTMLElement | HTMLDivElement | null>,
     mPointer: any,
 }
 
@@ -26,17 +27,17 @@ const progressDifference = 0.0005;
 
 const progressPc = {
     1: 0.061,
-    2: 0.13,
+    2: 0.12,
     3: 0.235,
 }
 
 const progressMd = {
     1: 0.091,
     2: 0.14,
-    3: 0.235,
+    3: 0.205,
 }
 
-export default function Model({ containerRef, inView, firstContainerRef, firstCustomRef, secondCustomRef, thirdCustomRef, fourthCustomRef, mPointer}: ModelProps) {
+export default function Model({ containerRef, inView, firstContainerRef, firstCustomRef, secondCustomRef, thirdCustomRef, fourthCustomRef, mPointer, lastContainerRef}: ModelProps) {
     const {scene} = useGLTF('/models/model.glb');
     const modelRef = useRef<THREE.Object3D>(null);
     const progressRef = useRef<number>(0);
@@ -45,7 +46,6 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
 
 
     
-    const [stage, setStage] = useState<number>(0);
     const [progress, setProgress] = useState<any>(progressPc);
 
     const width = useWindowWidth();
@@ -126,6 +126,7 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
             x: "1.1", y: "2.8", z: "-0.2",
             positionX: "1.5", positionY: "-0.5", positionZ: "0",
         },
+        config: {duration: 1},
     });
 
     const { values: progressValuesSecond } = useSpringTrigger({
@@ -139,38 +140,48 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         },
         to: {
             x: "0.8", y: "3", z: "0",
-            positionX: "-2", positionY: "-1.6", positionZ: "-2",
+            positionX: "-2", positionY: "-1.6", positionZ: "0",
         },
+        config: {duration: 1},
+        // onChange: (state) => {
+        //     console.log(state.value.progress, progressRef.current, progress)
+        // }
     });
 
     const { values: progressValuesThird } = useSpringTrigger({
         trigger: thirdCustomRef,
         start: 'top bottom',
-        end: 'bottom bottom',
+        end: 'bottom top',
         scrub: true,
         from: {
             x: "0.8", y: "3", z: "0",
-            positionX: "-2", positionY: "-1.6", positionZ: "-2",
+            positionX: "-2", positionY: "-1.6", positionZ: "0",
         },
         to: {
             x: "-0.1", y: "3.2", z: "0",
-            positionX: "0", positionY: "0", positionZ: "2",
+            positionX: "5", positionY: "-2", positionZ: "1",
         },
+        config: {duration: 1},
+        onChange: (state) => {
+            console.log(state.value.progress, progressRef.current)
+        }
     });
 
     const { values: progressValuesFourth } = useSpringTrigger({
-        trigger: fourthCustomRef,
-        start: 'center bottom',
-        end: 'bottom bottom',
+        trigger: lastContainerRef,
+        start: 'top bottom',
+        end: 'center bottom',
         scrub: true,
         from: {
-            x: "-0.1", y: "3.2", z: "0",
-            positionX: "0", positionY: "0", positionZ: "2",
+            x: "0", y: "3.2", z: "0",
+            positionX: "2", positionY: "-2", positionZ: "1",
         },
         to: {
-            x: "-0.3", y: "3.2", z: "0",
-            positionX: "0", positionY: "0", positionZ: "1.8",
+            x: "0", y: "3.2", z: "0",
+            positionX: "-2", positionY: "-2", positionZ: "-0.5",
         },
+        config: {duration: 1},
+
     });
 
     useEffect(() => {
@@ -247,7 +258,7 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         <Float>
         <primitive
             ref={modelRef}
-            scale={20}
+            scale={width > 1024 ? 22 : 18}
             rotation={[0.9, 3.3, 0]}
             object={model}
         />

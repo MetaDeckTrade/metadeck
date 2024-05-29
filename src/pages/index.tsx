@@ -38,6 +38,13 @@ const StlyedWrapper = styled.div`
     `}
 `
 
+const LastStyledContainer = styled.div`
+    height: 100vh;
+    bottom: -50vh;
+    position: absolute;
+    left: 0;
+    width: 100%;
+`
 
 export default function Home() {
 
@@ -47,6 +54,7 @@ export default function Home() {
     const customizaSecondRef = useRef<HTMLDivElement | null>(null)
     const customizaThirdRef = useRef<HTMLDivElement | null>(null)
     const customizalFourthRef = useRef<HTMLDivElement | null>(null)
+    const lastAnimationRef = useRef<HTMLDivElement | null>(null)
 
     const mPointer: any = new Vector3(0, 0, 0)
 
@@ -61,10 +69,11 @@ export default function Home() {
                     <StlyedWrapper>
                         <div style={{ position: 'relative', height: '100%', width: '100%'}}>
                             <div style={{position: 'sticky', top: 0, left: 0, marginBottom: '100vh', marginTop: '-100vh'}}>
-                                <Blanket mPointer={mPointer} firstContainerRef={metaContainerRef} firstCustomRef={customizableFirstRef} secondCustomRef={customizaSecondRef} thirdCustomRef={customizaThirdRef} fourthCustomRef={customizalFourthRef} containerRef={containerRef}></Blanket>
+                                <Blanket lastContainerRef={lastAnimationRef} mPointer={mPointer} firstContainerRef={metaContainerRef} firstCustomRef={customizableFirstRef} secondCustomRef={customizaSecondRef} thirdCustomRef={customizaThirdRef} fourthCustomRef={customizalFourthRef} containerRef={containerRef}></Blanket>
                             </div>
                         </div>
                     </StlyedWrapper>
+                    <LastStyledContainer ref={lastAnimationRef}></LastStyledContainer>
                     <div ref={metaContainerRef}>
                         <TradingCompanion />
                         <WhyMetaDeck />
