@@ -16,6 +16,7 @@ export const ContainerStyle = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: ${rm(20)};
+    z-index: 10;
     ${media.lg`
     padding: calc(${rm(90)} + ${rm(40)}) ${rm(40)} ${rm(270)} ${rm(40)};
     `}

@@ -22,6 +22,7 @@ interface Blanket {
     secondCustomRef: MutableRefObject<HTMLElement | HTMLDivElement | null>,
     thirdCustomRef: MutableRefObject<HTMLElement | HTMLDivElement | null>,
     fourthCustomRef: MutableRefObject<HTMLElement | HTMLDivElement | null>,
+    lastContainerRef: MutableRefObject<HTMLElement | HTMLDivElement | null>,
     mPointer: any,
 }
 
@@ -43,7 +44,7 @@ const StyledBlanket = styled.div`
     }
 `
 
-export default function Blanket({containerRef, firstContainerRef, firstCustomRef, secondCustomRef, thirdCustomRef, fourthCustomRef, mPointer}: Blanket) {
+export default function Blanket({containerRef, firstContainerRef, firstCustomRef, secondCustomRef, thirdCustomRef, fourthCustomRef, mPointer, lastContainerRef}: Blanket) {
 
     const { ref, inView } = useInView();
     const width = useWindowWidth()    
@@ -63,7 +64,7 @@ export default function Blanket({containerRef, firstContainerRef, firstCustomRef
         <StyledBlanket ref={ref} >
             <PageView style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: '-1'}}>
                 <Suspense fallback>
-                    <Model mPointer={mPointer} firstCustomRef={firstCustomRef} secondCustomRef={secondCustomRef} thirdCustomRef={thirdCustomRef} fourthCustomRef={fourthCustomRef} firstContainerRef={firstContainerRef} inView={inView} containerRef={containerRef}></Model>
+                    <Model lastContainerRef={lastContainerRef} mPointer={mPointer} firstCustomRef={firstCustomRef} secondCustomRef={secondCustomRef} thirdCustomRef={thirdCustomRef} fourthCustomRef={fourthCustomRef} firstContainerRef={firstContainerRef} inView={inView} containerRef={containerRef}></Model>
                     <ambientLight intensity={4} />
                     <pointLight position={[1.855, 3.411, -1.345]}  intensity={1} decay={2.54}/>
                     <directionalLight color='white' intensity={0.8} position={[0, 0, 10]}></directionalLight>
