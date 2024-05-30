@@ -50,7 +50,7 @@ export default function FooterBlanket({blockRef}: Blanket) {
             <PageView style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: '17'}}>
                 <Suspense fallback>
                     <FooterModel position={[width > 1024 ? -0.7 : (width < 576 ? 0 : 1), width > 1024 ? -0.5 : (width < 576 ? -0.4 : -0.2), -1.3]} rotation={[0.8, 3.4, 0.1]}></FooterModel>
-                    <ambientLight intensity={4} />
+                    <ambientLight intensity={2} />
                     <pointLight position={[1.855, 3.411, -1.345]}  intensity={1} decay={2.54}/>
                     <directionalLight color='white' intensity={0.8} position={[0, 0, 10]}></directionalLight>
                     <pointLight position={[-10, -10, -10]} color='blue' />

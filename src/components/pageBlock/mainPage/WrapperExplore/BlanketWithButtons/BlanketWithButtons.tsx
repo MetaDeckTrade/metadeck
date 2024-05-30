@@ -54,7 +54,7 @@ export default function BlanketWithButtons({containerRef, blockNumber,blockRef}:
                     <ButtonModels blockNumber={blockNumber} activeNumber={1} position={[width > 576 ? -1.65 : -1.65 + mobileCofX, width > 576 ? .5 : .5 + mobileCofY, 1]} rotation={[-.09, 3.5, -.15]} inView={inView} containerRef={blockRef} url='/models/orange.glb'></ButtonModels>
                     <ButtonModels blockNumber={blockNumber} activeNumber={2} position={[width > 576 ? -1.55 : -1.55 + mobileCofX, width > 576 ? 0 : 0 + mobileCofY, 1]} rotation={[-.09, 3.5, -.14]} inView={inView} containerRef={blockRef} url='/models/yellow.glb'></ButtonModels>
                     <directionalLight color='white' intensity={0.5} position={[0, 0, 10]}></directionalLight>
-                    <ambientLight intensity={1} />
+                    <ambientLight intensity={2} />
                     <pointLight position={[20, 30, 10]}  intensity={1} />
                     <pointLight position={[-10, -10, -10]} color='blue' />
                     <PerspectiveCamera makeDefault fov={40} position={[0, 0, width < 1440 ? (width < 1024 ? 11 : 9) : 7]} />

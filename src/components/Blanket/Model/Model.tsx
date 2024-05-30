@@ -27,8 +27,8 @@ const progressDifference = 0.0005;
 
 const progressPc = {
     1: 0.061,
-    2: 0.12,
-    3: 0.235,
+    2: 0.11,
+    3: 0.15,
 }
 
 const progressMd = {
@@ -149,9 +149,9 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
     });
 
     const { values: progressValuesThird } = useSpringTrigger({
-        trigger: thirdCustomRef,
-        start: 'top bottom',
-        end: 'bottom top',
+        trigger: secondCustomRef,
+        start: 'center bottom',
+        end: 'top center',
         scrub: true,
         from: {
             x: "0.8", y: "3", z: "0",
@@ -159,12 +159,12 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         },
         to: {
             x: "-0.1", y: "3.2", z: "0",
-            positionX: "5", positionY: "-2", positionZ: "1",
+            positionX: "3", positionY: "-2", positionZ: "1",
         },
         config: {duration: 1},
-        onChange: (state) => {
-            console.log(state.value.progress, progressRef.current)
-        }
+        // onChange: (state) => {
+        //     console.log(state.value.progress, progressRef.current)
+        // }
     });
 
     const { values: progressValuesFourth } = useSpringTrigger({
