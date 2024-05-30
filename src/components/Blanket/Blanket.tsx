@@ -65,10 +65,9 @@ export default function Blanket({containerRef, firstContainerRef, firstCustomRef
             <PageView style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: '-1'}}>
                 <Suspense fallback>
                     <Model lastContainerRef={lastContainerRef} mPointer={mPointer} firstCustomRef={firstCustomRef} secondCustomRef={secondCustomRef} thirdCustomRef={thirdCustomRef} fourthCustomRef={fourthCustomRef} firstContainerRef={firstContainerRef} inView={inView} containerRef={containerRef}></Model>
-                    <ambientLight intensity={4} />
                     <pointLight position={[1.855, 3.411, -1.345]}  intensity={1} decay={2.54}/>
-                    <directionalLight color='white' intensity={0.8} position={[0, 0, 10]}></directionalLight>
-                    <pointLight position={[-10, -10, -10]} color='blue' />
+                    <directionalLight color='white' intensity={0.5} position={[0, 0, 10]}></directionalLight>
+                    <ambientLight intensity={2} />
                     <PerspectiveCamera makeDefault fov={40} position={[0, 0, width < 1440 ? (width < 1024 ? (width <= 576 ? 9 : 7) : 9) : 7]}/>
                     <Preload all></Preload>
                 </Suspense>
