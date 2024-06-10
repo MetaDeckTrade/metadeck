@@ -57,7 +57,7 @@ export default function ButtonModels({ containerRef, inView, rotation, position,
         },
         to: {
             x: `${rotation[0]}`, y: `${rotation[1]}`, z: `${rotation[2]}`,
-            positionX: `${position[0] + (width > 576 ? 1.9 : 0)}`, positionY: `${position[1] + (width > 576 ? 0.5 : 0.3)}`, positionZ: `${position[2]}`,
+            positionX: `${position[0] + (width > 576 ? 1.9 : -0.12)}`, positionY: `${position[1] + (width > 576 ? 0.5 : 0.3)}`, positionZ: `${position[2]}`,
         },
     });
 

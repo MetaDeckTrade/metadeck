@@ -65,7 +65,7 @@ export default function BlanketModal({ inView, rotation, position, containerRef}
         },
         to: {
             x: `${rotation[0]}`, y: `${rotation[1]}`, z: `${rotation[2]}`,
-            positionX: "0", positionY: `${position[1] + 0.5}`, positionZ: `${position[2]}`,
+            positionX: "-.12", positionY: `${position[1] + 0.5}`, positionZ: `${position[2]}`,
         },
         onChange: (state) => {
             progressRef.current = state.value.progress;
