@@ -28,7 +28,7 @@ const TradingCompanion = ({ data }: { data: Types | null }) => {
             <Text speed={0.5}  className="text" delay={300} mode='once'>
                 {data?.description ? data.description : null}
             </Text>
-            <WrapperButton>
+            <WrapperButton> 
                 {
                     data?.button && data?.button.length ?
                         data?.button?.map((_ : Navigation , i : number) => (
