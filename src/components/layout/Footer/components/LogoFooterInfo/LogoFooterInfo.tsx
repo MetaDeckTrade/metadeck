@@ -1,10 +1,9 @@
 import Image from "next/image";
 import { Container, ContainerWrapperLogoMobile, StylePMobile, WrapperDescription, WrapperLogo } from "./style";
 import useInnerWidth from "@/hooks/useWidthWindow";
-import { useEffect } from "react";
 
 
-export default function LogoFooterInfo() {
+export default function LogoFooterInfo({data} : any) {
     const innerWidth = useInnerWidth()
 
     return (
@@ -14,22 +13,22 @@ export default function LogoFooterInfo() {
                     <>
                         <ContainerWrapperLogoMobile>
                             <WrapperLogo>
-                                <Image src={'/img/subtract.svg'} width={50} height={25} alt="" />
-                                <p>Meta Deck</p>
+                                <Image className="logo" src={ data?.logo?.filename ? data?.logo?.filename : '/img/subtract.svg'} width={50} height={25} alt="" />
+                                {data?.logoName ?<p className="logoName">{data?.logoName}</p> : null}
                             </WrapperLogo>
-                            <p>© Meta Deck 2024</p>
+                            {data?.copyrightNotice ? <p>{data?.copyrightNotice}</p> : null}
                         </ContainerWrapperLogoMobile>
-                        <StylePMobile>Welcome to the future of crypto trading.</StylePMobile>
+                        {data?.appeal ? <StylePMobile>{data?.appeal}</StylePMobile> : null} 
                     </>
                     :
                     <>
                         <WrapperLogo>
-                            <Image src={'/img/subtract.svg'} width={50} height={25} alt="" />
-                            <p>Meta Deck</p>
+                            <Image src={ data?.logo?.filename ? data?.logo?.filename : '/img/subtract.svg'} width={50} height={25} alt="" />
+                            {data?.logoName ?<p className="logoName">{data?.logoName}</p> : null}
                         </WrapperLogo>
                         <WrapperDescription>
-                            <p>Welcome to the future of crypto trading. </p>
-                            <p>© Meta Deck 2024</p>
+                            {data?.appeal ?<p>{data?.appeal}</p> : null}
+                            {data?.copyrightNotice ? <p>{data?.copyrightNotice}</p> : null}
                         </WrapperDescription>
                     </>
 

@@ -2,23 +2,25 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { ContainerNew, Sheme, Subtitle, SubtitleDescription, Title, WrapperSybtitle, WrapperTitle } from './styleSimplicityMeetsPower'
 import useInnerWidth from '@/hooks/useWidthWindow'
 import { Stiky, StikyNew } from '../CompatibleWhereCounts/styleCompatibleWhereCounts';
+import { TypesSimplicity } from '../WrapperExplore/WrapperExplore';
 
-export default function SimplicityMeetsPower() {
+export default function SimplicityMeetsPower({data} : {data : TypesSimplicity}) {
     const refHeight = useRef(null);
     const wrapperRefHeight = useRef(null);
     const [imageSrc, setImageSrc] = useState('/img/sheme.png');
     const widthWindow = useInnerWidth()
+    // Rectangle 7933
     useEffect(() => {
         if (widthWindow > 1440) {
-            setImageSrc('/img/sheme.png')
+            setImageSrc(data?.imgDesktop?.filename || '/img/Rectangle7933.png')
         } else if (widthWindow <= 1440 && widthWindow > 1024) {
-            setImageSrc('/img/shemelg.png')
+            setImageSrc(data?.imgLaptop?.filename || '/img/Rectangle7933.png')
         } else if (widthWindow <= 1024 && widthWindow > 480) {
-            setImageSrc('/img/shememd.png')
+            setImageSrc(data?.imgTablet?.filename || '/img/Rectangle7933.png')
         } else if (widthWindow <= 480) {
-            setImageSrc('/img/shemexsm.png')
+            setImageSrc(data?.imgMobile?.filename || '/img/Rectangle7933.png')
         }
-    }, [widthWindow])
+    }, [widthWindow, data])
 
     useMemo(() => {
         if (!wrapperRefHeight.current || !refHeight.current) { return }
@@ -37,10 +39,10 @@ export default function SimplicityMeetsPower() {
             <StikyNew ref={refHeight}>
             <ContainerNew>
                     <WrapperTitle>
-                        <Title >Simplicity Meets Power</Title>
+                        {data?.title ? <Title >{data?.title}</Title> : null}
                         <WrapperSybtitle>
-                            <Subtitle>How MetaDeck Enhances Your Trading</Subtitle>
-                            <SubtitleDescription>MetaDeck combines sophisticated software with robust hardware to streamline your trading. Here’s a quick look at how it integrates into your trading setup</SubtitleDescription>
+                            {data?.subtitle ? <Subtitle>{data?.subtitle}</Subtitle> : null}
+                            {data?.description ? <SubtitleDescription>{data?.description}</SubtitleDescription> : null}
                         </WrapperSybtitle>
                     </WrapperTitle>
                     <Sheme src={imageSrc} width={1808} height={697} alt='' />

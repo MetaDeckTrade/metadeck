@@ -16,7 +16,7 @@ interface Types {
 
 
 
-export default function Costomizable({firstRef, secondRef, thirdRef, fourthRef}: any,) {
+export default function Costomizable({firstRef, secondRef, thirdRef, fourthRef, dataCms}: any,) {
     const data: any = [
         [
             {

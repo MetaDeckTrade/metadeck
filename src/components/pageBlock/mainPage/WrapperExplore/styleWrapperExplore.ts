@@ -312,9 +312,11 @@ export const WrapperText = styled(animated.div)`
                 `}
             }
         }
-        >svg{
+        .icon{
             position: relative;
             width: ${rm(16)};
             height: ${rm(16)};
+            flex-shrink: 0;
         }
+        
 `

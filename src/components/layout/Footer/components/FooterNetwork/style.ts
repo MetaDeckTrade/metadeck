@@ -19,7 +19,7 @@ export const Container = styled.div`
         gap: ${rm(15)};
     `}
    
-    >p{
+    .title{
         opacity: 0.6;
         line-height: 130%;
         letter-spacing: 0.01em;

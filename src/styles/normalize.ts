@@ -60,11 +60,9 @@ body {
 @Keyframes fadeIn {
     from {
         opacity: 0;
-        filter: blur(50px);
     }
     to {
         opacity: 1;
-        filter: blur(0);
     }
 }
 

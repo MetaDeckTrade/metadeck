@@ -4,7 +4,6 @@ import { useWindowWidth } from "@react-hook/window-size";
 import { useSpring } from "@react-spring/three";
 import { Preload, useGLTF } from "@react-three/drei";
 import { useRef, MutableRefObject, useState, useEffect, useMemo } from 'react';
-import { useInView } from "react-intersection-observer";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { easings } from "@react-spring/web";

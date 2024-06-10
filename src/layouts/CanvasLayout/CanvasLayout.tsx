@@ -23,7 +23,7 @@ const CanvasLayout = ({ children }: any) => {
                 width: ' 100%',
                 height: '100%',
                 minHeight: 'calc(var(--vh, 1vh) * 100)',
-                zIndex: '1' //-1
+                // zIndex: '1' //-1
             }}
         >
             {children}

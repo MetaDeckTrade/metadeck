@@ -6,11 +6,7 @@ import GlobalStyles from "@/styles"
 import ResponceGrid from '@/styles/utils'
 
 import type { AppProps } from 'next/app'
-import Header from '@/components/layout/Header/Header'
-import Footer from '@/components/layout/Footer/Footer'
-import Network from '@/components/layout/Network/Network'
 import ScrollDown from '@/components/layout/ScrollDown/ScrollDown'
-import Burger from '@/components/layout/Burger/Burger'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 export const coordinatesRef = { x: 0, y: 0 };
@@ -49,15 +45,11 @@ export default function App({ Component, pageProps }: AppProps) {
                     <ScrollLayout>
                         <ScrollDown>
                             <CanvasLayout>
-                                <Burger />
                                 <ResponceGrid />
-                                <Header />
                                 <GlobalStyles />
-                                <Network />
                                 <Lvh />
                                 <AdaptiveGrid baseWidth={1920} />
                                 <Component {...pageProps} />
-                                <Footer />
                             </CanvasLayout>
                         </ScrollDown>
                     </ScrollLayout>

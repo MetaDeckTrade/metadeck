@@ -4,17 +4,20 @@ import { lenis } from "@/layouts/ScrollLayout/ScrollLayout";
 
 
 export default function FooterLink({data} : any){
+    
     const handleClick = (item: any) => {
-        if (item.href.includes('#')) {
-            lenis.current?.scrollTo(item.href)
+        if(item?.href){
+            window.open(item.href, '_blank');
             return
         }
-        window.open(item.href, '_blank');
+        if ( item?.anchor) {
+            lenis.current?.scrollTo(item.anchor)
+        }
     }
     return(
         <Container>
             {
-                data.length? 
+                data?.length? 
                     data.map((_ : any, i : number) => (
                         <LinkFooterStyle onClick={() => handleClick(_)} key={i}>
                             {_.name}

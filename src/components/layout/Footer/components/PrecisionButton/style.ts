@@ -26,7 +26,7 @@ export const Container = styled.div`
             justify-content: center;
          }
     `}
-    >p{
+    .subtitle{
         opacity: 0.6;
         color: ${colors.white2};
         line-height: 130%;

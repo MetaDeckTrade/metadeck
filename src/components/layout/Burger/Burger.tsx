@@ -5,29 +5,8 @@ import { easings, useSpring } from "@react-spring/web";
 import Button from "@/components/UI/Button/Button";
 import NetworkIcons from "@/components/UI/NetworkIcons/NetworkIcons";
 import { Container, WrapperNetwork } from "./style";
-const dataLink = [
-    {
-        link: '#advantage',
-        name: 'why',
-    },
-    {
-        link: '#explore',
-        name: 'explore',
-    },
-    {
-        link: '#how',
-        name: 'how',
-    },
-    {
-        link: '#contact',
-        name: 'community',
-    },
-]
-interface TypesLink {
-    link: string;
-    name: string;
-}
-export default function Burger(){
+
+export default function Burger({ dataHeader, dataFooter, dataNetwork }: any) {
     const burger = useGlobalStore(state => state.burger)
     const setBurger = useGlobalStore(state => state.setburger)
 
@@ -50,26 +29,36 @@ export default function Burger(){
         config: { duration: 500, easing: easings.easeOutCubic },
     })
 
-    return(
+    return (
         <Container style={effect}>
             <div>
                 {
-                    dataLink?.length ?
-                        dataLink.map((_: TypesLink, i: number) => {
-                            if (_.link && _.name) {
-                                return <LinkHeader onClick={() => {setBurger(false)}} name={_.name} href={_.link} key={i} />;
-                            }
-                            return null;
-                        })
+                    dataHeader?.navigation && dataHeader?.navigation?.length ?
+                        dataHeader?.navigation.map((_: any, i: number) => (
+                            <LinkHeader onClick={() => { setBurger(false) }} name={_.name} anchor={_.anchor} href={_.href} key={i} />
+                        ))
                         : null
                 }
             </div>
-            <p >Experience precision at the push of a button</p>
-            <Button name='Order Now' burger={true}  color="yellow"/>
+            {dataFooter?.precisionButton && dataFooter?.precisionButton?.[0] ?
+                <>
+                    {dataFooter?.precisionButton?.[0]?.subtitle ? <p className='subtitle'>{dataFooter?.precisionButton?.[0]?.subtitle}</p> : null}
+                    {dataFooter?.precisionButton?.[0]?.button && dataFooter?.precisionButton?.[0]?.button?.[0] ?
+                        dataFooter?.precisionButton?.[0]?.button?.map((_: any, i: number) => (
+                            <Button onclick={() => { setBurger(false) }} burger={true} key={i + 99} header={true} href={_.href} anchor={_.anchor} color={_.style} name={_.name} />
+                        ))
+                        : null
+                    }
+                </>
+                : null}
             <WrapperNetwork>
-                <NetworkIcons name="telegram"/>
-                <NetworkIcons name="youtube"/>
-                <NetworkIcons name="twitter"/>
+                {
+                    dataNetwork?.network && dataNetwork?.network?.length ?
+                    dataNetwork?.network?.map((_: any, i: number) => (
+                            <NetworkIcons key={i + 343} name={_.icon} href={_.href} />
+                        ))
+                        : null
+                }
             </WrapperNetwork>
         </Container>
     )
