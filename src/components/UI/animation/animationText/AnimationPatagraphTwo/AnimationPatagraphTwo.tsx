@@ -1,6 +1,6 @@
 import { useSpring, animated } from "@react-spring/web"
 import { useEffect, useState } from "react"
-import { useInView } from "react-intersection-observer"
+import { useInView } from "@/hooks/useInView"
 
 interface Types {
     duration: number,
@@ -18,7 +18,7 @@ interface TypesText {
 
 const AnimatiosPharagraphTwoT = ({animationDelay = 0, duration = 0, text, delay = 0,  ...props }: Types | any) => {
 
-    const { ref, inView } = useInView()
+    const [ ref, inView ] = useInView()
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {

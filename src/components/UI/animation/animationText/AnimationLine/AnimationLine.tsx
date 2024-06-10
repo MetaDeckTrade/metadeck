@@ -1,7 +1,7 @@
 
 import { SplitText } from "@cyriacbr/react-split-text"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { useInView } from "react-intersection-observer"
+import { useInView } from "@/hooks/useInView"
 import styled, { css } from 'styled-components'
 import { colors, fonts } from '@/styles'
 import { media, responsive, rm } from '@/styles/utils'
@@ -95,7 +95,7 @@ const StyledContainer = styled(SplitText)`
     `
 
 const LineAnimation = ({ delay = 0, children, ...props }: any) => {
-    const { ref, inView } = useInView()
+    const [ ref, inView ] = useInView()
     const [loaded, setLoaded] = useState(false);
     const [animatedOnce, setAnimatedOnce] = useState(false);
 

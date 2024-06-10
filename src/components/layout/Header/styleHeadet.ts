@@ -39,13 +39,13 @@ export const LogoWrapper = styled.a`
     gap: ${rm(8.47)};
     cursor: pointer;
 
-    >img {
+    .logoIcon {
         position: relative;
         width: ${rm(72.24)};
         height: ${rm(36)};
     }
 
-    >p {
+    .logo{
         font-size: ${rm(32)};
         color: ${colors.white2};
         line-height: 100%;

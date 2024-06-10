@@ -1,43 +1,25 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Scrollbar, A11y, Autoplay } from 'swiper/modules';
 import 'swiper/css';
-import { CompatibleWhereCountsStyle, CompatibleWhereCountsStyleNew, Stiky, StikyNew, SwiperSlideImage, Text } from './styleCompatibleWhereCounts'
-import { NativeUnderpin } from '@/components/UI/NativeUnderpin/NativeUnderpin';
+import { CompatibleWhereCountsStyleNew, Stiky, StikyNew, SwiperSlideImage, Text } from './styleCompatibleWhereCounts'
 import useInnerWidth from '@/hooks/useWidthWindow';
 
-export default function CompatibleWhereCounts() {
+interface TypesString {
+    filename: string
+}
+
+interface Types {
+    subtitle: string,
+    swiper: Array<TypesString>,
+    title: string
+}
+
+export default function CompatibleWhereCounts({ data }: { data: Types }) {
     const stickyRef: any = useRef(null);
     const refHeight = useRef(null);
     const wrapperRefHeight = useRef(null);
-    useEffect(() => {
-        const calculateStickyHeight = () => {
-            if (stickyRef.current) {
-                const stickyElement: any = stickyRef.current;
-                const { height } = stickyElement.getBoundingClientRect();
 
-                const parentElement = stickyElement.parentElement;
-                if (parentElement) {
-                    // parentElement.style.paddingBottom = `${height}px`;
-                }
-            }
-        };
-
-        calculateStickyHeight();
-        window.addEventListener('resize', calculateStickyHeight);
-
-        return () => {
-            window.removeEventListener('resize', calculateStickyHeight);
-        };
-    }, []);
-
-    const swiperLength = [
-        { src: '/img/swiper1.png' }, { src: '/img/swiper2.png' }, { src: '/img/swiper3.png' }, { src: '/img/swiper4.png' }, { src: '/img/swiper5.png' },
-        { src: '/img/swiper1.png' }, { src: '/img/swiper2.png' }, { src: '/img/swiper3.png' }, { src: '/img/swiper4.png' }, { src: '/img/swiper5.png' },
-    ]
-    // const CompatibleWhereCountst = forwardRef((props, ref) => (
-    //     <CompatibleWhereCounts ref={ref} {...props} />
-    //   ));
     const innerWidth = useInnerWidth()
     useMemo(() => {
         if (!wrapperRefHeight.current || !refHeight.current) { return }
@@ -51,32 +33,45 @@ export default function CompatibleWhereCounts() {
         }
     }, [wrapperRefHeight, refHeight, innerWidth])
     return (
-        <Stiky ref={wrapperRefHeight}>
-            <StikyNew ref={refHeight}>
-                <CompatibleWhereCountsStyleNew ref={stickyRef} >
-                    <h1>Compatible Where it Counts</h1>
-                    <Text>
-                        <p>MetaDeck seamlessly integrates with numerous high-profile platforms and services to ensure your trading is as efficient as possible. Compatible with:</p>
-                    </Text>
-                    <Swiper
-                        spaceBetween={0}
-                        slidesPerView={'auto'}
-                        autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true }}
-                        speed={3000}
-                        loop={true}
-                        modules={[Navigation, Scrollbar, A11y, Autoplay]}
-                        className={'mySwiperTheyTrustUs'}
-                    >
-                        {
-                            swiperLength.map((_: any, i: number) => (
-                                <SwiperSlide key={i}>
-                                    <SwiperSlideImage src={_.src} width={300} height={200} alt='' />
-                                </SwiperSlide>
-                            ))
-                        }
-                    </Swiper>
-                </CompatibleWhereCountsStyleNew>
-            </StikyNew>
-        </Stiky>
+        <>
+            {
+                data ?
+                    <Stiky ref={wrapperRefHeight}>
+                        <StikyNew ref={refHeight}>
+                            <CompatibleWhereCountsStyleNew ref={stickyRef} >
+                                {data?.title ? <h1>{data?.title}</h1> : null}
+                                {
+                                    data?.subtitle ?
+                                        <Text>
+                                            <p>{data?.subtitle}</p>
+                                        </Text>
+                                        : null
+                                }
+                                <Swiper
+                                    spaceBetween={0}
+                                    slidesPerView={'auto'}
+                                    autoplay={{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true }}
+                                    speed={3000}
+                                    loop={true}
+                                    modules={[Navigation, Scrollbar, A11y, Autoplay]}
+                                    className={'mySwiperTheyTrustUs'}
+                                >
+                                    {
+                                        data?.swiper && data.swiper.length ?
+                                            data?.swiper?.map((_: TypesString, i: number) => (
+                                                <SwiperSlide key={i}>
+                                                    <SwiperSlideImage src={_.filename} width={300} height={200} alt='' />
+                                                </SwiperSlide>
+                                            ))
+                                            : null
+                                    }
+                                </Swiper>
+                            </CompatibleWhereCountsStyleNew>
+                        </StikyNew>
+                    </Stiky>
+                    : null
+            }
+        </>
+
     )
 }

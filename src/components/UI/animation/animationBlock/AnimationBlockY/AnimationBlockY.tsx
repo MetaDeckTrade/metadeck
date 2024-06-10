@@ -1,6 +1,6 @@
 import { useSpring, animated } from "@react-spring/web";
 import { useEffect, useMemo, useState } from "react";
-import { useInView } from "react-intersection-observer"
+import { useInView } from "@/hooks/useInView"
 
 interface Types {
     children: any,
@@ -37,7 +37,7 @@ export default function AnimationBlockY({ children, duration = 0, delay = 0, ...
 }
 
 const AnimationBlok = ({ children, delay, duration }: Types) => {
-    const { ref, inView } = useInView()
+    const [ ref, inView ] = useInView()
     const [animatedOnce, setAnimatedOnce] = useState(false);
     
     useEffect(() => {
