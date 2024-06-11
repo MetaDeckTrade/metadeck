@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ImageMy from "@/components/UI/ImageMy/ImageMy";
 import { Container, Email } from "./style";
 
 
@@ -13,7 +13,7 @@ export default function EmailFooter({ data, title }: any) {
                         data?.map((_: any, i: number) => (
                             <Email key={i} href={_.link || '/'} target="_blank">
                                 {_?.icon?.filename ? 
-                                    <Image className="icon" src={_?.icon?.filename} width={20} alt="" height={20} />
+                                    <ImageMy className="icon" src={_?.icon?.filename} width={20} alt="" height={20} />
                                 : null}
                                 {_.name ? <p>{_.name}</p> : null} 
                             </Email>

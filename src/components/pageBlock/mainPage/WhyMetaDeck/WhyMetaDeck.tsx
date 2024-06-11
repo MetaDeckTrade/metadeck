@@ -19,7 +19,7 @@ export default function WhyMetaDeck({ data }: { data: Types }) {
 
     return (
         <WhyMetaDeckStyle id='advantage'>
-            <WhyMetaDeckImage src={'/img/ellipse3.png'} width={1583} height={1628} alt='' />
+            <WhyMetaDeckImage src={'/img/ellipse3.webp'} width={1583} height={1628} alt='' />
             <ContainerText>
                 {data?.title ? <AnimatiosWordsWhyMetaDeck delay={0} duration={700} text={data?.title} /> : null}
                 {data?.subtitle ?

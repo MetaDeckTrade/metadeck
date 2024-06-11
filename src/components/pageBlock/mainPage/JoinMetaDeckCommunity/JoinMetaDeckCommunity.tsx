@@ -5,30 +5,7 @@ import styled from 'styled-components'
 import { useWindowWidth } from '@react-hook/window-size'
 import Image from 'next/image'
 import { media, rm } from '@/styles/utils'
-import Link from 'next/link'
-import { colors } from '@/styles'
-const StyleLineAnimation = styled(Link)`
-    position: relative;
-    width: ${rm(32)};
-    height: ${rm(32)};
-    cursor: pointer;
-    
-    >svg{
-        transition: ease 0.5s;
-        color: ${colors.white1};
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: fill;
-    }
-    &:hover {
-        >svg{
-            color: ${colors.yellow1};
-        }
-    }
-    `
+
 const StyledMobileImage = styled.div`
     display: none;
     width: 100%;
@@ -81,13 +58,10 @@ export default function JoinMetaDeckCommunity({ data }: { data: Types }) {
                             ))
                             : null
                     }
-                    {/* <NetworkIcons name='telegram' />
-                    <NetworkIcons name='youtube' />
-                    <NetworkIcons name='twitter' /> */}
                 </ContainerNetwork>
             </ContainerInfo>
             <StyledMobileImage>
-                <Image src='/img/mobileBlanketImage.png' alt='blanketImageMobile' width={500} height={400}></Image>
+                <Image src='/img/mobileBlanketImage.webp' alt='blanketImageMobile' width={500} height={400}></Image>
             </StyledMobileImage>
         </Container>
     )

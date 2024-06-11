@@ -1,4 +1,4 @@
-import Image from "next/image";
+import ImageMy from "@/components/UI/ImageMy/ImageMy";
 import { Container, ContainerWrapperLogoMobile, StylePMobile, WrapperDescription, WrapperLogo } from "./style";
 import useInnerWidth from "@/hooks/useWidthWindow";
 
@@ -13,7 +13,7 @@ export default function LogoFooterInfo({data} : any) {
                     <>
                         <ContainerWrapperLogoMobile>
                             <WrapperLogo>
-                                <Image className="logo" src={ data?.logo?.filename ? data?.logo?.filename : '/img/subtract.svg'} width={50} height={25} alt="" />
+                                <ImageMy className="logo" src={ data?.logo?.filename ? data?.logo?.filename : '/img/subtract.svg'} width={50} height={25} alt="" />
                                 {data?.logoName ?<p className="logoName">{data?.logoName}</p> : null}
                             </WrapperLogo>
                             {data?.copyrightNotice ? <p>{data?.copyrightNotice}</p> : null}
@@ -23,7 +23,7 @@ export default function LogoFooterInfo({data} : any) {
                     :
                     <>
                         <WrapperLogo>
-                            <Image src={ data?.logo?.filename ? data?.logo?.filename : '/img/subtract.svg'} width={50} height={25} alt="" />
+                            <ImageMy src={ data?.logo?.filename ? data?.logo?.filename : '/img/subtract.svg'} width={50} height={25} alt="" />
                             {data?.logoName ?<p className="logoName">{data?.logoName}</p> : null}
                         </WrapperLogo>
                         <WrapperDescription>

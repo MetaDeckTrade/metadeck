@@ -145,22 +145,7 @@ export const WpapperInfo: any = styled.div`
     min-height: 300vh;
     background-color: ${colors.yellow1};
     z-index: 4;
-    transition: ease 0.5s;
-    /* >:nth-child(4){
-        display: none;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: ${rm(375)};
-       
-        ${media.md`
-            display: block;
-        `}
-        ${media.xsm`
-            display: none;
-        `}
-    } */
+    transition: ease 0.5s;   
     ${(props: any) => {
         switch (props.bgcolor) {
             case 0:

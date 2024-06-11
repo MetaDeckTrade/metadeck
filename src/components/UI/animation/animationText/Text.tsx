@@ -2,13 +2,13 @@ import React, { useEffect, memo, useState, useRef } from 'react'
 import { NextPage } from 'next';
 import { useInView } from 'react-intersection-observer';
 import { animated, useIsomorphicLayoutEffect } from '@react-spring/web';
-// import { useAssetsLoader } from '@/layouts/AssetsLoaderLayout/AssetsLoaderLayout';
 import styled from "styled-components";
+import { colors } from '@/styles';
 
 const StyledText = styled.span`
   display: flex;
   flex-wrap: wrap;
-
+  color: ${colors.white2};
   .hidden {
     overflow: hidden;
   }
@@ -19,14 +19,14 @@ interface text {
     speed?: number,
     mode?: 'once' | 'forward' | 'none'
     className?: string
-    delay?: number
+    delay?: number,
+    duration?: number
 }
 
-const Text: NextPage<text> = memo(function Text({ children, columnGap, speed = 0.01, delay = 0, mode = 'none', ...props }) {
+const Text: NextPage<text> = memo(function Text({ children, duration=0.45,columnGap, speed = 0.01, delay = 0, mode = 'none', ...props }) {
   const textRef = useRef<HTMLElement | null>(null)
   const [ref, inView] = useInView();
   const [words, setWords] = useState<string[][]>([]);
-//   const { fullyLoaded } = useAssetsLoader()
   const showed = useRef(false)
   useIsomorphicLayoutEffect(() => ref(textRef.current), [textRef.current])
   useEffect(() => {
@@ -62,8 +62,7 @@ const Text: NextPage<text> = memo(function Text({ children, columnGap, speed = 0
   }, [children]);
 
   //Function for transition between letters calculations
-  const calculateTransitionDelay = (wordIndex: number, letterIndex: number) => {
-    // let letterDelay = speed ? speed * letterIndex : 0.02 * letterIndex;
+  const calculateTransitionDelay = (wordIndex: number, duration: number) => {
     let lineDelay = speed * wordIndex;
 
     let wordDelay = delay / 1000;
@@ -72,8 +71,7 @@ const Text: NextPage<text> = memo(function Text({ children, columnGap, speed = 0
       wordDelay += speed ? words[i].length * speed : words[i].length * 0.02;
     }
   
-    // return inView /*&& fullyLoaded*/ ? `opacity ease 0.45s ${wordDelay + letterDelay}s` : '0s';
-    return inView /*&& fullyLoaded*/ ? `transform ease 0.45s ${wordDelay + lineDelay}s` : '0s';
+    return inView /*&& fullyLoaded*/ ? `transform ease ${duration}s ${wordDelay + lineDelay}s` : '0s';
   };
 
   return (
@@ -85,10 +83,10 @@ const Text: NextPage<text> = memo(function Text({ children, columnGap, speed = 0
               key={letterIndex}
               style={{
                 display: 'inline-block',
-                // opacity: (inView /*&& fullyLoaded*/) || showed.current ? 1 : 0,
+                opacity: 0.6,
                 transform: `translateY(${(inView /*&& fullyLoaded*/) || showed.current ? 0 : 110}%)`,
-                transition: calculateTransitionDelay(wordIndex, letterIndex),
-                color: inView /*&& fullyLoaded*/ ? 'inherit' : 'transparent',
+                transition: calculateTransitionDelay(wordIndex, duration),
+                color: `${colors.white2}`,
               }}
             >
               {letter}

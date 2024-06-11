@@ -181,7 +181,7 @@ export default function WrapperExplore({ data, simplicityMeetsPowerData }: { dat
                             <WrapperImageContainer ref={testRef}>
                                 <div >
                                     <WrapperImage>
-                                        <animated.img style={imageAnimated} src={'/img/imageExplore.png'} width={1920} height={1326} alt='' />
+                                        <animated.img style={imageAnimated} src={'/img/imageExplore.webp'} width={1920} height={1326} alt='' />
                                     </WrapperImage>
                                 </div>
                             </WrapperImageContainer>
@@ -237,6 +237,7 @@ export default function WrapperExplore({ data, simplicityMeetsPowerData }: { dat
                             </Wrapper>
                         </Wrapper >
                         <SimplicityMeetsPower data={simplicityMeetsPowerData}/>
+                        <div style={{position: 'absolute', left: '0', bottom: '100vh'}} id="how"> </div>
                     </Wrapper>
                     : null
             }

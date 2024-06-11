@@ -10,7 +10,7 @@ const StyleLineAnimation = styled(Link)`
     cursor: pointer;
     
     >svg{
-        transition: ease 0.5s;
+        transition: color ease 0.5s;
         color: ${colors.white1};
         position: absolute;
         left: 0;
