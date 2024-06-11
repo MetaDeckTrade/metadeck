@@ -3,7 +3,8 @@ import { Container } from './style'
 import { useEffect, useState } from 'react'
 import { useSpring } from '@react-spring/web'
 
-export default function Network(){
+export default function Network({ data } : any) {
+    console.log(data)
     const [booted, setbooted] = useState(false)
     useEffect(() => {
         setbooted(true)
@@ -15,11 +16,16 @@ export default function Network(){
         config: { duration: 1000 },
         delay: 700
     })
-    return(
+    return (
         <Container style={effect}>
-            <NetworkIcons name='telegram'/>
-            <NetworkIcons name='youtube'/>
-            <NetworkIcons name='twitter'/>
-        </Container> 
+            {
+                data?.network && data?.network?.length ?
+                    data?.network?.map((_: any, i: number) => (
+                        <NetworkIcons key={i + 343} name={_.icon} href={_.href} />
+                    ))
+                    : null
+            }
+
+        </Container>
     )
 }

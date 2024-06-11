@@ -1,7 +1,7 @@
+import ImageMy from "@/components/UI/ImageMy/ImageMy";
 import { colors } from "@/styles";
 import { inter, orbitronBold } from "@/styles/fonts";
-import { marginLvh, media, responsive, rm } from "@/styles/utils";
-import Image from "next/image";
+import { marginLvh, media, rm } from "@/styles/utils";
 import styled from "styled-components";
 
 
@@ -146,7 +146,7 @@ export const SubtitleDescription = styled.p`
        
 `
 
-export const Sheme = styled(Image)`
+export const Sheme = styled(ImageMy)`
      position: relative;
     width: 100%;
     height: ${rm(697)};

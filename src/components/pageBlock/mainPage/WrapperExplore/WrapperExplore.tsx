@@ -5,95 +5,10 @@ import SimplicityMeetsPower from '../SimplicityMeetsPower/SimplicityMeetsPower';
 import { useInView } from 'react-intersection-observer';
 import { animated } from "@react-spring/web";
 import AnimatiosPharagraphTwoT from '@/components/UI/animation/animationText/AnimationPatagraphTwo/AnimationPatagraphTwo';
-import useInnerWidth from '@/hooks/useWidthWindow';
 import BlanketWithButtons from './BlanketWithButtons/BlanketWithButtons';
-import { useWindowWidth } from '@react-hook/window-size';
 import styled from 'styled-components';
 import { media, rm } from '@/styles/utils';
-
-const dataTable = [
-    {
-        text: 'Change wallet',
-        duration: 300,
-        delay: 50,
-    },
-    {
-        text: 'Custom 1',
-        duration: 300,
-        delay: 100,
-    },
-    {
-        text: 'Custom 2',
-        duration: 300,
-        delay: 150,
-    },
-    {
-        text: 'Custom 3',
-        duration: 300,
-        delay: 200,
-    },
-    {
-        text: 'Custom 4',
-        duration: 300,
-        delay: 250,
-    }
-]
-
-const dataTable2 = [
-    {
-        text: 'Buy 1',
-        duration: 300,
-        delay: 50,
-    },
-    {
-        text: 'Buy 2',
-        duration: 300,
-        delay: 100,
-    },
-    {
-        text: 'Buy 3',
-        duration: 300,
-        delay: 150,
-    },
-    {
-        text: 'Buy 4',
-        duration: 300,
-        delay: 200,
-    },
-    {
-        text: 'Max tx',
-        duration: 300,
-        delay: 250,
-    },
-]
-
-const dataTable3 = [
-    {
-        text: 'Sell initial',
-        duration: 300,
-        delay: 50,
-    },
-    {
-        text: 'Sell 25%',
-        duration: 300,
-        delay: 100,
-    },
-    {
-        text: 'Sell 50%',
-        duration: 300,
-        delay: 150,
-    },
-    {
-        text: 'Sell 75%',
-        duration: 300,
-        delay: 200,
-    },
-    {
-        text: 'Sell all',
-        duration: 300,
-        delay: 250,
-    },
-]
+import Image from 'next/image';
 
 const StlyedWrapper = styled.div`
     position: absolute;
@@ -102,65 +17,53 @@ const StlyedWrapper = styled.div`
     height: 100%;
     width: 100%;
 
-    ${media.md`
-        /* padding-bottom: 116vh !important; */
-    `}
-
     ${media.xsm`
         padding-bottom: 0 !important;
     `}
 `
+interface StepsInfo {
+    icon: { filename: string },
+    text: string,
+    _uid: string
+}
 
-export default function WrapperExplore({scene}: any) {
+interface Steps {
+    title: string,
+    stepsInfo: Array<StepsInfo>
+}
+
+interface Types {
+    functionalitySubtitle: string,
+    functionalityTitle: string,
+    title: string,
+    steps: Array<Steps>
+}
+export interface TypesSimplicity{
+    description: string,
+    subtitle: string,
+    title: string
+    imgDesktop: { filename: string },
+    imgLaptop: { filename: string },
+    imgMobile: { filename: string },
+    imgTablet: { filename: string },
+}
+
+export default function WrapperExplore({ data, simplicityMeetsPowerData }: { data: Types , simplicityMeetsPowerData : TypesSimplicity}) {
 
     const stickyRef = useRef(null);
     const triggerRef = useRef<HTMLDivElement>(null!)
     const refTitle = useRef<HTMLDivElement | null>(null)
-    const [numerBlock, setnumerBlock] = useState(0)
+    const [numerBlock, setnumerBlock] = useState(-1)
     const [buttonNumber, setButtonNumber] = useState(0)
     const { ref: yellowRef, inView: yellowBlock } = useInView()
     const { ref: grinRef, inView: grinBlock } = useInView()
     const { ref: start, inView: startBlock } = useInView()
     const refWrapper = useRef(null)
-    const [dataTableList, setdataTableList]: any = useState([...dataTable])
+    const [dataTableList, setdataTableList]: any = useState([])
     const refTable = useRef(null)
     const refWrapperTable = useRef(null)
-    const innerWidth  = useInnerWidth()
 
     const [ref, inView] = useInView()
-
-    // useEffect(() => {
-    //     if(!refTable.current || !refWrapperTable.current) {return} 
-    //     // const wrapperHeight = refWrapperTable.current.getBoundingClientRect().height
-    //     const wrapperHeight = window.innerHeight
-
-    //     // @ts-expect-error
-    //     const heightElement = refTable.current.getBoundingClientRect().height
-    //     if(wrapperHeight && heightElement){
-    //         const newPadding = wrapperHeight - heightElement
-
-    //         let padding;
-    //         if(innerWidth > 1440){
-    //             padding = 227
-    //         } else if(innerWidth <= 1440 && innerWidth > 1024){
-    //             padding = 192
-    //         } else if (innerWidth <= 1024 && innerWidth > 480) {
-    //             padding = 205
-    //         } else if (innerWidth <= 480){
-    //             padding = 120
-    //         }
-    //          if (wrapperHeight < 900) {
-    //             padding = 80
-                
-    //         }
-    //         if(padding && newPadding && refTable.current ){
-    //             // @ts-expect-error
-    //             refTable.current.style.paddingTop = `${newPadding -  padding}px`
-    //         }
-    //     }
-
-
-    // },[refTable, refWrapperTable, innerWidth])
 
     const { values: titleValues } = useSpringTrigger({
         trigger: triggerRef,
@@ -195,26 +98,26 @@ export default function WrapperExplore({scene}: any) {
     }, [])
 
     useEffect(() => {
-        if (yellowBlock && !grinBlock && numerBlock !== 1 && refWrapper.current) {
+        if (yellowBlock && !grinBlock && numerBlock !== 1 && refWrapper.current && data?.steps && data?.steps.length) {
             // @ts-expect-error
-            refWrapper.current.textContent = `10 / 15`
+            refWrapper.current.textContent = data?.steps?.[0].title
             setnumerBlock(1)
-            setdataTableList([...dataTable3])
+            setdataTableList([...data?.steps?.[0].stepsInfo])
 
         }
-        if (grinBlock  && numerBlock !== 2 && refWrapper.current) {
+        if (grinBlock && numerBlock !== 2 && refWrapper.current) {
             setnumerBlock(2)
             // @ts-expect-error
-            refWrapper.current.textContent = `15 / 15`
-            setdataTableList([...dataTable2])
+            refWrapper.current.textContent = data?.steps?.[1].title
+            setdataTableList([...data?.steps?.[1].stepsInfo])
         }
         if (startBlock && numerBlock !== 0 && refWrapper.current) {
             setnumerBlock(0)
             // @ts-expect-error
-            refWrapper.current.textContent = `5 / 15`
-            setdataTableList([...dataTable])
+            refWrapper.current.textContent = data?.steps?.[2].title
+            setdataTableList([...data?.steps?.[2].stepsInfo])
         }
-    }, [yellowBlock, grinBlock, startBlock, refWrapper])
+    }, [yellowBlock, grinBlock, startBlock, refWrapper, data])
 
 
     useEffect(() => {
@@ -244,13 +147,9 @@ export default function WrapperExplore({scene}: any) {
                 }
                 let innerHeight = window.innerHeight;
                 const parentElement = document.getElementById('functionality');
-                const title = document.getElementById('title');
                 if (parentElement) {
                     parentElement.style.height = `${innerHeight - height}px`;
                 }
-                // if(title){
-                //     title.style.paddingBottom = `${innerHeight - height}px`
-                // }
             }
         };
 
@@ -260,105 +159,88 @@ export default function WrapperExplore({scene}: any) {
         return () => {
             window.removeEventListener('resize', calculateStickyHeight);
         };
-    }, []);
+    }, [data]);
 
     const containerRef = useRef<any>(null)
     const blockRef = useRef<any>(null)
 
     return (
-        <Wrapper id='explore' ref={containerRef}>
-            <div style={{position: 'absolute', height: '100vh', top: '0', left: '0', width: '100%'}} ref={blockRef}></div>
-            <Wrapper >
-                <StlyedWrapper>
-                    <div style={{ position: 'relative', height: '100%', width: '100%'}}>
-                        <div style={{position: 'sticky', top: 0, left: 0, marginBottom: '100vh', marginTop: '-100vh'}}>
-                            <BlanketWithButtons blockNumber={buttonNumber} containerRef={containerRef} blockRef={blockRef}></BlanketWithButtons>
-                        </div>
-                    </div>
-                </StlyedWrapper>
-                <WrapperImageContainer ref={testRef}>
-                    <div >
-                        <WrapperImage>
-                            <animated.img style={imageAnimated} src={'/img/imageExplore.png'} width={1920} height={1326} alt='' />
-                        </WrapperImage>
-                    </div>
-                </WrapperImageContainer>
+        <>
+            {
+                data ?
+                    <Wrapper id='explore' ref={containerRef}>
+                        <div style={{ position: 'absolute', height: '100vh', top: '0', left: '0', width: '100%' }} ref={blockRef}></div>
+                        <Wrapper >
+                            <StlyedWrapper>
+                                <div style={{ position: 'relative', height: '100%', width: '100%' }}>
+                                    <div style={{ position: 'sticky', top: 0, left: 0, marginBottom: '100vh', marginTop: '-100vh' }}>
+                                        <BlanketWithButtons blockNumber={buttonNumber} containerRef={containerRef} blockRef={blockRef}></BlanketWithButtons>
+                                    </div>
+                                </div>
+                            </StlyedWrapper>
+                            <WrapperImageContainer ref={testRef}>
+                                <div >
+                                    <WrapperImage>
+                                        <animated.img style={imageAnimated} src={'/img/imageExplore.webp'} width={1920} height={1326} alt='' />
+                                    </WrapperImage>
+                                </div>
+                            </WrapperImageContainer>
 
-                <Wrapper ref={triggerRef} style={{ marginBottom: '-100vh' }}>
-                    <TitleWrapper ref={stickyRef} id='title'>
-                        <WrapperTitle ref={refTitle}>
-                            <Title duration={500} text={'Explore Your MetaDeck'} delay={300} />
-                        </WrapperTitle>
-                       
-                    </TitleWrapper>
-                    <Wrapper ref={refWrapperTable}> 
-                        <Functionality id='functionality' style={{ marginTop: `calc(-100vh + ${heightrefTitle}px)` }}>
-                            <div style={{width: '100%'}} ref={ref}></div>
-                            <FunctionalityWrapperTexxt>
-                                <FunctionalityTitle>Functionality at Your Fingertips</FunctionalityTitle>
-                                <FunctionalitySubtitle>From customizable macro keys to preset trading functions, every button on MetaDeck opens up a new possibility. Here’s how MetaDeck can serve your trading needs:</FunctionalitySubtitle>
-                            </FunctionalityWrapperTexxt>
-                        </Functionality>
-                        <WpapperInfo bgcolor={numerBlock} >
+                            <Wrapper ref={triggerRef} style={{ marginBottom: '-100vh' }}>
 
-                            <div ref={yellowRef} style={{ position: 'absolute', top: '50%', transform: 'translate(-50%, 0%)', right: 0, height: '1px', width: '1px', pointerEvents: 'none' }}></div>
-                            <div ref={grinRef} style={{ position: 'absolute', bottom: '0%', right: 0, height: '70vh', width: '100%', pointerEvents: 'none' }}></div>
-                            <div ref={start} style={{ position: 'absolute', top: '0%', right: 0, height: '1px', width: '1px', pointerEvents: 'none' }}></div>
-                            {/* <Image src={'/img/image187.png'}  width={1920} height={375} alt=''/> */}
-                            <WrapperInfoTable>
-                                <WrapperTable ref={refTable}>
-                                    <TitleTable ref={refWrapper}>5 / 15</TitleTable>
-                                    <Table>
+                                <TitleWrapper ref={stickyRef} id='title'>
+                                    <WrapperTitle ref={refTitle}>
                                         {
-                                            numerBlock === 0 ?
-                                                dataTable.map((_: any, i: number) => (
-                                                    <WrapperText key={i + 99}>
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M0 0H10L16 6V16H0V0Z" fill="#001A41" />
-                                                        </svg>
-                                                        <AnimatiosPharagraphTwoT delay={_.delay} duration={_.duration} key={i} text={_.text}></AnimatiosPharagraphTwoT>
-                                                    </WrapperText>
-                                                ))
+                                            data?.title ?
+                                                <Title duration={500} text={data?.title} delay={300} />
                                                 : null
                                         }
-                                        {
-                                            numerBlock === 1 ?
-                                                dataTable2.map((_: any, i: number) => (
-                                                    <WrapperText key={i + 999}>
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M0 0H10L16 6V16H0V0Z" fill="#001A41" />
-                                                        </svg>
-                                                        <AnimatiosPharagraphTwoT delay={_.delay} duration={_.duration} key={i} text={_.text}></AnimatiosPharagraphTwoT>
-                                                    </WrapperText>
-                                                ))
-                                                : null
-                                        }
-                                        {
-                                            numerBlock === 2 ?
-                                                dataTable3.map((_: any, i: number) => (
-                                                    <WrapperText key={i + 9999}>
-                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M0 0H10L16 6V16H0V0Z" fill="#001A41" />
-                                                        </svg>
-                                                        <AnimatiosPharagraphTwoT delay={_.delay} duration={_.duration} key={i} text={_.text}></AnimatiosPharagraphTwoT>
-                                                    </WrapperText>
-                                                ))
-                                                : null
-                                        }
-                                        {/* {
-                                            dataTableList.map((_: any, i: number) => (
-                                                <AnimatiosPharagraphTwo delay={300} duration={300} key={i} text={_.text}></AnimatiosPharagraphTwo>
-                                            ))
-                                        } */}
-                                    </Table>
-                                </WrapperTable>
-                            </WrapperInfoTable>
-                        </WpapperInfo>
+                                    </WrapperTitle>
+                                </TitleWrapper>
+
+                                <Wrapper ref={refWrapperTable}>
+                                    <Functionality id='functionality' style={{ marginTop: `calc(-100vh + ${heightrefTitle}px)` }}>
+                                        <div style={{ width: '100%' }} ref={ref}></div>
+                                        <FunctionalityWrapperTexxt>
+                                            {data?.functionalityTitle ? <FunctionalityTitle>{data?.functionalityTitle}</FunctionalityTitle> : null}
+                                            {data?.functionalitySubtitle ? <FunctionalitySubtitle>{data?.functionalitySubtitle}</FunctionalitySubtitle> : null}
+                                        </FunctionalityWrapperTexxt>
+                                    </Functionality>
+                                    <WpapperInfo bgcolor={numerBlock} >
+
+                                        <div ref={yellowRef} style={{ position: 'absolute', top: '50%', transform: 'translate(-50%, 0%)', right: 0, height: '1px', width: '1px', pointerEvents: 'none' }}></div>
+                                        <div ref={grinRef} style={{ position: 'absolute', bottom: '0%', right: 0, height: '70vh', width: '100%', pointerEvents: 'none' }}></div>
+                                        <div ref={start} style={{ position: 'absolute', top: '0%', right: 0, height: '1px', width: '1px', pointerEvents: 'none' }}></div>
+                                        <WrapperInfoTable>
+                                            <WrapperTable ref={refTable}>
+                                                <TitleTable ref={refWrapper}>5 / 15</TitleTable>
+                                                <Table>
+                                                    {
+                                                        dataTableList.length ?
+                                                            dataTableList.map((_: StepsInfo, i: number) => (
+                                                                <WrapperText key={_._uid}>
+                                                                    {
+                                                                        _?.icon && _?.icon?.filename ?
+                                                                            <Image className='icon' src={_?.icon?.filename} width={16} height={16} alt='' />
+                                                                            : null
+                                                                    }
+                                                                    <AnimatiosPharagraphTwoT delay={50 * (i + 1)} duration={300} key={i} text={_.text}></AnimatiosPharagraphTwoT>
+                                                                </WrapperText>
+                                                            ))
+                                                            : null
+                                                    }
+                                                </Table>
+                                            </WrapperTable>
+                                        </WrapperInfoTable>
+                                    </WpapperInfo>
+                                </Wrapper>
+                            </Wrapper>
+                        </Wrapper >
+                        <SimplicityMeetsPower data={simplicityMeetsPowerData}/>
+                        <div style={{position: 'absolute', left: '0', bottom: '100vh'}} id="how"> </div>
                     </Wrapper>
-                </Wrapper>
-            </Wrapper >
-
-            <SimplicityMeetsPower  />
-        </Wrapper>
+                    : null
+            }
+        </>
     )
 }

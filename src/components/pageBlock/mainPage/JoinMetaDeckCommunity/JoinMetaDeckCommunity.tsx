@@ -27,26 +27,41 @@ const StyledMobileImage = styled.div`
         height: 100%;
     }
 `
+export interface Network {
+    href: string,
+    icon: string
+}
 
-export default function JoinMetaDeckCommunity() {
+interface Types {
+    description: string,
+    subtitle: string,
+    title: string,
+    network: Array<Network>
+}
+
+export default function JoinMetaDeckCommunity({ data }: { data: Types }) {
 
     const width = useWindowWidth()
-
+    console.log()
     return (
         <Container id='contact'>
             {width > 576 && <FooterBlanket></FooterBlanket>}
             <ContainerInfo>
-                <h1>Join the MetaDeck Community</h1>
-                <Subtitle>Connect, Learn, and Grow</Subtitle>
-                <Description>Get the most out of your MetaDeck by joining our community of dedicated traders. Share tips, strategies, and get exclusive community-only benefits.</Description>
+                {data?.title ? <h1>{data?.title}</h1> : null}
+                {data?.subtitle ? <Subtitle>{data?.subtitle}</Subtitle> : null}
+                {data?.description ? <Description>{data?.description}</Description> : null}
                 <ContainerNetwork>
-                    <NetworkIcons name='telegram' />
-                    <NetworkIcons name='youtube' />
-                    <NetworkIcons name='twitter' />
+                    {
+                        data?.network && data?.network?.length ?
+                            data?.network?.map((_ : Network, i : number) => (
+                                 <NetworkIcons key={i + 343} name={_.icon} href={_.href} />
+                            ))
+                            : null
+                    }
                 </ContainerNetwork>
             </ContainerInfo>
             <StyledMobileImage>
-                <Image src='/img/mobileBlanketImage.png' alt='blanketImageMobile' width={500} height={400}></Image>
+                <Image src='/img/mobileBlanketImage.webp' alt='blanketImageMobile' width={500} height={400}></Image>
             </StyledMobileImage>
         </Container>
     )

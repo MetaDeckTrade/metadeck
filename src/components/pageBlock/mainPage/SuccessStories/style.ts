@@ -95,7 +95,7 @@ export const WrapperSubtitle = styled.div`
     flex-direction: column;
     gap: ${rm(30)};
 
-    >:nth-child(1){
+    .dataSubtitle{
         color: ${colors.white2};
         opacity: 0.75;
         line-height: 120%;
@@ -116,7 +116,7 @@ export const WrapperSubtitle = styled.div`
         `}
     }
     
-    >:nth-child(2){
+    .dataDescription{
         line-height: 130%;
         letter-spacing: 0.01em;
         opacity: 0.6;

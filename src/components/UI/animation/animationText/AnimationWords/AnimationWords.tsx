@@ -1,9 +1,9 @@
 
-'use client'
 
+import { useInView } from "@/hooks/useInView"
 import { useSpring, animated } from "@react-spring/web"
 import { useEffect, useMemo, useState } from "react"
-import { useInView } from "react-intersection-observer"
+// import { useInView } from "@/hooks/useInView"
 
 interface Types {
     animationDelay? : number,
@@ -23,7 +23,7 @@ interface TypesText {
 
 const AnimatiosWords = ({ animationDelay = 0, duration = 0, text, delay = 0, ...props }: Types | any) => {
 
-    const { ref, inView } = useInView()
+    const  [ ref, inView ] = useInView()
 
     const textWords = useMemo(() => {
         if (text.length) {

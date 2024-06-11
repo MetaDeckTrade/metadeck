@@ -22,7 +22,7 @@ export const Container = styled.div`
     ${media.xsm`
         gap: ${rm(15)};
     `}
-    >:nth-child(1){
+    .title{
         opacity: 0.6;
         line-height: 130%;
         letter-spacing: 0.01em;
@@ -69,7 +69,7 @@ export const Email = styled(Link)`
     `}
 
 }
->svg{
+.icon{
     position: relative;
     width: ${rm(24)};
     height: ${rm(24)};

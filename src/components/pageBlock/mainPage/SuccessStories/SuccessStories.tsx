@@ -1,43 +1,36 @@
 import CardsTeam from '@/components/UI/CardsTeam/CardsTeam'
 import { Container, WrapperSubtitle } from './style'
 
-const dataCards = [
-    {
-        src: '/img/icon.png',
-        name: 'Jacob Smith',
-        description: 'Traders worldwide are transforming their strategies with MetaDeck. Here’s what they have to say.'
-    },
-    {
-        src: '/img/icon.png',
-        name: 'William Brown',
-        description: 'Traders worldwide are transforming their strategies with MetaDeck. Here’s what they have to say.'
-    },
-    {
-        src: '/img/icon.png',
-        name: 'James Davis',
-        description: 'Traders worldwide are transforming their strategies with MetaDeck. Here’s what they have to say.'
-    },
-]
-interface Types {
-    src: string,
+interface CardTypes {
+    description: string,
     name: string,
-    description: string
+    img: { filename: string }
 }
-export default function SuccessStories() {
+
+interface TypesData {
+    description: string,
+    subtitle: string,
+    title: string,
+    card: Array<CardTypes>
+}
+
+export default function SuccessStories({ data }: { data: TypesData }) {
     return (
-        <Container id='support'>
+        <Container id='success'>
             <div >
-                <h1>Success Stories</h1>
+                {data?.title ? <h1>{data.title}</h1> : null}
                 <WrapperSubtitle>
-                    <p >Don’t Just Take Our Word for It</p>
-                    <p>Traders worldwide are transforming their strategies with MetaDeck. Here’s what they have to say:</p>
+                    {data?.subtitle ? <p className='dataSubtitle'>{data?.subtitle}</p> : null}
+                    {data?.description ? <p className='dataDescription'>{data?.description}</p> : null}
                 </WrapperSubtitle>
             </div>
             <div>
                 {
-                    dataCards.map((_: Types, i: number) => (
-                        <CardsTeam key={i} src={_.src} name={_.name} description={_.description} />
-                    ))
+                    data?.card && data?.card?.length ?
+                        data?.card?.map((_: CardTypes, i: number) => (
+                            <CardsTeam key={i} src={_.img.filename} name={_.name} description={_.description} />
+                        ))
+                        : null
                 }
             </div>
         </Container>

@@ -1,6 +1,5 @@
 import AnimationBlockY from "../animation/animationBlock/AnimationBlockY/AnimationBlockY";
 import AnimatiosPharagraphTwo from "../animation/animationText/AnimationPatagraph/AnimationPatagraph";
-import LineAnimation from "../animation/animationText/AnimationLine/AnimationLine";
 import React from 'react';
 import styled from "styled-components";
 import { media, responsive, rm } from '../../../styles/utils'
@@ -17,10 +16,11 @@ interface Types {
 }
 const ContainerStyle = styled.div`
 position: relative;
-width: fit-content;
+width: ${rm(500)};
 display: flex;
 flex-direction: column;
 gap: ${rm(30)};
+
 `
 const WrapperNumer = styled.div`
 position: relative;
@@ -65,6 +65,7 @@ const StyleLineAnimation = styled(Text)`
 position: relative;
 width: ${rm(424)} !important;
 overflow: hidden;
+color: ${colors.white2} !important;
 ${inter()}
 ${media.xsm`
 width: 100% !important;
@@ -79,7 +80,7 @@ export default function InformationBlock({ number, delay = 0, title, text, ...pr
                     <svg width="100" height="75" viewBox="0 0 100 75" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 0H88L100 12V75H0V0Z" fill="#001A41" />
                     </svg>
-                    <p>{number}</p>
+                    <p>{+number <= 9 ? 0 : null}{number}</p>
                 </WrapperNumer>
             </AnimationBlockY>
             <StyleAnimatiosPharagraphTwo

@@ -5,13 +5,16 @@ import styled, { css } from 'styled-components'
 import { fonts, orbitronBold } from '@/styles/fonts'
 import { media, responsive, rm } from '@/styles/utils'
 import { colors } from '@/styles'
+import { lenis } from '@/layouts/ScrollLayout/ScrollLayout'
 
 interface Types {
     name: string,
     onclick?: (value?: any) => void,
     header?: boolean,
     color?: string
-    burger?: any;
+    burger?: any,
+    anchor? : string,
+    href? : string
 }
 
 const StyledContainer = styled.button`
@@ -25,7 +28,7 @@ const StyledContainer = styled.button`
     cursor: pointer;
     ${(props: any) => {
         switch (props.color) {
-            case "yellow":
+            case "orange":
                 return css`
             background-color: ${colors.yellow1} ;
             color: ${colors.blue1} ;
@@ -72,10 +75,15 @@ const Button = memo((props: Types) => {
     const clock = useCallback(() => {
         if (props.onclick) {
             props.onclick()
-        } else {
+        } 
+        if(props.href){
+            window.open(props.href)
             return
         }
-    }, [props.onclick])
+        if(props.anchor){
+            lenis.current?.scrollTo(props.anchor)
+        }
+    }, [props.onclick, props.href, props.anchor])
 
     return (
         <>

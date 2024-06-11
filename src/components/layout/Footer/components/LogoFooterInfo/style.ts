@@ -32,7 +32,7 @@ export const WrapperLogo = styled.div`
     align-items: center;
     gap: ${rm(5)};
    
-    >img{
+    .logo{
         position: relative;
         width: ${rm(50)};
         height: ${rm(25)};
@@ -49,7 +49,7 @@ export const WrapperLogo = styled.div`
             height: ${rm(19)};
         `}
     }
-    >p{
+    .logoName{
         ${orbitronBold()}
         font-size: ${rm(18)};
         line-height: 110%;

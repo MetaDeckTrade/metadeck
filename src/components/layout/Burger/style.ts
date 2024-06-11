@@ -14,7 +14,7 @@ export const Container = styled(animated.div)`
     position: fixed;
     left: 0;
     top: 0;
-    z-index: 110;
+    z-index: 120;
     padding: ${rm(150)} ${rm(30)} ${rm(60)} ${rm(30)};
     display: flex;
     flex-direction: column;
@@ -24,7 +24,7 @@ export const Container = styled(animated.div)`
         flex-direction: column;
         gap: ${rm(20)};
     }
-    >:nth-child(2){
+    .subtitle{
         font-size: ${rm(16)};
         color: ${colors.white2} ;
         letter-spacing: 0.01em;
@@ -33,6 +33,10 @@ export const Container = styled(animated.div)`
         opacity: 0.6;
         margin-top: ${rm(50)};
         ${inter()}
+        display: none;
+        ${media.xsm`
+            display: block;
+        `}
     }
     ${media.xsm`
         padding: ${rm(120)} ${rm(10)} ${rm(20)} ${rm(10)};

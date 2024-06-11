@@ -1,7 +1,7 @@
+import ImageMy from "@/components/UI/ImageMy/ImageMy";
 import { colors } from "@/styles";
 import { inter, orbitronBold } from "@/styles/fonts";
-import { heightLvh, marginLvh, media, responsive, rm } from "@/styles/utils";
-import Image from "next/image";
+import { heightLvh, marginLvh, media, rm } from "@/styles/utils";
 
 import styled from "styled-components";
 
@@ -17,10 +17,6 @@ export const StikyNew = styled.div`
     position: sticky;
     top: 0; left: 0;
     width: 100%;
-    /* height: 100vh;
-    height: 100lvh;
-    height: calc(var(--vh, 1lvh) * 100); */ 
-    /* ${heightLvh(100)} */
     background-color: ${colors.white1} ;
     `
 
@@ -174,7 +170,7 @@ ${media.md`
         }
 `
 
-export const SwiperSlideImage = styled(Image)`
+export const SwiperSlideImage = styled(ImageMy)`
     position: relative;
     width: 100%;
     height: ${rm(256)};
