@@ -162,7 +162,7 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         },
         config: {duration: 1},
         onChange: (state) => {
-            console.log(progressRef.current)
+            // console.log(progressRef.current)
         }
     });
 

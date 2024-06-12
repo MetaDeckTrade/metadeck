@@ -17,7 +17,6 @@ interface Types {
 
 
 export default function Costomizable({ firstRef, secondRef, thirdRef, fourthRef, data }: any,) {
-    console.log(data)
     const dataCms = useMemo(() => {
         if(!data || !data?.information?.length) {return}
         const dataNew = data?.information?.filter((_ : any, i : number) => i !== 0 )

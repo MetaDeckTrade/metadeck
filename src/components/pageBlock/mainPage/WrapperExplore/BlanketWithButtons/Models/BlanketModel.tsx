@@ -18,7 +18,7 @@ interface Model {
     rotation: Array<number>,
 }
 
-export default function BlanketModal({ inView, rotation, position, containerRef}: Model) {
+export default function BlanketModal({ inView, rotation, position, containerRef }: Model) {
     const { scene } = useGLTF('/models/model.glb');
     const modelRef = useRef<THREE.Object3D>(null);
     const progressRef = useRef<number>(0)
@@ -43,7 +43,7 @@ export default function BlanketModal({ inView, rotation, position, containerRef}
     }, [inView]);
 
     useEffect(() => {
-        if(!inViewButtonBlanket && modelRef.current) {
+        if (!inViewButtonBlanket && modelRef.current) {
             modelRef.current.visible = false
         } else if (modelRef.current && inViewButtonBlanket) {
             modelRef.current.visible = true
@@ -73,7 +73,7 @@ export default function BlanketModal({ inView, rotation, position, containerRef}
     });
 
 
- useFrame((state) => {
+    useFrame((state) => {
         if (!modelRef.current) return;
 
         const time = state.clock.getElapsedTime();

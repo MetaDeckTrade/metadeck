@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { useSpring } from '@react-spring/web'
 
 export default function Network({ data } : any) {
-    console.log(data)
     const [booted, setbooted] = useState(false)
     useEffect(() => {
         setbooted(true)
