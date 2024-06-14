@@ -60,7 +60,7 @@ export default function JoinMetaDeckCommunity({ data }: { data: Types }) {
                 </ContainerNetwork>
             </ContainerInfo>
             <StyledMobileImage>
-                <Image src='/img/mobileBlanketImage.webp' alt='blanketImageMobile' width={500} height={400}></Image>
+                <Image src='/img/mobileblanketimage.webp' alt='blanketImageMobile' width={500} height={400}></Image>
             </StyledMobileImage>
         </Container>
     )
