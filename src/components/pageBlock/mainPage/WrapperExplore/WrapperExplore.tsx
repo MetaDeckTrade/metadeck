@@ -52,6 +52,7 @@ const WrapperExplore = ({ data, simplicityMeetsPowerData }: { data: Types, simpl
     const highBlockRef = useRef<HTMLDivElement | null>(null);
     const testRef = useRef(null)
     const [scrollPosition, setscrollPosition] = useState(0)
+    const [activeLine, setActiveLine] = useState(0)
     const [heightrefTitle, setheightrefTitle] = useState(0)
     
     const { values: titleValues } = useSpringTrigger({
@@ -91,18 +92,27 @@ const WrapperExplore = ({ data, simplicityMeetsPowerData }: { data: Types, simpl
         onChange: () => {
             if (values && highBlockRef.current) {
                 const y = values.x.get()
-                if (+y <= 0.33 && scrollPosition !== 1) {
+
+                if(+y < 0.1) {
+                    setActiveLine(0)
+                }
+                if (+y <= 0.33 && +y > 0.1 && scrollPosition !== 1) {
                     setscrollPosition(1)
+                    setActiveLine(1)
                     highBlockRef.current.style.backgroundColor = 'rgba(255, 107, 0, 1)'
                 }
                 if (+y <= 0.66 && +y > 0.33 && scrollPosition !== 2) {
+                    // console.log('2')
                     highBlockRef.current.style.backgroundColor = 'rgba(255, 184, 0, 1) '
                     setscrollPosition(2)
+                    setActiveLine(2)
                 }
                 if (+y > 0.66 && scrollPosition !== 3) {
                     setscrollPosition(3)
+                    setActiveLine(3)
                     highBlockRef.current.style.backgroundColor = 'rgba(149, 243, 0, 1) '
-                }
+                } 
+
             }
         }
     })
@@ -134,6 +144,10 @@ const WrapperExplore = ({ data, simplicityMeetsPowerData }: { data: Types, simpl
     const containerRef = useRef<any>(null)
     const blockRef = useRef<any>(null)
 
+    useEffect(() => {
+        console.log(scrollPosition)
+    }, [scrollPosition])
+
     return (
         <>
             {
@@ -144,7 +158,7 @@ const WrapperExplore = ({ data, simplicityMeetsPowerData }: { data: Types, simpl
                             <StlyedWrapper>
                                 <div style={{ position: 'relative', height: '100%', width: '100%' }}>
                                     <div style={{ position: 'sticky', top: 0, left: 0, marginBottom: '100vh', marginTop: '-100vh' }}>
-                                        <BlanketWithButtons blockNumber={scrollPosition} containerRef={containerRef} blockRef={blockRef}></BlanketWithButtons>
+                                        <BlanketWithButtons blockNumber={activeLine} containerRef={containerRef} blockRef={blockRef}></BlanketWithButtons>
                                     </div>
                                 </div>
                             </StlyedWrapper>

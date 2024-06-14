@@ -33,7 +33,7 @@ export default function ButtonModels({ containerRef, inView, rotation, position,
     });
 
     const positionSpring = useSpring({
-        z: blockNumber === activeNumber ? position[2] + 0.3 : -1,
+        z: blockNumber === activeNumber ? position[2] + 0.3 : -.3,
         config: { duration: 500, easing: easings.easeInOutCubic },
     });
 
@@ -74,7 +74,7 @@ export default function ButtonModels({ containerRef, inView, rotation, position,
         modelRef.current.position.z = positionSpring.z.get();
         modelRef.current.scale.set(effect.scale.get(), effect.scale.get(), effect.scale.get());
 
-        if (effect.scale.get() < 0.3) {
+        if (effect.scale.get() < 0.5) {
             modelRef.current.visible = false;
         } else {
             modelRef.current.visible = true;
