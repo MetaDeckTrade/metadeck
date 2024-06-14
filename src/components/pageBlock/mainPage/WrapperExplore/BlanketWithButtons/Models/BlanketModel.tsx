@@ -19,6 +19,12 @@ interface Model {
     activeNumber: number,
 }
 
+const uniforms = {
+    uLine1Opacity: { value: 1 },
+    uLine2Opacity: { value: 1 },
+    uLine3Opacity: { value: 1 },
+}
+
 export default function BlanketModal({ inView, rotation, position, containerRef, activeNumber }: Model) {
     const { scene } = useGLTF('/models/buttonsBlunket.glb');
     const modelRef = useRef<THREE.Object3D>(null);
@@ -28,53 +34,46 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
     const width = useWindowWidth();
     const [animatedOnce, setAnimatedOnce] = useState(false);
 
-    const model = useMemo(() => {
+    // const uniforms = useRef({
+    //     uLine1Opacity: { value: 1 },
+    //     uLine2Opacity: { value: 1 },
+    //     uLine3Opacity: { value: 1 },
+    // })
+
+    const { clonedScene, line1, line2, line3 } = useMemo(() => {
         const clonedScene = scene.clone();
 
-                //lines opacity and z
+        //lines opacity and z
         const line1 = clonedScene.getObjectByName('line_1') as THREE.Group;
         const line2 = clonedScene.getObjectByName('line_2') as THREE.Group;
         const line3 = clonedScene.getObjectByName('line_3') as THREE.Group;
 
-        const applyShader = (object: THREE.Object3D) => {
+        const applyShader = (object: THREE.Object3D, uniform: { value: number }) => {
             object.traverse((child) => {
                 if (child instanceof THREE.Mesh) {
-                    console.log(child.material)
 
-                    const material = child.material.clone()
+                    child.material.onBeforeCompile = (shader: THREE.Shader) => {
+                        shader.uniforms.uOpacity = uniform
 
-
-                    material.onBeforeCompile = (shader: THREE.Shader) => {
-                        console.log('onBeforeCompile called');
-                        shader.fragmentShader = 'uniform float uOpacity; ' +shader.fragmentShader
+                        shader.fragmentShader = shader.fragmentShader.replace('varying vec3 vViewPosition;', `
+                            varying vec3 vViewPosition;
+                            uniform float uOpacity;
+                        `)
 
                         shader.fragmentShader = shader.fragmentShader.replace('#include <dithering_fragment>', `
                             #include <dithering_fragment>
-
                             gl_FragColor.rgb *= uOpacity;
                         `)
-                        console.log(shader, 'f')
                     }
-
-                    child.material = material
-
-                    // console.log(originalMaterial)
-
-                    // const uniforms = {
-                    //     uOpacity: { value: opacity },
-                    //     uColor: { value: new THREE.Color(originalMaterial.color) },
-                    //     uTexture: { value: originalMaterial.map },
-                    // };
-        
                 }
             });
         };
-        
-        if (line1) applyShader(line1);
-        if (line2) applyShader(line2);
-        if (line3) applyShader(line3);
 
-        return clonedScene;
+        if (line1) applyShader(line1, uniforms.uLine1Opacity);
+        if (line2) applyShader(line2, uniforms.uLine2Opacity);
+        if (line3) applyShader(line3, uniforms.uLine3Opacity);
+
+        return { clonedScene, line1, line2, line3 };
     }, [scene]);
 
     useEffect(() => {
@@ -103,6 +102,24 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
     }));
 
     useEffect(() => {
+        switch (activeNumber) {
+            case 1:
+                line1.visible = false
+                line2.visible = true
+                line3.visible = true
+                break;
+            case 2:
+                line1.visible = true
+                line2.visible = false
+                line3.visible = true
+                break;
+            case 3:
+                line1.visible = true
+                line2.visible = true
+                line3.visible = false
+                break;
+        }
+
         setProps({
             line1Opacity: activeNumber === 1 ? 0.5 : 1,
             line2Opacity: activeNumber === 2 ? 0.5 : 1,
@@ -135,7 +152,9 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
 
     useFrame((state) => {
         if (!modelRef.current) return;
-
+        uniforms.uLine1Opacity.value = props.line1Opacity.get()
+        uniforms.uLine2Opacity.value = props.line2Opacity.get()
+        uniforms.uLine3Opacity.value = props.line3Opacity.get()
 
         //blanket pos and rotation
         const time = state.clock.getElapsedTime();
@@ -169,7 +188,7 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
             scale={20}
             position={position}
             rotation={rotation}
-            object={model}
+            object={clonedScene}
         />
     );
 }

@@ -6,6 +6,7 @@ import { animated } from "@react-spring/web";
 import styled from 'styled-components';
 import { media } from '@/styles/utils';
 import TableContain from './Table/Table';
+import BlanketWithButtons from './BlanketWithButtons/BlanketWithButtons';
 
 const StlyedWrapper = styled.div`
     position: absolute;
@@ -129,7 +130,7 @@ const WrapperExplore = ({ data, simplicityMeetsPowerData }: { data: Types, simpl
             window.removeEventListener('resize', calculateStickyHeight);
         };
     }, [data]);
-    console.log('rerender')
+
     const containerRef = useRef<any>(null)
     const blockRef = useRef<any>(null)
 
@@ -143,7 +144,7 @@ const WrapperExplore = ({ data, simplicityMeetsPowerData }: { data: Types, simpl
                             <StlyedWrapper>
                                 <div style={{ position: 'relative', height: '100%', width: '100%' }}>
                                     <div style={{ position: 'sticky', top: 0, left: 0, marginBottom: '100vh', marginTop: '-100vh' }}>
-                                        {/* <BlanketWithButtons blockNumber={buttonNumber} containerRef={containerRef} blockRef={blockRef}></BlanketWithButtons> */}
+                                        <BlanketWithButtons blockNumber={scrollPosition} containerRef={containerRef} blockRef={blockRef}></BlanketWithButtons>
                                     </div>
                                 </div>
                             </StlyedWrapper>
