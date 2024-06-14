@@ -1,8 +1,8 @@
+import ImageMy from "@/components/UI/ImageMy/ImageMy";
 import AnimatiosWords from "@/components/UI/animation/animationText/AnimationWords/AnimationWords";
 import { colors } from "@/styles";
 import { orbitronBold } from "@/styles/fonts";
-import { media, responsive, rm } from "@/styles/utils";
-import Image from "next/image";
+import { media, rm } from "@/styles/utils";
 import styled from "styled-components";
 
 export const WhyMetaDeckStyle = styled.div`
@@ -29,7 +29,7 @@ export const WhyMetaDeckStyle = styled.div`
     `}
 
     .text {
-        position: relative;
+            position: relative;
             width: ${rm(613)} !important;
             overflow: hidden;
             line-height: 120% !important;
@@ -52,7 +52,7 @@ export const WhyMetaDeckStyle = styled.div`
     }
 `
 
-export const WhyMetaDeckImage = styled(Image)`
+export const WhyMetaDeckImage = styled(ImageMy)`
     position: absolute;
     left: 0;
     top: ${rm(370)};

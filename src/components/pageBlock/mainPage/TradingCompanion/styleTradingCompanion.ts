@@ -1,12 +1,10 @@
-import LineAnimation from "@/components/UI/animation/animationText/AnimationLine/AnimationLine";
+import ImageMy from "@/components/UI/ImageMy/ImageMy";
 import AnimatiosPharagraphTwo from "@/components/UI/animation/animationText/AnimationPatagraph/AnimationPatagraph";
 import AnimatiosWords from "@/components/UI/animation/animationText/AnimationWords/AnimationWords";
 import { colors, fonts } from "@/styles";
 import { orbitronBold } from "@/styles/fonts";
-import { media, responsive, rm } from "@/styles/utils";
-import Image from "next/image";
+import { media, rm } from "@/styles/utils";
 import styled from "styled-components";
-
 
 export const ContainerStyle = styled.div`
     position: relative;
@@ -30,7 +28,7 @@ export const ContainerStyle = styled.div`
     `}
 
     .text {
-        position: relative;
+            position: relative;
             width: ${rm(585)} !important;
             overflow: hidden;
             ${fonts.inter}
@@ -48,7 +46,7 @@ export const ContainerStyle = styled.div`
     }
 
 `
-export const Ellipse1 = styled(Image)`
+export const Ellipse1 = styled(ImageMy)`
 position: absolute;
     left: 0;
     top: ${rm(50)};
@@ -58,7 +56,7 @@ position: absolute;
     max-width: 100%;
 `
 
-export const Ellipse2 = styled(Image)`
+export const Ellipse2 = styled(ImageMy)`
     position: absolute;
     right: 0;
     top: 0;
@@ -123,23 +121,7 @@ export const Title = styled(AnimatiosWords)`
     }
 `
 
-export const LineAnimationText = styled(LineAnimation)`
-    position: relative;
-    width: ${rm(585)} !important;
-    overflow: hidden;
-    ${fonts.inter}
-    ${media.lg`
-        width: ${rm(445)} !important;
-    `}
-    ${media.md`
-         width: ${rm(474)} !important;
-         margin-top: ${rm(20)};
-    `}
-    ${media.xsm`
-        width: 100% !important;
-        margin-top: ${rm(0)};
-    `}
-`
+
 
 export const WrapperButton = styled.div`
     position: relative;

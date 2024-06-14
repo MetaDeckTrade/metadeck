@@ -1,6 +1,5 @@
 import AnimationBlockY from "../animation/animationBlock/AnimationBlockY/AnimationBlockY";
 import AnimatiosPharagraphTwo from "../animation/animationText/AnimationPatagraph/AnimationPatagraph";
-import LineAnimation from "../animation/animationText/AnimationLine/AnimationLine";
 import React from 'react';
 import styled from "styled-components";
 import { media, responsive, rm } from '../../../styles/utils'
@@ -17,10 +16,11 @@ interface Types {
 }
 const ContainerStyle = styled.div`
 position: relative;
-width: fit-content;
+width: ${rm(500)};
 display: flex;
 flex-direction: column;
 gap: ${rm(30)};
+
 `
 const WrapperNumer = styled.div`
 position: relative;
@@ -65,6 +65,7 @@ const StyleLineAnimation = styled(Text)`
 position: relative;
 width: ${rm(424)} !important;
 overflow: hidden;
+color: ${colors.white2} !important;
 ${inter()}
 ${media.xsm`
 width: 100% !important;

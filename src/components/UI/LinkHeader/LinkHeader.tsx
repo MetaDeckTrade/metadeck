@@ -12,7 +12,7 @@ const StyleLineAnimation = styled.a`
         letter-spacing: 0.1em;
         cursor: pointer;
         opacity: 0.75;
-        transition: ease 0.5s;
+        transition: opacity ease 0.5s;
         &:hover{
             opacity: 1;
         }
