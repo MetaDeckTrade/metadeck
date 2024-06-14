@@ -8,8 +8,6 @@ export default function useFetchData(url: string, setState: any) {
         const fetch = async () => {
             await fetchData(url)
             .then((_) => {
-                console.log(_)
-
                 if (setState ) {
                     setState(_)
                     localStorage.setItem('data', `${_}`)

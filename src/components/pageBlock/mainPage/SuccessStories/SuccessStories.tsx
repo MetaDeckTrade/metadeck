@@ -16,7 +16,7 @@ interface TypesData {
 
 export default function SuccessStories({ data }: { data: TypesData }) {
     return (
-        <Container id='simplicity'>
+        <Container id='success'>
             <div >
                 {data?.title ? <h1>{data.title}</h1> : null}
                 <WrapperSubtitle>

@@ -11,7 +11,7 @@ export default function CardsTeam({ src, name, description }: Types) {
     
     return (
         <Container>
-            <ImageNext src={'/img/rectangle.png'} width={527} height={396} alt=''/>
+            <ImageNext src={'/img/rectangle.webp'} width={527} height={396} alt=''/>
             <WrapperImage>
                 <Image src={src} alt='' width={96} height={96} />
         

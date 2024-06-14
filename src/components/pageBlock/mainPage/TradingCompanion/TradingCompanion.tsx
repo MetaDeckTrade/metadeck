@@ -21,17 +21,22 @@ const TradingCompanion = ({ data }: { data: Types | null }) => {
 
     return (
         <ContainerStyle id='about'>
-            <Ellipse1 src={'/img/ellipse1.png'} width={1000} height={1101} alt='' />
-            <Ellipse2 src={'/img/ellipse2.png'} width={1590} height={1442} alt='' />
+            <Ellipse1 src={'/img/ellipse1.webp'} width={1000} height={1101} alt='' />
+            <Ellipse2 src={'/img/ellipse2.webp'} width={1590} height={1442} alt='' />
             {data?.subtitle ? <Subtitle duration={600} text={data?.subtitle} delay={0} /> : null}
             {data?.title ? <Title animationDelay={0} duration={800} text={data?.title} delay={400} /> : null}
-            <Text speed={0.5}  className="text" delay={300} mode='once'>
-                {data?.description ? data.description : null}
-            </Text>
-            <WrapperButton> 
+            {
+                data?.description ?
+                    <Text  className="text" delay={300} mode='once'>
+                        {data?.description}
+                    </Text>
+                    : null
+            }
+
+            <WrapperButton>
                 {
                     data?.button && data?.button.length ?
-                        data?.button?.map((_ : Navigation , i : number) => (
+                        data?.button?.map((_: Navigation, i: number) => (
                             <AnimationBlockY duration={(i + 3) * 100} key={i + 3434} delay={1300}>
                                 <Button color={_.style} key={i + 343} name={_.name} href={_.href} anchor={_.anchor} />
                             </AnimationBlockY>

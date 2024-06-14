@@ -86,7 +86,7 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
 
     useEffect(() => {
         if (!inViewButtonBlanket && modelRef.current) {
-            modelRef.current.visible = false;
+            modelRef.current.visible = false
         } else if (modelRef.current && inViewButtonBlanket) {
             modelRef.current.visible = true;
         }

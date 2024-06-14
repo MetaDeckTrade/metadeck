@@ -12,13 +12,13 @@ export default function SimplicityMeetsPower({data} : {data : TypesSimplicity}) 
     // Rectangle 7933
     useEffect(() => {
         if (widthWindow > 1440) {
-            setImageSrc(data?.imgDesktop?.filename || '/img/Rectangle7933.png')
+            setImageSrc(data?.imgDesktop?.filename || '/img/Rectangle7933.webp')
         } else if (widthWindow <= 1440 && widthWindow > 1024) {
-            setImageSrc(data?.imgLaptop?.filename || '/img/Rectangle7933.png')
+            setImageSrc(data?.imgLaptop?.filename || '/img/Rectangle7933.webp')
         } else if (widthWindow <= 1024 && widthWindow > 480) {
-            setImageSrc(data?.imgTablet?.filename || '/img/Rectangle7933.png')
+            setImageSrc(data?.imgTablet?.filename || '/img/Rectangle7933.webp')
         } else if (widthWindow <= 480) {
-            setImageSrc(data?.imgMobile?.filename || '/img/Rectangle7933.png')
+            setImageSrc(data?.imgMobile?.filename || '/img/Rectangle7933.webp')
         }
     }, [widthWindow, data])
 
@@ -35,7 +35,7 @@ export default function SimplicityMeetsPower({data} : {data : TypesSimplicity}) 
     }, [wrapperRefHeight, refHeight, widthWindow])
 
     return (
-        <Stiky id="how" ref={wrapperRefHeight}>
+        <Stiky  ref={wrapperRefHeight}>
             <StikyNew ref={refHeight}>
             <ContainerNew>
                     <WrapperTitle>

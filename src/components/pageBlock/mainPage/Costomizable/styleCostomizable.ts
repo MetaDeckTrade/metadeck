@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 
 
 export const StyledcontainerWrapper = styled.div`
-position: relative;
+    position: relative;
     width: 100%;
     background-color: ${colors.blue2};
 `
@@ -30,12 +30,6 @@ export const ContainerStyled = styled.div`
     ${media.md`
        padding: ${rm(0)} ${rm(30)} ${rm(80)} ${rm(30)};
        gap: ${rm(80)};
-       >:nth-child(1){
-        justify-content: flex-end !important;
-    }
-    >:nth-child(2){
-        justify-content: flex-start !important;
-    }
     `}
     ${media.xsm`
        padding: ${rm(0)} ${rm(10)} ${rm(80)} ${rm(10)};

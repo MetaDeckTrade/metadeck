@@ -1,14 +1,10 @@
 import { colors } from "@/styles"
 import { inter } from "@/styles/fonts"
-import { media, responsive, rm } from "@/styles/utils"
-import Image from "next/image"
+import { media, rm } from "@/styles/utils"
 import styled from "styled-components"
+import ImageMy from "../ImageMy/ImageMy"
 
-export const Container = styled.div`
-    /* background-image: url('/img/cadsBack.svg');
-    background-position: center;
-    background-size: 100% 100%;
-    background-repeat: no-repeat; */
+export const Container = styled.div`   
     position: relative;
     width: 100%; 
     display: flex; 
@@ -27,7 +23,7 @@ export const Container = styled.div`
     padding: ${rm(34)} ${rm(22)} ${rm(60)} ${rm(22)};
     `}
     `
-export const ImageNext = styled(Image)`
+export const ImageNext = styled(ImageMy)`
     position: absolute;
     left: 0;
     top: 0;
