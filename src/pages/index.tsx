@@ -43,8 +43,29 @@ const StlyedWrapper = styled.div`
 `
 
 const LastStyledContainer = styled.div`
-    height: 100vh;
-    bottom: -50vh;
+    height: 25%;
+    top: 90%;
+    position: absolute;
+    left: 0;
+    width: 100%;
+`
+const FirstStyledContainer = styled.div`
+    height: 25%;
+    top: 0;
+    position: absolute;
+    left: 0;
+    width: 100%;
+`
+const SecondStyledContainer = styled.div`
+    height: 30%;
+    top: 25%;
+    position: absolute;
+    left: 0;
+    width: 100%;
+`
+const ThirdStyledContainer = styled.div`
+    height: 35%;
+    top: 55%;
     position: absolute;
     left: 0;
     width: 100%;
@@ -96,6 +117,11 @@ export default function Home({ initialData }: any) {
                 <div style={{position: 'relative', height: '100%'}}>
                     <StlyedWrapper>
                         <div style={{ position: 'relative', height: '100%', width: '100%'}}>
+                            <FirstStyledContainer ref={metaContainerRef} ></FirstStyledContainer>
+                            <SecondStyledContainer ref={customizableFirstRef} ></SecondStyledContainer>
+                            <ThirdStyledContainer ref={customizaSecondRef} ></ThirdStyledContainer>
+                            {/* <div ref={customizaThirdRef} style={{position: 'absolute', height: '100vh', top: 0, left: 0}}></div> */}
+                            {/* <div ref={customizalFourthRef} style={{position: 'absolute', height: '100vh', top: 0, left: 0}}></div> */}
                             <div style={{position: 'sticky', top: 0, left: 0, marginBottom: '100vh', marginTop: '-100vh'}}>
                                 <Blanket lastContainerRef={lastAnimationRef} mPointer={mPointer} firstContainerRef={metaContainerRef} firstCustomRef={customizableFirstRef} secondCustomRef={customizaSecondRef} thirdCustomRef={customizaThirdRef} fourthCustomRef={customizalFourthRef} containerRef={containerRef}></Blanket>
                             </div>
