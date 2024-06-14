@@ -42,7 +42,6 @@ interface Types {
 export default function JoinMetaDeckCommunity({ data }: { data: Types }) {
 
     const width = useWindowWidth()
-    console.log()
     return (
         <Container id='contact'>
             {width > 576 && <FooterBlanket></FooterBlanket>}

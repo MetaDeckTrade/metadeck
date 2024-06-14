@@ -138,25 +138,7 @@ export const FunctionalitySubtitle = styled.p`
         `}
 `
 
-export const WpapperInfo: any = styled.div`
-    position: sticky;
-    top: 0px;
-    width: 100%;
-    min-height: 300vh;
-    background-color: ${colors.yellow1};
-    z-index: 4;
-    transition: ease 0.5s;   
-    ${(props: any) => {
-        switch (props.bgcolor) {
-            case 0:
-                return css` background-color: rgba(255, 107, 0, 1) !important`;
-            case 1:
-                return css` background-color: rgba(255, 184, 0, 1) !important`;
-            case 2:
-                return css`background-color: rgba(149, 243, 0, 1) !important`;
-        }
-    }}
-`
+
 export const WrapperInfoTable = styled.div`
 position: sticky;
     top: ${rm(0)};
@@ -271,9 +253,19 @@ export const WrapperImageContainer = styled(animated.div)`
         top: 0;
         height: 100%;
         width: 100%;
-        >:nth-child(1){
+        /* >:nth-child(1){
             position: relative;
             height: 100%;
+        } */
+        >:nth-child(1){
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        height: 100vh;
+            width: 100%;
+            object-fit: cover;
+            pointer-events: none;
+            z-index: 2;
         }
 `
 export const WrapperText = styled(animated.div)`
@@ -304,4 +296,13 @@ export const WrapperText = styled(animated.div)`
             flex-shrink: 0;
         }
         
+`
+export const WpapperInfo: any = styled.div`
+    position: sticky;
+    top: 0px;
+    width: 100%;
+    min-height: 400vh;
+    background-color: ${colors.yellow1};
+    z-index: 4;
+    transition: ease 0.5s;   
 `

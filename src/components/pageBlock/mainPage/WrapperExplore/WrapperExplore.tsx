@@ -1,14 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import { Functionality, FunctionalitySubtitle, FunctionalityTitle, FunctionalityWrapperTexxt, Table, Title, TitleTable, TitleWrapper, WpapperInfo, Wrapper, WrapperImage, WrapperImageContainer, WrapperInfoTable, WrapperTable, WrapperText, WrapperTitle } from './styleWrapperExplore';
+import { memo, useEffect, useRef, useState } from 'react';
+import { Functionality, FunctionalitySubtitle, FunctionalityTitle, FunctionalityWrapperTexxt, Title, TitleWrapper, WpapperInfo, Wrapper, WrapperImageContainer, WrapperInfoTable, WrapperTable, WrapperTitle } from './styleWrapperExplore';
 import { useSpringTrigger } from '@/hooks/useSpringTrigger';
 import SimplicityMeetsPower from '../SimplicityMeetsPower/SimplicityMeetsPower';
-import { useInView } from 'react-intersection-observer';
 import { animated } from "@react-spring/web";
-import AnimatiosPharagraphTwoT from '@/components/UI/animation/animationText/AnimationPatagraphTwo/AnimationPatagraphTwo';
-import BlanketWithButtons from './BlanketWithButtons/BlanketWithButtons';
 import styled from 'styled-components';
-import { media, rm } from '@/styles/utils';
-import Image from 'next/image';
+import { media } from '@/styles/utils';
+import TableContain from './Table/Table';
 
 const StlyedWrapper = styled.div`
     position: absolute;
@@ -38,7 +35,7 @@ interface Types {
     title: string,
     steps: Array<Steps>
 }
-export interface TypesSimplicity{
+export interface TypesSimplicity {
     description: string,
     subtitle: string,
     title: string
@@ -48,23 +45,14 @@ export interface TypesSimplicity{
     imgTablet: { filename: string },
 }
 
-export default function WrapperExplore({ data, simplicityMeetsPowerData }: { data: Types , simplicityMeetsPowerData : TypesSimplicity}) {
-
-    const stickyRef = useRef(null);
+const WrapperExplore = ({ data, simplicityMeetsPowerData }: { data: Types, simplicityMeetsPowerData: TypesSimplicity }) => {
     const triggerRef = useRef<HTMLDivElement>(null!)
     const refTitle = useRef<HTMLDivElement | null>(null)
-    const [numerBlock, setnumerBlock] = useState(-1)
-    const [buttonNumber, setButtonNumber] = useState(0)
-    const { ref: yellowRef, inView: yellowBlock } = useInView()
-    const { ref: grinRef, inView: grinBlock } = useInView()
-    const { ref: start, inView: startBlock } = useInView()
-    const refWrapper = useRef(null)
-    const [dataTableList, setdataTableList]: any = useState([])
-    const refTable = useRef(null)
-    const refWrapperTable = useRef(null)
-
-    const [ref, inView] = useInView()
-
+    const highBlockRef = useRef<HTMLDivElement | null>(null);
+    const testRef = useRef(null)
+    const [scrollPosition, setscrollPosition] = useState(0)
+    const [heightrefTitle, setheightrefTitle] = useState(0)
+    
     const { values: titleValues } = useSpringTrigger({
         trigger: triggerRef,
         start: 'top top',
@@ -81,62 +69,43 @@ export default function WrapperExplore({ data, simplicityMeetsPowerData }: { dat
             }
         }
     })
-    const testRef = useRef(null)
+
     const { values: imageAnimated } = useSpringTrigger({
-        trigger: testRef,
+        trigger: highBlockRef,
         start: 'top center',
         end: 'bottom bottom',
         scrub: true,
-        from: { y: '70%' },
+        from: { y: '100%' },
         to: { y: '0%' },
     })
 
-    useEffect(() => {
-        setTimeout(() => {
-            setButtonNumber(0)
-        }, 100)
-    }, [])
+  
+    const { values: values } = useSpringTrigger({
+        trigger: highBlockRef,
+        start: 'top bottom',
+        end: 'bottom bottom',
+        scrub: true,
+        from: { x: '0' },
+        to: { x: '1' },
+        onChange: () => {
+            if (values && highBlockRef.current) {
+                const y = values.x.get()
+                if (+y <= 0.33 && scrollPosition !== 1) {
+                    setscrollPosition(1)
+                    highBlockRef.current.style.backgroundColor = 'rgba(255, 107, 0, 1)'
+                }
+                if (+y <= 0.66 && +y > 0.33 && scrollPosition !== 2) {
+                    highBlockRef.current.style.backgroundColor = 'rgba(255, 184, 0, 1) '
+                    setscrollPosition(2)
+                }
+                if (+y > 0.66 && scrollPosition !== 3) {
+                    setscrollPosition(3)
+                    highBlockRef.current.style.backgroundColor = 'rgba(149, 243, 0, 1) '
+                }
+            }
+        }
+    })
 
-    useEffect(() => {
-        if (yellowBlock && !grinBlock && numerBlock !== 1 && refWrapper.current && data?.steps && data?.steps.length) {
-            // @ts-expect-error
-            refWrapper.current.textContent = data?.steps?.[0].title
-            setnumerBlock(1)
-            setdataTableList([...data?.steps?.[0].stepsInfo])
-
-        }
-        if (grinBlock && numerBlock !== 2 && refWrapper.current) {
-            setnumerBlock(2)
-            // @ts-expect-error
-            refWrapper.current.textContent = data?.steps?.[1].title
-            setdataTableList([...data?.steps?.[1].stepsInfo])
-        }
-        if (startBlock && numerBlock !== 0 && refWrapper.current) {
-            setnumerBlock(0)
-            // @ts-expect-error
-            refWrapper.current.textContent = data?.steps?.[2].title
-            setdataTableList([...data?.steps?.[2].stepsInfo])
-        }
-    }, [yellowBlock, grinBlock, startBlock, refWrapper, data])
-
-
-    useEffect(() => {
-        if (numerBlock === 0 && !inView) {
-            setButtonNumber(1)
-        }
-        else if (numerBlock === 1 && !inView) {
-            setButtonNumber(2)
-        }
-        else if (numerBlock === 2 && !inView) {
-            setButtonNumber(3)
-        }
-        else {
-            setButtonNumber(0)
-        }
-    }, [yellowBlock, grinBlock, startBlock, refWrapper, numerBlock])
-
-
-    const [heightrefTitle, setheightrefTitle] = useState(0)
     useEffect(() => {
         const calculateStickyHeight = () => {
             if (refTitle.current) {
@@ -160,7 +129,7 @@ export default function WrapperExplore({ data, simplicityMeetsPowerData }: { dat
             window.removeEventListener('resize', calculateStickyHeight);
         };
     }, [data]);
-
+    console.log('rerender')
     const containerRef = useRef<any>(null)
     const blockRef = useRef<any>(null)
 
@@ -174,21 +143,15 @@ export default function WrapperExplore({ data, simplicityMeetsPowerData }: { dat
                             <StlyedWrapper>
                                 <div style={{ position: 'relative', height: '100%', width: '100%' }}>
                                     <div style={{ position: 'sticky', top: 0, left: 0, marginBottom: '100vh', marginTop: '-100vh' }}>
-                                        <BlanketWithButtons blockNumber={buttonNumber} containerRef={containerRef} blockRef={blockRef}></BlanketWithButtons>
+                                        {/* <BlanketWithButtons blockNumber={buttonNumber} containerRef={containerRef} blockRef={blockRef}></BlanketWithButtons> */}
                                     </div>
                                 </div>
                             </StlyedWrapper>
-                            <WrapperImageContainer ref={testRef}>
-                                <div >
-                                    <WrapperImage>
-                                        <animated.img style={imageAnimated} src={'/img/imageExplore.webp'} width={1920} height={1326} alt='' />
-                                    </WrapperImage>
-                                </div>
-                            </WrapperImageContainer>
+
 
                             <Wrapper ref={triggerRef} style={{ marginBottom: '-100vh' }}>
 
-                                <TitleWrapper ref={stickyRef} id='title'>
+                                <TitleWrapper id='title'>
                                     <WrapperTitle ref={refTitle}>
                                         {
                                             data?.title ?
@@ -198,49 +161,33 @@ export default function WrapperExplore({ data, simplicityMeetsPowerData }: { dat
                                     </WrapperTitle>
                                 </TitleWrapper>
 
-                                <Wrapper ref={refWrapperTable}>
+                                <Wrapper >
                                     <Functionality id='functionality' style={{ marginTop: `calc(-100vh + ${heightrefTitle}px)` }}>
-                                        <div style={{ width: '100%' }} ref={ref}></div>
                                         <FunctionalityWrapperTexxt>
                                             {data?.functionalityTitle ? <FunctionalityTitle>{data?.functionalityTitle}</FunctionalityTitle> : null}
                                             {data?.functionalitySubtitle ? <FunctionalitySubtitle>{data?.functionalitySubtitle}</FunctionalitySubtitle> : null}
                                         </FunctionalityWrapperTexxt>
                                     </Functionality>
-                                    <WpapperInfo bgcolor={numerBlock} >
-
-                                        <div ref={yellowRef} style={{ position: 'absolute', top: '50%', transform: 'translate(-50%, 0%)', right: 0, height: '1px', width: '1px', pointerEvents: 'none' }}></div>
-                                        <div ref={grinRef} style={{ position: 'absolute', bottom: '0%', right: 0, height: '70vh', width: '100%', pointerEvents: 'none' }}></div>
-                                        <div ref={start} style={{ position: 'absolute', top: '0%', right: 0, height: '1px', width: '1px', pointerEvents: 'none' }}></div>
+                                    <WpapperInfo ref={highBlockRef} >
                                         <WrapperInfoTable>
-                                            <WrapperTable ref={refTable}>
-                                                <TitleTable ref={refWrapper}>5 / 15</TitleTable>
-                                                <Table>
-                                                    {
-                                                        dataTableList.length ?
-                                                            dataTableList.map((_: StepsInfo, i: number) => (
-                                                                <WrapperText key={_._uid}>
-                                                                    {
-                                                                        _?.icon && _?.icon?.filename ?
-                                                                            <Image className='icon' src={_?.icon?.filename} width={16} height={16} alt='' />
-                                                                            : null
-                                                                    }
-                                                                    <AnimatiosPharagraphTwoT delay={50 * (i + 1)} duration={300} key={i} text={_.text}></AnimatiosPharagraphTwoT>
-                                                                </WrapperText>
-                                                            ))
-                                                            : null
-                                                    }
-                                                </Table>
+                                            <WrapperTable >
+                                                <TableContain dataTableList={data?.steps} scrollPosition={scrollPosition} />
                                             </WrapperTable>
+                                            <WrapperImageContainer ref={testRef}>
+                                                <animated.img style={imageAnimated} src={'/img/imageexplore.webp'} width={1920} height={1326} alt='' />
+                                            </WrapperImageContainer>
                                         </WrapperInfoTable>
                                     </WpapperInfo>
                                 </Wrapper>
                             </Wrapper>
                         </Wrapper >
-                        <SimplicityMeetsPower data={simplicityMeetsPowerData}/>
-                        <div style={{position: 'absolute', left: '0', bottom: '100vh'}} id="how"> </div>
+                        <SimplicityMeetsPower data={simplicityMeetsPowerData} />
+                        <div style={{ position: 'absolute', left: '0', bottom: '100vh' }} id="how"> </div>
                     </Wrapper>
                     : null
             }
         </>
     )
 }
+
+export default memo(WrapperExplore)
