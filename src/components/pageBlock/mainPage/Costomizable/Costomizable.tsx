@@ -26,7 +26,6 @@ export default function Costomizable({firstRef, secondRef, thirdRef, fourthRef, 
                 delay: 300,
                 position: 'start',
                 positionMobile: 'end',
-                ref: firstRef
             },
             {
                 number: '03',
@@ -35,7 +34,6 @@ export default function Costomizable({firstRef, secondRef, thirdRef, fourthRef, 
                 delay: 300,
                 position: 'end',
                 positionMobile: 'start',
-                ref: secondRef
             },
         ],
         [
@@ -46,7 +44,6 @@ export default function Costomizable({firstRef, secondRef, thirdRef, fourthRef, 
                 delay: 300,
                 position: 'end',
                 positionMobile: 'end',
-                ref: thirdRef
             },
             {
                 number: '05',
@@ -54,7 +51,6 @@ export default function Costomizable({firstRef, secondRef, thirdRef, fourthRef, 
                 title: 'Built for Traders',
                 delay: 300,
                 position: 'start',
-                ref: fourthRef
             },
         ]
     ]
@@ -78,7 +74,7 @@ export default function Costomizable({firstRef, secondRef, thirdRef, fourthRef, 
                             {
                                 _.length ?
                                     _.map((element: Types, index: number) => (
-                                        <WrapperContent ref={element.ref} key={99 + index + i} style={style(element.position)} >
+                                        <WrapperContent  key={99 + index + i} style={style(element.position)} >
                                             <InformationBlock delay={element.delay}
                                                 number={element.number} title={element.title}
                                                 text={element.text} />

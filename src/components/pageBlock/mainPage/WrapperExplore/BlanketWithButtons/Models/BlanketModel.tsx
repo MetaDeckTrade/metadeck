@@ -16,24 +16,66 @@ interface Model {
     inView: boolean,
     position: Array<number>,
     rotation: Array<number>,
+    activeNumber: number,
 }
 
-export default function BlanketModal({ inView, rotation, position, containerRef}: Model) {
-    const { scene } = useGLTF('/models/model.glb');
+export default function BlanketModal({ inView, rotation, position, containerRef, activeNumber }: Model) {
+    const { scene } = useGLTF('/models/buttonsBlunket.glb');
     const modelRef = useRef<THREE.Object3D>(null);
-    const progressRef = useRef<number>(0)
+    const progressRef = useRef<number>(0);
 
-    const inViewButtonBlanket = useGlobalStore((state: any) => (state.inViewButtonBlanket))
-
+    const inViewButtonBlanket = useGlobalStore((state: any) => (state.inViewButtonBlanket));
     const width = useWindowWidth();
-
     const [animatedOnce, setAnimatedOnce] = useState(false);
 
     const model = useMemo(() => {
-        const model = scene.clone()
+        const clonedScene = scene.clone();
 
-        return model
-    }, [scene])
+                //lines opacity and z
+        const line1 = clonedScene.getObjectByName('line_1') as THREE.Group;
+        const line2 = clonedScene.getObjectByName('line_2') as THREE.Group;
+        const line3 = clonedScene.getObjectByName('line_3') as THREE.Group;
+
+        const applyShader = (object: THREE.Object3D) => {
+            object.traverse((child) => {
+                if (child instanceof THREE.Mesh) {
+                    console.log(child.material)
+
+                    const material = child.material.clone()
+
+
+                    material.onBeforeCompile = (shader: THREE.Shader) => {
+                        console.log('onBeforeCompile called');
+                        shader.fragmentShader = 'uniform float uOpacity; ' +shader.fragmentShader
+
+                        shader.fragmentShader = shader.fragmentShader.replace('#include <dithering_fragment>', `
+                            #include <dithering_fragment>
+
+                            gl_FragColor.rgb *= uOpacity;
+                        `)
+                        console.log(shader, 'f')
+                    }
+
+                    child.material = material
+
+                    // console.log(originalMaterial)
+
+                    // const uniforms = {
+                    //     uOpacity: { value: opacity },
+                    //     uColor: { value: new THREE.Color(originalMaterial.color) },
+                    //     uTexture: { value: originalMaterial.map },
+                    // };
+        
+                }
+            });
+        };
+        
+        if (line1) applyShader(line1);
+        if (line2) applyShader(line2);
+        if (line3) applyShader(line3);
+
+        return clonedScene;
+    }, [scene]);
 
     useEffect(() => {
         if (!inView) return;
@@ -43,16 +85,33 @@ export default function BlanketModal({ inView, rotation, position, containerRef}
     }, [inView]);
 
     useEffect(() => {
-        if(!inViewButtonBlanket && modelRef.current) {
-            modelRef.current.visible = false
+        if (!inViewButtonBlanket && modelRef.current) {
+            modelRef.current.visible = false;
         } else if (modelRef.current && inViewButtonBlanket) {
-            modelRef.current.visible = true
+            modelRef.current.visible = true;
         }
+    }, [inViewButtonBlanket]);
 
-    }, [inViewButtonBlanket])
+    const [props, setProps] = useSpring(() => ({
+        line1Opacity: 1,
+        line2Opacity: 1,
+        line3Opacity: 1,
+        line1Z: .061,
+        line2Z: .061,
+        line3Z: .061,
+        config: { duration: 300, easing: easings.easeInOutCubic },
+    }));
 
-
-
+    useEffect(() => {
+        setProps({
+            line1Opacity: activeNumber === 1 ? 0.5 : 1,
+            line2Opacity: activeNumber === 2 ? 0.5 : 1,
+            line3Opacity: activeNumber === 3 ? 0.5 : 1,
+            line1Z: activeNumber === 1 ? .056 : .061,
+            line2Z: activeNumber === 2 ? .056 : .061,
+            line3Z: activeNumber === 3 ? .056 : .061,
+        });
+    }, [activeNumber, setProps]);
 
     const { values: progressValues } = useSpringTrigger({
         trigger: containerRef,
@@ -73,9 +132,12 @@ export default function BlanketModal({ inView, rotation, position, containerRef}
     });
 
 
- useFrame((state) => {
+
+    useFrame((state) => {
         if (!modelRef.current) return;
 
+
+        //blanket pos and rotation
         const time = state.clock.getElapsedTime();
         const baseRotationX = rotation[0] + Math.sin(time * 0.5) * 0.05;  // Small oscillation in X
         const baseRotationY = rotation[1] + Math.sin(time * 0.3) * 0.05;  // Small oscillation in Y
@@ -100,6 +162,7 @@ export default function BlanketModal({ inView, rotation, position, containerRef}
             );
         }
     });
+
     return (
         <primitive
             ref={modelRef}
