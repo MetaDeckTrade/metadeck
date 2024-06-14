@@ -61,7 +61,7 @@ export default function BlanketWithButtons({containerRef, blockNumber,blockRef}:
                     <pointLight position={[20, 30, 10]}  intensity={1} />
                     <pointLight position={[-10, -10, -10]} color='blue' />
                     <PerspectiveCamera makeDefault fov={40} position={[0, 0, width < 1440 ? (width < 1024 ? 11 : 9) : 7]} />
-                    <TestModel activeNumber={blockNumber} position={[width > 576 ? -2.3 : -2.3 + mobileCofX, width > 576 ? -1.2 : -.4 + mobileCofY, -1.3]} rotation={[0.8, 3.4, 0.1]} inView={inView} containerRef={blockRef}></TestModel>
+                    {/* <TestModel activeNumber={blockNumber} position={[width > 576 ? -2.3 : -2.3 + mobileCofX, width > 576 ? -1.2 : -.4 + mobileCofY, -1.3]} rotation={[0.8, 3.4, 0.1]} inView={inView} containerRef={blockRef}></TestModel> */}
                 </Suspense>
                 <Preload all></Preload>
             </PageView>

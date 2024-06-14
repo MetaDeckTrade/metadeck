@@ -601,11 +601,13 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
     });
 
     return (
-        <primitive
-            ref={modelRef}
-            scale={width > 1024 ? 22 : 18}
-            rotation={[0.9, 3.3, 0]}
-            object={model}
-        />
+        <Float>
+            <primitive
+                ref={modelRef}
+                scale={width > 1024 ? 22 : 18}
+                rotation={[0.9, 3.3, 0]}
+                object={model}
+            />
+        </Float>
     );
 }
