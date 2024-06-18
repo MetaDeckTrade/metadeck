@@ -84,7 +84,7 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         scrub: true,
         from: {
             x: "0.9", y: "3.3", z: "0",
-            positionX: width > 1024 ? "1.5" : "0", positionY: "-1.6", positionZ: "0",
+            positionX: width > 1024 ? "1.5" : "0", positionY: "-1.6", positionZ: "-1",
         },
         to: {
             x: "1.1", y: "2.8", z: "-0.2",
@@ -126,7 +126,7 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         },
         to: {
             x: "-0.1", y: "3.2", z: "0",
-            positionX: "-2", positionY: "-1.6", positionZ: "-1",
+            positionX: "-2", positionY: "-2.3", positionZ: "-1",
         },
         config: {duration: 1},
         onChange: (state) => {
@@ -141,7 +141,7 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         scrub: true,
         from: {
             x: "-0.1", y: "3.2", z: "0",
-            positionX: "-2", positionY: "-1.6", positionZ: "-1",
+            positionX: "-2", positionY: "-2.3", positionZ: "-1",
         },
         to: {
             x: "-.4", y: "2.9", z: "-.2",
