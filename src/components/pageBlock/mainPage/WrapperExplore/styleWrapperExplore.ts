@@ -19,7 +19,7 @@ export const Wrapper = styled.div`
 `
 
 export const TitleWrapper = styled.div`
-    position: sticky;
+    position: relative;
     top: ${rm(80)};
     z-index: 10;
     overflow: hidden;
@@ -66,7 +66,7 @@ export const Functionality = styled.div`
     background-color: ${colors.white1};
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-end !important;
     padding-right: ${rm(315)};
     z-index: 5;
     ${media.lg`
@@ -140,16 +140,22 @@ export const FunctionalitySubtitle = styled.p`
 
 
 export const WrapperInfoTable = styled.div`
-position: sticky;
+    position: sticky;
     top: ${rm(0)};
     width: 100%;
-    /* padding-top: ${rm(380)}; */
+    padding-top: ${rm(250)};
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-end;
     ${heightLvh(100)}
     ${media.lg`
-        gap: ${rm(100)};        
+        gap: ${rm(100)};
+        padding-top: ${rm(150)}      
+    `}
+
+    ${media.md`
+        align-items: flex-end;
+
     `}
 `
 

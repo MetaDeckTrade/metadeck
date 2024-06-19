@@ -106,10 +106,10 @@ export const Title = styled(AnimatiosWords)`
         white-space: pre-wrap;
         >p {
             color: ${colors.white2};
-            font-size: ${rm(160)};
+            font-size: ${rm(128)};
             line-height: 120%;
             ${media.lg`
-            font-size: ${rm(122)};
+            font-size: ${rm(110)};
             `}
             ${media.md`
                 font-size: ${rm(90)};

@@ -31,14 +31,14 @@ export default function Costomizable({ firstRef, secondRef, thirdRef, fourthRef,
     ]
 
     const style = useCallback((position: string) => {
-        switch (position) {
-            case 'center':
-                return { justifyContent: 'center' }
-            case 'end':
-                return { justifyContent: 'flex-end' }
-            case 'start':
+        // switch (position) {
+        //     case 'center':
+        //         return { justifyContent: 'center' }
+        //     case 'end':
+        //         return { justifyContent: 'flex-end' }
+        //     case 'start':
                 return { justifyContent: 'flex-start' }
-        }
+        // }
     }, [])
     return (
         <StyledcontainerWrapper id='compatibility'>

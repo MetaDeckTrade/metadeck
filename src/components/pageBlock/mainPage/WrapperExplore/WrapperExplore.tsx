@@ -55,9 +55,11 @@ const WrapperExplore = ({ data, simplicityMeetsPowerData }: { data: Types, simpl
     const [activeLine, setActiveLine] = useState(0)
     const [heightrefTitle, setheightrefTitle] = useState(0)
     
+    const textTriggerRef = useRef<HTMLDivElement | null>(null)
+
     const { values: titleValues } = useSpringTrigger({
-        trigger: triggerRef,
-        start: 'top top',
+        trigger: textTriggerRef,
+        start: 'top bottom',
         end: 'bottom bottom',
         scrub: true,
         from: { x: '0' },
@@ -166,7 +168,7 @@ const WrapperExplore = ({ data, simplicityMeetsPowerData }: { data: Types, simpl
 
                             <Wrapper ref={triggerRef} style={{ marginBottom: '-100vh' }}>
 
-                                <TitleWrapper id='title'>
+                                <TitleWrapper id='title' ref={textTriggerRef}>
                                     <WrapperTitle ref={refTitle}>
                                         {
                                             data?.title ?

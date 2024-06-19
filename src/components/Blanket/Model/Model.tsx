@@ -84,11 +84,11 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         scrub: true,
         from: {
             x: "0.9", y: "3.3", z: "0",
-            positionX: width > 1024 ? "1.5" : "0", positionY: "-1.6", positionZ: "0",
+            positionX: width > 1024 ? "2.1" : "0", positionY: "-1.6", positionZ: "-1",
         },
         to: {
             x: "1.1", y: "2.8", z: "-0.2",
-            positionX: "1.5", positionY: "-0.5", positionZ: "0",
+            positionX: "2.1", positionY: "-0.5", positionZ: "0",
         },
         config: {duration: 1},
         onChange: (state) => {
@@ -103,11 +103,13 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         scrub: true,
         from: {
             x: "1.1", y: "2.8", z: "-0.2",
-            positionX: "1.5", positionY: "-0.5", positionZ: "0",
+            positionX: "2.1", positionY: "-0.5", positionZ: "0",
+
         },
         to: {
             x: "1.1", y: "2.8", z: "-0.2",
-            positionX: "1.5", positionY: "-0.5", positionZ: "-.5",
+            positionX: "1.5", positionY: "-0.5", positionZ: "0",
+
         },
         config: {duration: 1},
         onChange: (state) => {
@@ -122,11 +124,13 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         scrub: true,
         from: {
             x: "1.1", y: "2.8", z: "-0.2",
-            positionX: "1.5", positionY: "-0.5", positionZ: "-.5",
+            positionX: "1.5", positionY: "-0.5", positionZ: "0",
+
         },
         to: {
             x: "-0.1", y: "3.2", z: "0",
-            positionX: "-2", positionY: "-1.6", positionZ: "-1",
+            positionX: "1.5", positionY: "-0.5", positionZ: "0",
+
         },
         config: {duration: 1},
         onChange: (state) => {
@@ -141,11 +145,11 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         scrub: true,
         from: {
             x: "-0.1", y: "3.2", z: "0",
-            positionX: "-2", positionY: "-1.6", positionZ: "-1",
+            positionX: "1.5", positionY: "-0.5", positionZ: "0",
         },
         to: {
             x: "-.4", y: "2.9", z: "-.2",
-            positionX: ".7", positionY: "-1", positionZ: "-1",
+            positionX: "1.5", positionY: "-1.7", positionZ: "0",
         },
         config: {duration: 1},
         onChange: (state) => {
@@ -227,7 +231,7 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         <Float>
             <primitive
                 ref={modelRef}
-                scale={width > 1024 ? 22 : 18}
+                scale={width > 1024 ? 20 : 18}
                 rotation={[0.9, 3.3, 0]}
                 object={model}
             />

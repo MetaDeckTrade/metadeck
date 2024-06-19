@@ -33,7 +33,7 @@ export default function ButtonModels({ containerRef, inView, rotation, position,
     });
 
     const positionSpring = useSpring({
-        z: blockNumber === activeNumber ? position[2] + 0.3 : -.3,
+        z: blockNumber === activeNumber ? position[2] + -.9 : -.3,
         config: { duration: 500, easing: easings.easeInOutCubic },
     });
 
@@ -57,7 +57,7 @@ export default function ButtonModels({ containerRef, inView, rotation, position,
         },
         to: {
             x: `${rotation[0]}`, y: `${rotation[1]}`, z: `${rotation[2]}`,
-            positionX: `${position[0] + (width > 576 ? 1.9 : -0.12)}`, positionY: `${position[1] + (width > 576 ? 0.5 : 0.3)}`, positionZ: `${position[2]}`,
+            positionX: `${position[0] + (width > 1024 ? 1.9 : (width > 576 ? 2.4 : 0))}`, positionY: `${position[1] + (width > 1024 ? 1.6 : (width > 576 ? 1.8 : .5))}`, positionZ: `${position[2]}`,
         },
     });
 
@@ -67,9 +67,13 @@ export default function ButtonModels({ containerRef, inView, rotation, position,
         if (!modelRef.current || !inViewButtonBlanket) return;
 
         const time = state.clock.getElapsedTime();
-        const baseRotationX = rotation[0] + Math.sin(time * 0.5) * 0.05;  // Small oscillation in X
-        const baseRotationY = rotation[1] + Math.sin(time * 0.3) * 0.05;  // Small oscillation in Y
-        const baseRotationZ = rotation[2] + Math.sin(time * 0.4) * 0.05;  // Small oscillation in Z
+        // const baseRotationX = rotation[0] + Math.sin(time * 0.5) * 0.05;  // Small oscillation in X
+        // const baseRotationY = rotation[1] + Math.sin(time * 0.3) * 0.05;  // Small oscillation in Y
+        // const baseRotationZ = rotation[2] + Math.sin(time * 0.4) * 0.05;  // Small oscillation in Z
+
+        const baseRotationX = rotation[0];  // Small oscillation in X
+        const baseRotationY = rotation[1];  // Small oscillation in Y
+        const baseRotationZ = rotation[2];  // Small oscillation in Z
 
         modelRef.current.position.z = positionSpring.z.get();
         modelRef.current.scale.set(effect.scale.get(), effect.scale.get(), effect.scale.get());
