@@ -44,6 +44,7 @@ export const WhyMetaDeckStyle = styled.div`
             `}
             ${media.md`
                 width: ${rm(613)} !important;
+                font-size: ${rm(26)} !important;
             `}
            ${media.xsm`
                 width: ${rm(314)} !important;
@@ -91,13 +92,13 @@ export const AnimatiosWordsWhyMetaDeck = styled(AnimatiosWords)`
 
         >p {
             color: ${colors.white2};
-            font-size: ${rm(128)};
+            font-size: ${rm(96)};
             line-height: 120%;
             ${media.lg`
-                font-size: ${rm(126)};
+                font-size: ${rm(72)};
             `}
             ${media.md`
-                font-size: ${rm(110)};
+                font-size: ${rm(64)};
             `}
             ${media.xsm`
                 font-size: ${rm(64)};

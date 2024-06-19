@@ -160,7 +160,7 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
         },
         to: {
             x: `${rotation[0]}`, y: `${rotation[1]}`, z: `${rotation[2]}`,
-            positionX: "-.12", positionY: `${position[1] + 0.5}`, positionZ: `${position[2]}`,
+            positionX: "0", positionY: `${width > 576 ? position[1] + 2 : position[1] + 0.6}`, positionZ: `${position[2]}`,
         },
         onChange: (state) => {
             progressRef.current = state.value.progress;
@@ -185,9 +185,9 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
 
         //blanket pos and rotation
         const time = state.clock.getElapsedTime();
-        const baseRotationX = rotation[0] + Math.sin(time * 0.5) * 0.05;  // Small oscillation in X
-        const baseRotationY = rotation[1] + Math.sin(time * 0.3) * 0.05;  // Small oscillation in Y
-        const baseRotationZ = rotation[2] + Math.sin(time * 0.4) * 0.05;  // Small oscillation in Z
+        // const baseRotationX = rotation[0] + Math.sin(time * 0.5) * 0.05;  // Small oscillation in X
+        // const baseRotationY = rotation[1] + Math.sin(time * 0.3) * 0.05;  // Small oscillation in Y
+        // const baseRotationZ = rotation[2] + Math.sin(time * 0.4) * 0.05;  // Small oscillation in Z
 
         if (width < 1024) {
             modelRef.current.rotation.set(
@@ -202,9 +202,9 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
             );
         } else {
             modelRef.current.rotation.set(
-                baseRotationX + coordinatesRef.x * 0.01,
-                baseRotationY + coordinatesRef.y * 0.01,
-                baseRotationZ
+                rotation[0] + coordinatesRef.x * 0.01,
+                rotation[1] + coordinatesRef.y * 0.01,
+                rotation[2]
             );
         }
     });
