@@ -10,6 +10,7 @@ import { easings } from "@react-spring/web";
 import { lerp } from "three/src/math/MathUtils.js";
 import { coordinatesRef } from "@/pages/_app";
 import useGlobalStore from "@/store/store";
+import { testSpringTrigger } from "@/hooks/testSpring";
 
 interface Model {
     containerRef: MutableRefObject<HTMLElement | HTMLDivElement | null>,
@@ -113,7 +114,6 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
     }));
 
     useEffect(() => {
-        setTimeout(() => {
             setProps({
                 line1ColorAlpha: activeNumber != 0  ? 0.5 : 1,
                 line2ColorAlpha: activeNumber != 0 ? 0.5 : 1,
@@ -125,10 +125,9 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
                 line2Visible: activeNumber != 0 && activeNumber === 2 ? false : true,
                 line3Visible: activeNumber != 0 && activeNumber === 3 ? false : true,
             });
-        }, 200)
     }, [activeNumber, setProps]);
 
-    const { values: progressValues } = useSpringTrigger({
+    const [progressValues, progressState] = useSpringTrigger({
         trigger: containerRef,
         start: 'bottom bottom',
         end: 'bottom top',
@@ -145,6 +144,8 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
             progressRef.current = state.value.progress;
         }
     });
+
+
 
 
 

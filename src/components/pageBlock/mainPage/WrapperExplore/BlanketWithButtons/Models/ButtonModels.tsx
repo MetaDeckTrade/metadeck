@@ -46,7 +46,7 @@ export default function ButtonModels({ containerRef, inView, rotation, position,
     }, [inViewButtonBlanket])
 
 
-    const { values: progressValues } = useSpringTrigger({
+    const [progressValues, state] = useSpringTrigger({
         trigger: containerRef,
         start: 'bottom bottom',
         end: 'bottom top',

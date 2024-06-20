@@ -57,7 +57,7 @@ const WrapperExplore = ({ data, simplicityMeetsPowerData }: { data: Types, simpl
     
     const textTriggerRef = useRef<HTMLDivElement | null>(null)
 
-    const { values: titleValues } = useSpringTrigger({
+    const [titleValues, titleState] = useSpringTrigger({
         trigger: textTriggerRef,
         start: 'top bottom',
         end: 'bottom bottom',
@@ -74,7 +74,7 @@ const WrapperExplore = ({ data, simplicityMeetsPowerData }: { data: Types, simpl
         }
     })
 
-    const { values: imageAnimated } = useSpringTrigger({
+    const [imageAnimated, stateAnim] = useSpringTrigger({
         trigger: highBlockRef,
         start: 'top center',
         end: 'bottom bottom',
@@ -84,7 +84,7 @@ const WrapperExplore = ({ data, simplicityMeetsPowerData }: { data: Types, simpl
     })
 
   
-    const { values: values } = useSpringTrigger({
+    const [values, state] = useSpringTrigger({
         trigger: highBlockRef,
         start: 'top bottom',
         end: 'bottom bottom',

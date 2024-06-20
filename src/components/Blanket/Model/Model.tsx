@@ -77,7 +77,7 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         return scene
     }, [scene])
 
-    const { values: progressValues } = useSpringTrigger({
+    const [progressValues, progState] = useSpringTrigger({
         trigger: firstContainerRef,
         start: 'top center',
         end: 'bottom bottom',
@@ -91,12 +91,9 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
             positionX: "2.1", positionY: "-0.5", positionZ: "0",
         },
         config: {duration: 1},
-        onChange: (state) => {
-            progressRef.current = 1
-        }
     });
 
-    const { values: progressValuesSecond } = useSpringTrigger({
+    const [progressValuesSecond, secondState] = useSpringTrigger({
         trigger: firstCustomRef,
         start: 'top bottom',
         end: 'bottom bottom',
@@ -112,12 +109,9 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
 
         },
         config: {duration: 1},
-        onChange: (state) => {
-            progressRef.current = 2
-        }
     });
 
-    const { values: progressValuesThird } = useSpringTrigger({
+    const [progressValuesThird, thirdState] = useSpringTrigger({
         trigger: secondCustomRef,
         start: 'top bottom',
         end: 'bottom bottom',
@@ -133,12 +127,9 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
 
         },
         config: {duration: 1},
-        onChange: (state) => {
-            progressRef.current = 3
-        }
     });
 
-    const { values: progressValuesFourth } = useSpringTrigger({
+    const [progressValuesFourth, fourthState] = useSpringTrigger({
         trigger: lastContainerRef,
         start: 'top bottom',
         end: 'center bottom',
@@ -152,9 +143,6 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
             positionX: "1.5", positionY: "-1.7", positionZ: "0",
         },
         config: {duration: 1},
-        onChange: (state) => {
-            progressRef.current = 4
-        }
     });
 
     useEffect(() => {
@@ -169,7 +157,10 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         if(!inViewBlanket) return
 
         if (modelRef.current) {
-            if (progressRef.current === 1) {
+            const progress = progState.progress.get() + secondState.progress.get() + thirdState.progress.get() + fourthState.progress.get() 
+        
+        
+            if (progress <= 1) {
                 modelRef.current.rotation.set(
                     lerp(modelRef.current.rotation.x, +progressValues.x.get(), 0.05),
                     lerp(modelRef.current.rotation.y, +progressValues.y.get(), 0.05),
@@ -180,7 +171,7 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
                     lerp(modelRef.current.position.y, +progressValues.positionY.get(), 0.05),
                     lerp(modelRef.current.position.z, +progressValues.positionZ.get(), 0.05)
                 );
-            } else if (progressRef.current === 2) {
+            } else if (progress <= 2) {
                 modelRef.current.rotation.set(
                     lerp(modelRef.current.rotation.x, +progressValuesSecond.x.get(), 0.05),
                     lerp(modelRef.current.rotation.y, +progressValuesSecond.y.get(), 0.05),
@@ -191,7 +182,7 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
                     lerp(modelRef.current.position.y, +progressValuesSecond.positionY.get(), 0.05),
                     lerp(modelRef.current.position.z, +progressValuesSecond.positionZ.get(), 0.05)
                 );
-            } else if (progressRef.current === 3) {
+            } else if (progress <= 3) {
                 modelRef.current.rotation.set(
                     lerp(modelRef.current.rotation.x, +progressValuesThird.x.get(), 0.05),
                     lerp(modelRef.current.rotation.y, +progressValuesThird.y.get(), 0.05),
@@ -202,7 +193,7 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
                     lerp(modelRef.current.position.y, +progressValuesThird.positionY.get(), 0.05),
                     lerp(modelRef.current.position.z, +progressValuesThird.positionZ.get(), 0.05)
                 );
-            } else if (progressRef.current === 4) {
+            } else if (progress <= 4) {
                 modelRef.current.rotation.set(
                     lerp(modelRef.current.rotation.x, +progressValuesFourth.x.get(), 0.05),
                     lerp(modelRef.current.rotation.y, +progressValuesFourth.y.get(), 0.05),
