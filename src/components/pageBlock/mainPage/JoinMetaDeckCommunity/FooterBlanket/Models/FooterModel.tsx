@@ -1,7 +1,4 @@
-import { useSpringTrigger } from "@/hooks/useSpringTrigger";
-import { PageView } from "@/layouts/CanvasLayout/components/PageView";
 import { useWindowWidth } from "@react-hook/window-size";
-import { useSpring } from "@react-spring/three";
 import { Preload, useGLTF } from "@react-three/drei";
 import { useRef, MutableRefObject, useState, useEffect, useMemo } from 'react';
 import { useFrame } from "@react-three/fiber";

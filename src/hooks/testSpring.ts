@@ -37,7 +37,7 @@ export interface ScrollValues {
 
 const defaultConfig = { mass: 1, tension: 170, friction: 26 }
 
-export const useSpringTrigger = ({
+export const testSpringTrigger = ({
     trigger,
     start,
     end,
@@ -140,8 +140,8 @@ export const onScroll = (
         const values = calcValues({ 
             from, 
             to, 
-            progress: state.progress, 
-            allProgress: state.allProgress, 
+            progress: state.progress || 0, 
+            allProgress: state.allProgress || 0, 
             // @ts-expect-error
             scrub, 
             // @ts-expect-error
@@ -190,10 +190,10 @@ function calcProgress(start: TriggerPos, end: TriggerPos, trigger: HTMLElement, 
     const scrollStart = poses[start.split(' ').join('_')]
     // @ts-expect-error
     const scrollEnd = poses[end.split(' ').join('_')]
+    if (!scrollStart || !scrollEnd) { return {} }
     const length = Math.abs(scrollStart - scrollEnd)
     const allProgress = (scrollStart + length) / length
     const progress = enable?.current ? ( 1 - clamp(0, 1, allProgress) ) : 0
-
     return {
         scrollStart,
         scrollEnd,
