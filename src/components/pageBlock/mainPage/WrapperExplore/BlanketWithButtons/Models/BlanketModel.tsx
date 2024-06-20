@@ -110,20 +110,32 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
         line1Visible: true,
         line2Visible: true,
         line3Visible: true,
+        line1Z: 0,
+        line2Z: 0,
+        line3Z: 0,
+        line1Y: 0,
+        line2Y: 0,
+        line3Y: 0,
         config: { duration: 300, easing: easings.easeInOutCubic },
     }));
 
     useEffect(() => {
             setProps({
-                line1ColorAlpha: activeNumber != 0  ? 0.5 : 1,
-                line2ColorAlpha: activeNumber != 0 ? 0.5 : 1,
-                line3ColorAlpha: activeNumber != 0 ? 0.5 : 1,
+                line1ColorAlpha: activeNumber != 0 && activeNumber != 1 ? 0.5 : 1,
+                line2ColorAlpha: activeNumber != 0 && activeNumber != 2 ? 0.5 : 1,
+                line3ColorAlpha: activeNumber != 0 && activeNumber != 3 ? 0.5 : 1,
                 line1Opacity: activeNumber != 0 && activeNumber === 1  ? 0 : 1,
                 line2Opacity: activeNumber != 0 && activeNumber === 2 ? 0 : 1,
                 line3Opacity: activeNumber != 0 && activeNumber === 3 ? 0 : 1,
                 line1Visible: activeNumber != 0 && activeNumber === 1 ? false : true,
                 line2Visible: activeNumber != 0 && activeNumber === 2 ? false : true,
                 line3Visible: activeNumber != 0 && activeNumber === 3 ? false : true,
+                line1Z: activeNumber != 0 && activeNumber === 1 ? .055 : .061,
+                line2Z: activeNumber != 0 && activeNumber === 2 ? .055 : .061,
+                line3Z: activeNumber != 0 && activeNumber === 3 ? .055 : .061,
+                line1Y: activeNumber != 0 && activeNumber === 1 ? .005 : 0,
+                line2Y: activeNumber != 0 && activeNumber === 2 ? .005 : 0,
+                line3Y: activeNumber != 0 && activeNumber === 3 ? .005 : 0,
             });
     }, [activeNumber, setProps]);
 
@@ -159,10 +171,17 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
         // uniforms.uline2Opacity.value = props.line2Opacity.get()
         // uniforms.uline3Opacity.value = props.line3Opacity.get()
 
-        line1.visible = props.line1Visible.get()
-        line2.visible = props.line2Visible.get()
-        line3.visible = props.line3Visible.get()
+        // line1.visible = props.line1Visible.get()
+        // line2.visible = props.line2Visible.get()
+        // line3.visible = props.line3Visible.get()
 
+        line1.position.z = props.line1Z.get()
+        line2.position.z = props.line2Z.get()
+        line3.position.z = props.line3Z.get()
+
+        line1.position.y = props.line1Y.get()
+        line2.position.y = props.line2Y.get()
+        line3.position.y = props.line3Y.get()
 
         //blanket pos and rotation
         const time = state.clock.getElapsedTime();
