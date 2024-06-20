@@ -10,7 +10,6 @@ import { easings } from "@react-spring/web";
 import { lerp } from "three/src/math/MathUtils.js";
 import { coordinatesRef } from "@/pages/_app";
 import useGlobalStore from "@/store/store";
-import { testSpringTrigger } from "@/hooks/testSpring";
 
 interface Model {
     containerRef: MutableRefObject<HTMLElement | HTMLDivElement | null>,
