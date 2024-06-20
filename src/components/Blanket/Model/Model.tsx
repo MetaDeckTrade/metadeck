@@ -227,10 +227,12 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         uniforms.current.alpha.value = effect.opacity.get()
     });
 
+
     return (
         <Float>
             <primitive
                 ref={modelRef}
+                position={[width > 1024 ? 7.1 : 0, -1.6, -1]}
                 scale={width > 1024 ? 20 : 18}
                 rotation={[0.9, 3.3, 0]}
                 object={model}

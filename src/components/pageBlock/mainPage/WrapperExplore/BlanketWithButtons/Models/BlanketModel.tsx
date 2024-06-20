@@ -113,40 +113,19 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
     }));
 
     useEffect(() => {
-        // switch (activeNumber) {
-        //     case 0:
-        //         line1.visible = true
-        //         line2.visible = true
-        //         line3.visible = true
-        //         break;
-        //     case 1:
-        //         line1.visible = false
-        //         line2.visible = true
-        //         line3.visible = true
-        //         break;
-        //     case 2:
-        //         line1.visible = true
-        //         line2.visible = false
-        //         line3.visible = true
-        //         break;
-        //     case 3:
-        //         line1.visible = true
-        //         line2.visible = true
-        //         line3.visible = false
-        //         break;
-        // }
-
-        setProps({
-            line1ColorAlpha: activeNumber != 0  ? 0.5 : 1,
-            line2ColorAlpha: activeNumber != 0 ? 0.5 : 1,
-            line3ColorAlpha: activeNumber != 0 ? 0.5 : 1,
-            line1Opacity: activeNumber != 0 && activeNumber === 1  ? 0 : 1,
-            line2Opacity: activeNumber != 0 && activeNumber === 2 ? 0 : 1,
-            line3Opacity: activeNumber != 0 && activeNumber === 3 ? 0 : 1,
-            line1Visible: activeNumber != 0 && activeNumber === 1 ? false : true,
-            line2Visible: activeNumber != 0 && activeNumber === 2 ? false : true,
-            line3Visible: activeNumber != 0 && activeNumber === 3 ? false : true,
-        });
+        setTimeout(() => {
+            setProps({
+                line1ColorAlpha: activeNumber != 0  ? 0.5 : 1,
+                line2ColorAlpha: activeNumber != 0 ? 0.5 : 1,
+                line3ColorAlpha: activeNumber != 0 ? 0.5 : 1,
+                line1Opacity: activeNumber != 0 && activeNumber === 1  ? 0 : 1,
+                line2Opacity: activeNumber != 0 && activeNumber === 2 ? 0 : 1,
+                line3Opacity: activeNumber != 0 && activeNumber === 3 ? 0 : 1,
+                line1Visible: activeNumber != 0 && activeNumber === 1 ? false : true,
+                line2Visible: activeNumber != 0 && activeNumber === 2 ? false : true,
+                line3Visible: activeNumber != 0 && activeNumber === 3 ? false : true,
+            });
+        }, 200)
     }, [activeNumber, setProps]);
 
     const { values: progressValues } = useSpringTrigger({
@@ -182,6 +161,7 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
         line1.visible = props.line1Visible.get()
         line2.visible = props.line2Visible.get()
         line3.visible = props.line3Visible.get()
+
 
         //blanket pos and rotation
         const time = state.clock.getElapsedTime();
