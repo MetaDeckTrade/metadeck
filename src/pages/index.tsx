@@ -84,7 +84,7 @@ export default function Home({ initialData }: any) {
     const mPointer: any = new Vector3(0, 0, 0)
     const [data, setData] = useState([])
     useFetchData('home', setData)
-
+    
     return (
         <>
             <Head>

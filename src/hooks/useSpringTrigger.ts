@@ -243,8 +243,6 @@ function calcValues({
         
         
         const unit = endMatch[2]
-    // console.log(startMatch, endMatch, start, end)
-        
         
         if (scrub) {
             values[value] = lerp(+start, +end, progress) + unit

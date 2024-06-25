@@ -122,7 +122,7 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
 
         },
         to: {
-            x: "-0.1", y: "3.2", z: "0",
+            x: ".5", y: "3.2", z: "0",
             positionX: "1.5", positionY: "-0.5", positionZ: "0",
 
         },
@@ -135,12 +135,12 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         end: 'center bottom',
         scrub: true,
         from: {
-            x: "-0.1", y: "3.2", z: "0",
+            x: ".5", y: "3.2", z: "0",
             positionX: "1.5", positionY: "-0.5", positionZ: "0",
         },
         to: {
-            x: "-.4", y: "2.9", z: "-.2",
-            positionX: "1.5", positionY: "-1.7", positionZ: "0",
+            x: "-.1", y: "2.9", z: "-.2",
+            positionX: "1.5", positionY: "-.8", positionZ: "0",
         },
         config: {duration: 1},
     });
@@ -224,7 +224,7 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
             <primitive
                 ref={modelRef}
                 position={[width > 1024 ? 7.1 : 0, -1.6, -1]}
-                scale={width > 1024 ? 20 : 18}
+                scale={width > 1024 ? 21 : 18}
                 rotation={[0.9, 3.3, 0]}
                 object={model}
             />

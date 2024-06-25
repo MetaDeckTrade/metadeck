@@ -23,7 +23,7 @@ export default function WhyMetaDeck({ data }: { data: Types }) {
             <ContainerText>
                 {data?.title ? <AnimatiosWordsWhyMetaDeck delay={0} duration={700} text={data?.title} /> : null}
                 {data?.subtitle ?
-                    <Text className="text" delay={300} mode='once'>
+                    <Text className="text" delay={300} mode='forward'>
                         {data?.subtitle}
                     </Text>
                 : null}

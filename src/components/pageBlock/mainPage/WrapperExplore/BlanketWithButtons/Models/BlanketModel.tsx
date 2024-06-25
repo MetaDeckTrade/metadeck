@@ -2,7 +2,7 @@ import { useSpringTrigger } from "@/hooks/useSpringTrigger";
 import { PageView } from "@/layouts/CanvasLayout/components/PageView";
 import { useWindowWidth } from "@react-hook/window-size";
 import { useSpring } from "@react-spring/three";
-import { Preload, useGLTF } from "@react-three/drei";
+import { Float, Preload, useGLTF } from "@react-three/drei";
 import { useRef, MutableRefObject, useState, useEffect, useMemo } from 'react';
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
@@ -157,6 +157,26 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
     });
 
 
+    const [progressValuesLG, progressStateLG] = useSpringTrigger({
+        trigger: containerRef,
+        start: 'bottom bottom',
+        end: 'bottom top',
+        scrub: true,
+        from: {
+            x: `${rotation[0]}`, y: `${rotation[1]}`, z: `${rotation[2]}`,
+            positionX: `${position[0]}`, positionY: `${position[1]}`, positionZ: `${position[2]}`,
+        },
+        to: {
+            x: `${rotation[0]}`, y: `${rotation[1]}`, z: `${rotation[2]}`,
+            positionX: "0", positionY: `${width > 576 ? position[1] + 2 : position[1] + 0.6}`, positionZ: `${position[2]}`,
+        },
+        onChange: (state) => {
+            progressRef.current = state.value.progress;
+        }
+    });
+
+
+
 
 
 
@@ -209,12 +229,14 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
     });
 
     return (
-        <primitive
-            ref={modelRef}
-            scale={20}
-            position={position}
-            rotation={rotation}
-            object={clonedScene}
-        />
+        <Float speed={2}>
+            <primitive
+                ref={modelRef}
+                scale={20}
+                position={position}
+                rotation={rotation}
+                object={clonedScene}
+            />
+        </Float>
     );
 }

@@ -27,7 +27,7 @@ const TradingCompanion = ({ data }: { data: Types | null }) => {
             {data?.title ? <Title animationDelay={0} duration={800} text={data?.title} delay={400} /> : null}
             {
                 data?.description ?
-                    <Text  className="text" delay={300} mode='once'>
+                    <Text  className="text" delay={300} mode='forward'>
                         {data?.description}
                     </Text>
                     : null

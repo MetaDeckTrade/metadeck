@@ -10,7 +10,8 @@ interface Types {
     duration: number,
     text: string,
     delay: number,
-    props?: any
+    props?: any,
+    singleAnimation?: boolean
 }
 
 interface TypesText {
@@ -18,10 +19,12 @@ interface TypesText {
     text: string,
     duration: number,
     delay: number,
-    i? : boolean
+    i? : boolean,
+    singleAnimation?: boolean
+
 }
 
-const AnimatiosWords = ({ animationDelay = 0, duration = 0, text, delay = 0, ...props }: Types | any) => {
+const AnimatiosWords = ({ animationDelay = 0, duration = 0, text, delay = 0, singleAnimation  = false, ...props }: Types | any) => {
 
     const  [ ref, inView ] = useInView()
 
@@ -52,7 +55,7 @@ const AnimatiosWords = ({ animationDelay = 0, duration = 0, text, delay = 0, ...
                             textWords?.length ?
                                 textWords.map((_: string, i: number) => (
                                     <span key={i}>
-                                        <Text inView={inView} i={i+1 === textWords.length} text={_} duration={duration} delay={loaded ? i * delay : animationDelay + (i * delay)} />
+                                        <Text singleAnimation={singleAnimation} inView={inView} i={i+1 === textWords.length} text={_} duration={duration} delay={loaded ? i * delay : animationDelay + (i * delay)} />
                                     </span>
                                 ))
                                 : null
@@ -64,7 +67,7 @@ const AnimatiosWords = ({ animationDelay = 0, duration = 0, text, delay = 0, ...
     )
 }
 
-const Text = ({ inView = false, text, duration, delay, i=false }: TypesText) => {
+const Text = ({ inView = false, text, duration, delay, i=false, singleAnimation }: TypesText) => {
 
     const [animatedOnce, setAnimatedOnce] = useState(false);
 
@@ -77,13 +80,20 @@ const Text = ({ inView = false, text, duration, delay, i=false }: TypesText) => 
 
     const effect: any = useSpring({
         to: {
+            y: inView ? '0%' : '100%',
+        },
+        config: { duration: inView ? duration : 0 },
+        delay: inView ? delay : 0
+    })
+    const effect2: any = useSpring({
+        to: {
             y: animatedOnce ? '0%' : '100%',
         },
-        config: { duration: duration },
-        delay: delay
+        config: { duration: animatedOnce ? duration : 0 },
+        delay: animatedOnce ? delay : 0
     })
 
-    return <animated.p style={effect}>{text + ( i ? '' : ' ')}</animated.p>
+    return <animated.p style={ singleAnimation ? effect2 : effect}>{text + ( i ? '' : ' ')}</animated.p>
 
 }
 

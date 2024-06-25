@@ -1,5 +1,5 @@
 import { useSpring, animated } from "@react-spring/web";
-import { useEffect, useMemo, useState } from "react";
+import { memo } from "react";
 import { useInView } from "@/hooks/useInView"
 
 interface Types {
@@ -16,48 +16,34 @@ const style = {
     }
 }
 
-export default function AnimationBlockY({ children, duration = 0, delay = 0, ...props }: Types) {
-    const [loaded, setLoaded] = useState(false);
-
-    const animationDelay = 1000;
-
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            setLoaded(true);
-        }, animationDelay);
-        return () => clearTimeout(timeout);
-    }, []);
-
+const AnimationBlockY = ({ children, duration = 0, delay = 0, ...props }: Types) => {
 
     return (
-        <AnimationBlok delay={loaded ? delay : animationDelay + delay} duration={duration}>
+        <AnimationBlok delay={delay} duration={duration} {...props}>
             {children}
         </AnimationBlok>
     )
 }
 
-const AnimationBlok = ({ children, delay, duration }: Types) => {
+const AnimationBlok = ({ children, delay, duration, ...props }: Types) => {
     const [ ref, inView ] = useInView()
-    const [animatedOnce, setAnimatedOnce] = useState(false);
-    
-    useEffect(() => {
-        if(!inView) {return}
-        if(inView){
-            setAnimatedOnce(true)
-        }
-    },[inView])
 
     const effect: any = useSpring({
         to: {
-            opacity: animatedOnce ? 1 : 0,
-            y: animatedOnce ? '0%' : '40%',
+            opacity: inView ? 1 : 0,
+            y: inView ? '0%' : '40%',
+            willChange: 'transform',
         },
-        config: { duration: duration },
-        delay: delay,
+        config: { duration: inView ?  duration : 0 },
+        delay: inView ? delay : 0,
     })
+
     return (
-        <animated.div ref={ref} style={{...effect, ...style.container}} >
+        <animated.div {...props} ref={ref} style={{...effect, ...style.container}} >
             {children}
         </animated.div>
     )
 }
+
+
+export default memo(AnimationBlockY)

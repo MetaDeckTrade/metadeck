@@ -1,6 +1,4 @@
 //@ts-nocheck
-
-import { useEffect } from "react";
 import { createGlobalStyle, css } from "styled-components"
 export const breakpoints = {
   xlg: '1920px',
