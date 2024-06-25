@@ -106,6 +106,7 @@ pointer-events: none;
     .swiper-wrapper {
         height: auto !important;
         transition-timing-function: linear !important;
+         will-change: transform;
     }
 
     .swiper-slide {

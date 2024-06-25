@@ -35,22 +35,14 @@ const AnimatiosPharagraphTwoT = ({animationDelay = 0, duration = 0, text, delay 
 }
 
 const Text = ({ inView = false, text, duration, delay }: TypesText) => {
-    const [animatedOnce, setAnimatedOnce] = useState(false);
-
-    useEffect(() => {
-        if(!inView) {return}
-        if(inView){
-            setAnimatedOnce(true)
-        }
-    },[inView])
 
     const effect: any = useSpring({
         to: {
-            y: animatedOnce ? '0%' : '100%',
-            opacity: animatedOnce? '1' : '0',
+            y: inView ? '0%' : '100%',
+            opacity: inView? '1' : '0',
         },
-        config: { duration: duration },
-        delay: delay
+        config: { duration: inView ? duration : 0 },
+        delay: inView ? delay : 0
     })
 
     return <animated.p style={effect}>{text}</animated.p>

@@ -104,7 +104,6 @@ const WrapperExplore = ({ data, simplicityMeetsPowerData }: { data: Types, simpl
                     highBlockRef.current.style.backgroundColor = 'rgba(255, 107, 0, 1)'
                 }
                 if (+y <= 0.66 && +y > 0.33 && scrollPosition !== 2) {
-                    // console.log('2')
                     highBlockRef.current.style.backgroundColor = 'rgba(255, 184, 0, 1) '
                     setscrollPosition(2)
                     setActiveLine(2)
@@ -146,10 +145,6 @@ const WrapperExplore = ({ data, simplicityMeetsPowerData }: { data: Types, simpl
     const containerRef = useRef<any>(null)
     const blockRef = useRef<any>(null)
 
-    useEffect(() => {
-        console.log(scrollPosition)
-    }, [scrollPosition])
-
     return (
         <>
             {
@@ -172,7 +167,7 @@ const WrapperExplore = ({ data, simplicityMeetsPowerData }: { data: Types, simpl
                                     <WrapperTitle ref={refTitle}>
                                         {
                                             data?.title ?
-                                                <Title duration={500} text={data?.title} delay={300} />
+                                                <Title duration={500} singleAnimation={true} text={data?.title} delay={300} />
                                                 : null
                                         }
                                     </WrapperTitle>

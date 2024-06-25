@@ -1,6 +1,6 @@
 import AnimationBlockY from "../animation/animationBlock/AnimationBlockY/AnimationBlockY";
 import AnimatiosPharagraphTwo from "../animation/animationText/AnimationPatagraph/AnimationPatagraph";
-import React from 'react';
+import React, { memo } from 'react';
 import styled from "styled-components";
 import { media, responsive, rm } from '../../../styles/utils'
 import { inter, orbitronBold } from "@/styles/fonts";
@@ -71,8 +71,7 @@ ${media.xsm`
 width: 100% !important;
 `}
 `
-export default function InformationBlock({ number, delay = 0, title, text, ...props }: Types) {
-
+const InformationBlock = ({ number, delay = 0, title, text, ...props }: Types) =>  {
     return (
         <ContainerStyle  {...props}>
             <AnimationBlockY duration={600} delay={delay}>
@@ -86,9 +85,11 @@ export default function InformationBlock({ number, delay = 0, title, text, ...pr
             <StyleAnimatiosPharagraphTwo
                 duration={600}
                 text={title} delay={200 + delay} />
-            <StyleLineAnimation mode='once' delay={delay + 400} >
+            <StyleLineAnimation mode='forward' delay={delay + 400} >
                 {text}
             </StyleLineAnimation>
         </ContainerStyle>
     )
 }
+
+export default memo(InformationBlock)
