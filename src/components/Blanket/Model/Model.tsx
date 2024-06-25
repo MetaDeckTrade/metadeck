@@ -139,7 +139,7 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
             positionX: "1.5", positionY: "-0.5", positionZ: "0",
         },
         to: {
-            x: "-.1", y: "2.9", z: "-.2",
+            x: ".8", y: "2.9", z: "-.2",
             positionX: "1.5", positionY: "-.8", positionZ: "0",
         },
         config: {duration: 1},
@@ -153,18 +153,26 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
         }
     }, [inViewBlanket])
     
-    useFrame(({ pointer, size }) => {
+    useFrame((state) => {
         if(!inViewBlanket) return
+
+        const time = state.clock.getElapsedTime();
+
 
         if (modelRef.current) {
             const progress = progState.progress.get() + secondState.progress.get() + thirdState.progress.get() + fourthState.progress.get() 
         
+
+            const getBaseRotation = (progressValues: any, rotationCounter: number) => {
+                return (progressValues + Math.sin(time * rotationCounter) * 0.02)
+            }
+
         
             if (progress <= 1) {
                 modelRef.current.rotation.set(
-                    lerp(modelRef.current.rotation.x, +progressValues.x.get(), 0.05),
-                    lerp(modelRef.current.rotation.y, +progressValues.y.get(), 0.05),
-                    lerp(modelRef.current.rotation.z, +progressValues.z.get(), 0.05)
+                    lerp(modelRef.current.rotation.x, getBaseRotation(+progressValues.x.get(), 0.5) + coordinatesRef.x * 0.04, 0.05),
+                    lerp(modelRef.current.rotation.y, getBaseRotation(+progressValues.y.get(), 0.3) + coordinatesRef.y * 0.04, 0.05),
+                    lerp(modelRef.current.rotation.z, getBaseRotation(+progressValues.z.get(), 0.4), 0.05)
                 );
                 modelRef.current.position.set(
                     lerp(modelRef.current.position.x, +progressValues.positionX.get(), 0.05),
@@ -173,9 +181,9 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
                 );
             } else if (progress <= 2) {
                 modelRef.current.rotation.set(
-                    lerp(modelRef.current.rotation.x, +progressValuesSecond.x.get(), 0.05),
-                    lerp(modelRef.current.rotation.y, +progressValuesSecond.y.get(), 0.05),
-                    lerp(modelRef.current.rotation.z, +progressValuesSecond.z.get(), 0.05)
+                    lerp(modelRef.current.rotation.x, getBaseRotation(+progressValuesSecond.x.get(), 0.5) + coordinatesRef.x * 0.04, 0.05),
+                    lerp(modelRef.current.rotation.y, getBaseRotation(+progressValuesSecond.y.get(), 0.3) + coordinatesRef.y * 0.04, 0.05),
+                    lerp(modelRef.current.rotation.z, getBaseRotation(+progressValuesSecond.z.get(), 0.4), 0.05)
                 );
                 modelRef.current.position.set(
                     lerp(modelRef.current.position.x, +progressValuesSecond.positionX.get(), 0.05),
@@ -184,9 +192,9 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
                 );
             } else if (progress <= 3) {
                 modelRef.current.rotation.set(
-                    lerp(modelRef.current.rotation.x, +progressValuesThird.x.get(), 0.05),
-                    lerp(modelRef.current.rotation.y, +progressValuesThird.y.get(), 0.05),
-                    lerp(modelRef.current.rotation.z, +progressValuesThird.z.get(), 0.05)
+                    lerp(modelRef.current.rotation.x, getBaseRotation(+progressValuesThird.x.get(), 0.5) + coordinatesRef.x * 0.04, 0.05),
+                    lerp(modelRef.current.rotation.y, getBaseRotation(+progressValuesThird.y.get(), 0.3) + coordinatesRef.y * 0.04, 0.05),
+                    lerp(modelRef.current.rotation.z, getBaseRotation(+progressValuesThird.z.get(), 0.4), 0.05)
                 );
                 modelRef.current.position.set(
                     lerp(modelRef.current.position.x, +progressValuesThird.positionX.get(), 0.05),
@@ -195,9 +203,9 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
                 );
             } else if (progress <= 4) {
                 modelRef.current.rotation.set(
-                    lerp(modelRef.current.rotation.x, +progressValuesFourth.x.get(), 0.05),
-                    lerp(modelRef.current.rotation.y, +progressValuesFourth.y.get(), 0.05),
-                    lerp(modelRef.current.rotation.z, +progressValuesFourth.z.get(), 0.05)
+                    lerp(modelRef.current.rotation.x, getBaseRotation(+progressValuesFourth.x.get(), 0.5) + coordinatesRef.x * 0.04, 0.05),
+                    lerp(modelRef.current.rotation.y, getBaseRotation(+progressValuesFourth.y.get(), 0.3) + coordinatesRef.y * 0.04, 0.05),
+                    lerp(modelRef.current.rotation.z, getBaseRotation(+progressValuesFourth.z.get(), 0.4), 0.05)
                 );
                 modelRef.current.position.set(
                     lerp(modelRef.current.position.x, +progressValuesFourth.positionX.get(), 0.05),
@@ -206,13 +214,13 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
                 );
             }
 
-            if(width > 1024) {
-                modelRef.current.rotation.set(
-                    modelRef.current.rotation.x + coordinatesRef.x * 0.005,
-                    modelRef.current.rotation.y + coordinatesRef.y * 0.005,
-                    modelRef.current.rotation.z
-                );
-            }
+            // if(width > 1024) {
+            //     modelRef.current.rotation.set(
+            //         baseRotationX + coordinatesRef.x * 0.005,
+            //         baseRotationY + coordinatesRef.y * 0.005,
+            //         baseRotationZ
+            //     );
+            // }
         }
 
         uniforms.current.alpha.value = effect.opacity.get()
@@ -220,14 +228,12 @@ export default function Model({ containerRef, inView, firstContainerRef, firstCu
 
 
     return (
-        <Float>
-            <primitive
-                ref={modelRef}
-                position={[width > 1024 ? 7.1 : 0, -1.6, -1]}
-                scale={width > 1024 ? 21 : 18}
-                rotation={[0.9, 3.3, 0]}
-                object={model}
-            />
-        </Float>
+        <primitive
+            ref={modelRef}
+            position={[width > 1024 ? 7.1 : 0, -1.6, -1]}
+            scale={width > 1024 ? 21 : 18}
+            rotation={[0.9, 3.3, 0]}
+            object={model}
+        />
     );
 }
