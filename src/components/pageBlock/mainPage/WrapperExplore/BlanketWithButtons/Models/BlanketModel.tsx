@@ -62,13 +62,11 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
                             shader.fragmentShader = shader.fragmentShader.replace('varying vec3 vViewPosition;', `
                                 varying vec3 vViewPosition;
                                 uniform float uDarken;
-                                // uniform float uOpacity;
                             `)
     
                             shader.fragmentShader = shader.fragmentShader.replace('#include <dithering_fragment>', `
                                 #include <dithering_fragment>
                                 gl_FragColor.rgb *= uDarken;
-                                // gl_FragColor.a *= uOpacity;
                             `)
                         }
                     }
@@ -109,9 +107,9 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
         line1Visible: true,
         line2Visible: true,
         line3Visible: true,
-        line1Z: 0,
-        line2Z: 0,
-        line3Z: 0,
+        line1Z: .061,
+        line2Z: .061,
+        line3Z: .061,
         line1Y: 0,
         line2Y: 0,
         line3Y: 0,
@@ -138,6 +136,8 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
             });
     }, [activeNumber, setProps]);
 
+
+
     const [progressValues, progressState] = useSpringTrigger({
         trigger: containerRef,
         start: 'bottom bottom',
@@ -157,7 +157,7 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
     });
 
 
-    const [progressValuesLG, progressStateLG] = useSpringTrigger({
+    useSpringTrigger({
         trigger: containerRef,
         start: 'bottom bottom',
         end: 'bottom top',
@@ -179,20 +179,11 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
 
 
 
-
-    useFrame((state) => {
+    useFrame(() => {
         if (!modelRef.current) return;
         uniforms.uline1ColorAlpha.value = props.line1ColorAlpha.get()
         uniforms.uline2ColorAlpha.value = props.line2ColorAlpha.get()
         uniforms.uline3ColorAlpha.value = props.line3ColorAlpha.get()
-
-        // uniforms.uline1Opacity.value = props.line1Opacity.get()
-        // uniforms.uline2Opacity.value = props.line2Opacity.get()
-        // uniforms.uline3Opacity.value = props.line3Opacity.get()
-
-        // line1.visible = props.line1Visible.get()
-        // line2.visible = props.line2Visible.get()
-        // line3.visible = props.line3Visible.get()
 
         line1.position.z = props.line1Z.get()
         line2.position.z = props.line2Z.get()
@@ -201,12 +192,6 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
         line1.position.y = props.line1Y.get()
         line2.position.y = props.line2Y.get()
         line3.position.y = props.line3Y.get()
-
-        //blanket pos and rotation
-        const time = state.clock.getElapsedTime();
-        // const baseRotationX = rotation[0] + Math.sin(time * 0.5) * 0.05;  // Small oscillation in X
-        // const baseRotationY = rotation[1] + Math.sin(time * 0.3) * 0.05;  // Small oscillation in Y
-        // const baseRotationZ = rotation[2] + Math.sin(time * 0.4) * 0.05;  // Small oscillation in Z
 
         if (width < 1024) {
             modelRef.current.rotation.set(
@@ -237,6 +222,6 @@ export default function BlanketModal({ inView, rotation, position, containerRef,
                 rotation={rotation}
                 object={clonedScene}
             />
-        </Float>
+         </Float>
     );
 }
