@@ -1,27 +1,15 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { ContainerNew, Sheme, Subtitle, SubtitleDescription, Title, WrapperSybtitle, WrapperTitle } from './styleSimplicityMeetsPower'
+import { useMemo, useRef, memo } from 'react'
+import { ContainerNew, Title } from './styleSimplicityMeetsPower'
 import useInnerWidth from '@/hooks/useWidthWindow'
 import { Stiky, StikyNew } from '../CompatibleWhereCounts/styleCompatibleWhereCounts';
 import { TypesSimplicity } from '../WrapperExplore/WrapperExplore';
+import Image from 'next/image';
 
-export default function SimplicityMeetsPower({data} : {data : TypesSimplicity}) {
+function SimplicityMeetsPower({ data }: { data: TypesSimplicity }) {
     const refHeight = useRef(null);
     const wrapperRefHeight = useRef(null);
-    const [imageSrc, setImageSrc] = useState('/img/sheme.png');
     const widthWindow = useInnerWidth()
-    // Rectangle 7933
-    useEffect(() => {
-        if (widthWindow > 1440) {
-            setImageSrc(data?.imgDesktop?.filename || '/img/Rectangle7933.webp')
-        } else if (widthWindow <= 1440 && widthWindow > 1024) {
-            setImageSrc(data?.imgLaptop?.filename || '/img/Rectangle7933.webp')
-        } else if (widthWindow <= 1024 && widthWindow > 480) {
-            setImageSrc(data?.imgTablet?.filename || '/img/Rectangle7933.webp')
-        } else if (widthWindow <= 480) {
-            setImageSrc(data?.imgMobile?.filename || '/img/Rectangle7933.webp')
-        }
-    }, [widthWindow, data])
-
+    console.log(data)
     useMemo(() => {
         if (!wrapperRefHeight.current || !refHeight.current) { return }
         //@ts-expect-error
@@ -35,19 +23,44 @@ export default function SimplicityMeetsPower({data} : {data : TypesSimplicity}) 
     }, [wrapperRefHeight, refHeight, widthWindow])
 
     return (
-        <Stiky  ref={wrapperRefHeight}>
+        <Stiky ref={wrapperRefHeight}>
             <StikyNew ref={refHeight}>
-            <ContainerNew>
-                    <WrapperTitle>
-                        {data?.title ? <Title >{data?.title}</Title> : null}
-                        <WrapperSybtitle>
-                            {data?.subtitle ? <Subtitle>{data?.subtitle}</Subtitle> : null}
-                            {data?.description ? <SubtitleDescription>{data?.description}</SubtitleDescription> : null}
-                        </WrapperSybtitle>
-                    </WrapperTitle>
-                    <Sheme src={imageSrc} width={1808} height={697} alt='' />
+                <ContainerNew>
+                    <Title>How MetaDeck Works</Title>
+                    <div className='wrapperListWorks'>
+                        {
+                            data?.worksList?.length ?
+                                data.worksList.map((_: any, i: number) => (
+                                    <div key={i + 3111} className='wrapperCard'>
+                                        <div key={i + 34} className='containerCards'>
+                                            <div className='img'>
+                                            <Image  src={_.img?.filename} width={400} height={400} alt='' />
+                                            </div>
+                                            <div className={`textContainer ${_.topic === "darkTheme" ? 'textContainerDarkTheme' : null}`}>
+                                                <p>{_.description}</p>
+                                            </div>
+                                        </div>
+                                        <div className='wrapperLine'>
+                                        <svg className='line' width="2" height="697" viewBox="0 0 2 697" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="0.6" d="M1.00003 697L1 0" stroke="url(#paint0_linear_1001_819)" />
+                                            <defs>
+                                                <linearGradient id="paint0_linear_1001_819" x1="0.284455" y1="3.87464" x2="2.95535" y2="697.543" gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#001A41" stop-opacity="0" />
+                                                    <stop offset="0.505" stop-color="#001A41" />
+                                                    <stop offset="1" stop-color="#001A41" stop-opacity="0" />
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        </div>
+                                    </div>
+                                ))
+                                : null
+                        }
+                    </div>
                 </ContainerNew>
             </StikyNew>
         </Stiky>
     )
 }
+
+export default memo(SimplicityMeetsPower)

@@ -37,13 +37,8 @@ interface Types {
     steps: Array<Steps>
 }
 export interface TypesSimplicity {
-    description: string,
-    subtitle: string,
     title: string
-    imgDesktop: { filename: string },
-    imgLaptop: { filename: string },
-    imgMobile: { filename: string },
-    imgTablet: { filename: string },
+    worksList: any
 }
 
 const WrapperExplore = ({ data, simplicityMeetsPowerData }: { data: Types, simplicityMeetsPowerData: TypesSimplicity }) => {
