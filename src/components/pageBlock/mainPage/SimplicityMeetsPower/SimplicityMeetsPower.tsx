@@ -26,7 +26,7 @@ function SimplicityMeetsPower({ data }: { data: TypesSimplicity }) {
         <Stiky ref={wrapperRefHeight}>
             <StikyNew ref={refHeight}>
                 <ContainerNew>
-                    <Title>How MetaDeck Works</Title>
+                    {data?.title ? <Title>{data?.title}</Title> : null}
                     <div className='wrapperListWorks'>
                         {
                             data?.worksList?.length ?
@@ -34,9 +34,9 @@ function SimplicityMeetsPower({ data }: { data: TypesSimplicity }) {
                                     <div key={i + 3111} className='wrapperCard'>
                                         <div key={i + 34} className='containerCards'>
                                             <div className='img'>
-                                            <Image  src={_.img?.filename} width={400} height={400} alt='' />
+                                            <Image  src={_.img?.filename} width={435} height={320} alt='' />
                                             </div>
-                                            <div className={`textContainer ${_.topic === "darkTheme" ? 'textContainerDarkTheme' : null}`}>
+                                            <div className={`textContainer`}>
                                                 <p>{_.description}</p>
                                             </div>
                                         </div>
