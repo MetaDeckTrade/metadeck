@@ -87,7 +87,7 @@ export const CompatibleWhereCountsStyleNew = styled.div`
         padding: ${rm(100)} ${rm(0)} ${rm(175)} ${rm(0)};
     `}
     ${media.xsm`
-        padding: ${rm(80)} ${rm(0)} ${rm(128)} ${rm(0)};
+        padding: ${rm(80)} ${rm(0)} ${rm(32)} ${rm(0)};
     `}
 
     >h1 {
@@ -170,7 +170,7 @@ ${media.md`
         }
 `
 
-export const SwiperSlideImage = styled(ImageMy)`
+export const SwiperSlideImage = styled.img`
     position: relative;
     width: 100%;
     height: ${rm(256)};
