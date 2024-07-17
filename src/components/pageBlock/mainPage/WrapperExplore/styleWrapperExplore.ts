@@ -269,7 +269,7 @@ export const WrapperImageContainer = styled(animated.div)`
             bottom: 0;
         height: 100vh;
             width: 100%;
-            object-fit: cover;
+            object-fit: contain;
             pointer-events: none;
             z-index: 2;
         }

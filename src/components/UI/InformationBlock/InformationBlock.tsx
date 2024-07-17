@@ -16,10 +16,13 @@ interface Types {
 }
 const ContainerStyle = styled.div`
 position: relative;
-width: ${rm(500)};
+width: ${rm(580)};
 display: flex;
 flex-direction: column;
 gap: ${rm(30)};
+${media.md`
+    width: ${rm(500)};
+`}
 
 `
 const WrapperNumer = styled.div`
@@ -49,12 +52,16 @@ justify-content: center;
 
 const StyleAnimatiosPharagraphTwo = styled(AnimatiosPharagraphTwo)`
 color: ${colors.white1};
-font-size: ${rm(36)};
+font-size: ${rm(40)};
 line-height: 120%;
 margin-top: ${rm(50)};
-max-width: ${rm(530)};
+max-width: ${rm(600)};
 overflow: hidden;
 ${orbitronBold}
+${media.md`
+    font-size: ${rm(36)};
+    max-width: ${rm(530)};
+`}
 ${media.xsm`
 max-width: 100%;
     margin-top: ${rm(30)};
@@ -63,12 +70,17 @@ max-width: 100%;
 
 const StyleLineAnimation = styled(Text)`
 position: relative;
-width: ${rm(424)} !important;
+width: ${rm(500)} !important;
 overflow: hidden;
 color: ${colors.white2} !important;
 ${inter()}
+font-size: ${rm(18)};
 ${media.xsm`
 width: 100% !important;
+${media.md`
+    width: ${rm(424)} !important;
+    font-size: ${rm(16)};
+`}
 `}
 `
 const InformationBlock = ({ number, delay = 0, title, text, ...props }: Types) =>  {
