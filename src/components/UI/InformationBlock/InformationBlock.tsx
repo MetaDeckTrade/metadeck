@@ -23,7 +23,9 @@ gap: ${rm(30)};
 ${media.md`
     width: ${rm(500)};
 `}
-
+${media.xsm`
+    width: 100%;
+`}
 `
 const WrapperNumer = styled.div`
 position: relative;
