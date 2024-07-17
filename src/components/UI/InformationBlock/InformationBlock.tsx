@@ -81,6 +81,9 @@ ${media.md`
     width: ${rm(424)} !important;
     font-size: ${rm(16)};
 `}
+${media.xsm`
+    width: 100% !important;
+`}
 `}
 `
 const InformationBlock = ({ number, delay = 0, title, text, ...props }: Types) =>  {

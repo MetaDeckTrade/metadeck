@@ -85,49 +85,39 @@ pointer-events: none;
 
     
 .mySwiperTheyTrustUs {
-    height: auto !important;
+    height: fit-content !important;
     margin-top: ${rm(100)};
-
-    ${media.lg`
-        margin-top: ${rm(200)};
-        `
-    }
-
-    ${media.md`
-        margin-top: ${rm(120)};
-        `
-    }
-    
-    ${media.xsm`
-        margin-top: ${rm(80)};
-        `
-    }
+        @media screen and (max-width: 1440px) {
+           margin-top: ${rm(200)};
+        }
+        @media screen and (max-width: 1024px) {
+           margin-top: ${rm(120)};
+        }
+        @media screen and (max-width: 576px) {
+            margin-top: ${rm(32)};
+        }
 
     .swiper-wrapper {
         height: auto !important;
         transition-timing-function: linear !important;
-         will-change: transform;
+        will-change: transform;
     }
 
     .swiper-slide {
         height: auto !important;
         margin-right: ${rm(80)} !important;
         width: ${rm(380)} !important;
-        ${media.lg`
-            width: ${rm(290)};
-            `
-    }
-        ${media.md`
-        width: ${rm(332.5)} !important;
-
-            `
-    }
-        ${media.xsm`
-            width: ${rm(185)} !important;
-            margin-right: ${rm(45)} !important;
-
-            `
-    }
+       
+       @media screen and (max-width: 1440px) {
+           width: ${rm(290)};
+        }
+        @media screen and (max-width: 1024px) {
+           width: ${rm(332.5)} !important;
+        }
+        @media screen and (max-width: 576px) {
+            width: auto !important;
+            margin-right: ${rm(20)} !important;
+        }
     }
 }
 
