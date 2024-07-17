@@ -44,7 +44,7 @@ export const ContainerNew = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: ${rm(30)};
+    gap: ${rm(100)};
     padding: ${rm(80)} ${rm(60)};
     padding-top: ${rm(180)} ;
     min-height: 100vh;
@@ -67,7 +67,7 @@ export const ContainerNew = styled.div`
         .img{
             position: relative;
             width: 100%;
-            height: ${rm(400)};
+            height: ${rm(320)};
             overflow: hidden;
             flex-shrink: 0;
             ${media.lg`
@@ -79,56 +79,20 @@ export const ContainerNew = styled.div`
               
             >:nth-child(1){
                 position: absolute;
-                left: 50%;
-                top: 50%;
-                width: 105%;
-                height: 100%;
-                object-fit: cover;
-                transform: translate(-50%, -50%);
-                ${media.md`
-                    left: 0%;
-                    top: 0%;
-                transform: translate(0%, 0%);
+                left: 0%;
+                top: 0%;
                 width: 100%;
+                height: 100%;
                 object-fit: contain;
-                
-                `}
             }
         }
-        .textContainerDarkTheme{
-            background-color: #353E49 !important;
-            overflow: hidden;
-            >p{
-                color: #fff !important;
-            }
-            ${media.md`
-            background-color: transparent !important;
-            >p{
-                color: #001a41 !important;
-            }
-            `}
-            &::before{
-                content: '';
-                position: absolute;
-                width: ${rm(34)};
-                height: ${rm(34)};
-                background-color: #fff;
-                transform: rotate(45deg);
-                left: ${rm(-17)};
-                bottom: ${rm(-17)};
-            }
-        }
+        
         .textContainer{
             width: 100%;
-            padding: ${rm(30)};
+            padding: ${rm(10)};
             background-color: transparent;
             height: 100%;
-            ${media.md`
-                padding: ${rm(16)};
-             `}
-            ${media.xsm`
-                padding: ${rm(10)};
-             `}
+          
             >p{
                 line-height: 120%;
                 color: #001a41;
@@ -201,6 +165,7 @@ export const ContainerNew = styled.div`
     `}
     ${media.xsm`
         padding: ${rm(60)} ${rm(10)} ${rm(80)} ${rm(10)};
+    gap: ${rm(30)};
     `}
 `
 
