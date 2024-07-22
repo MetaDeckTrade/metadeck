@@ -23,7 +23,7 @@ export const CompatibleWhereCountsStyleNew = styled.div`
     position: relative;
     background-color: ${colors.white1};
     width: 100%;
-    padding: ${rm(80)} ${rm(0)} ${rm(214)} ${rm(0)};
+    padding: ${rm(140)} ${rm(0)} ${rm(214)} ${rm(0)};
     display: flex;
     flex-direction: column;
     align-items: flex-start;
