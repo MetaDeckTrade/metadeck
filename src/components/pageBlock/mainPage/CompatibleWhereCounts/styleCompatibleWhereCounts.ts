@@ -1,6 +1,6 @@
 import ImageMy from "@/components/UI/ImageMy/ImageMy";
 import { colors } from "@/styles";
-import { inter, orbitronBold } from "@/styles/fonts";
+import { inter, orbitron, orbitronBold } from "@/styles/fonts";
 import { heightLvh, marginLvh, media, rm } from "@/styles/utils";
 
 import styled from "styled-components";
@@ -8,166 +8,147 @@ import styled from "styled-components";
 
 export const Stiky = styled.div`
     position: relative;
-    /* ${marginLvh(-100)}
-    ${heightLvh(200)} */
     background-color: ${colors.white1} ;
-
 `
 export const StikyNew = styled.div`
     position: sticky;
     top: 0; left: 0;
     width: 100%;
     background-color: ${colors.white1} ;
-    `
-
-export const CompatibleWhereCountsStyle = styled.div`
-    position: sticky;
-    bottom: 0;
-    background-color: ${colors.white1};
-    width: 100%;
-    padding: ${rm(160)} ${rm(0)} ${rm(210)} ${rm(0)};
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    z-index: 1;
-    ${media.lg`
-        padding: ${rm(80)} ${rm(0)} ${rm(214)} ${rm(0)};
-    `}
-    ${media.md`
-        padding: ${rm(100)} ${rm(0)} ${rm(175)} ${rm(0)};
-    `}
-    ${media.xsm`
-        padding: ${rm(80)} ${rm(0)} ${rm(128)} ${rm(0)};
-    `}
-
-    >h1 {
-        line-height: 120%;
-        width: ${rm(915)};
-        color: ${colors.blue1};
-        font-size: ${rm(96)};
-        margin-left: ${rm(60)};
-        ${orbitronBold()}
-        ${media.lg`
-            font-size: ${rm(80)};
-            line-height: 110%;
-            width: ${rm(765)};
-            margin-left: ${rm(40)};
-        `}
-        ${media.md`
-            line-height: 120%;
-            margin-left: ${rm(30)};
-        `}
-        ${media.xsm`
-            width: 100%;
-            font-size:  ${rm(48)};
-            margin: 0;
-            padding-left: ${rm(10)};
-            padding-right: ${rm(10)};
-        `}
-    
-    }
-    
 `
 
 export const CompatibleWhereCountsStyleNew = styled.div`
-     overflow: hidden; 
+    overflow: hidden; 
     will-change: transform; 
     position: relative;
     background-color: ${colors.white1};
     width: 100%;
-    padding: ${rm(80)} ${rm(0)} ${rm(210)} ${rm(0)};
+    padding: ${rm(80)} ${rm(0)} ${rm(214)} ${rm(0)};
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     z-index: 1;
+
     ${media.lg`
-        padding: ${rm(80)} ${rm(0)} ${rm(214)} ${rm(0)};
+        padding: ${rm(160)} ${rm(0)} ${rm(214)} ${rm(0)};
     `}
+
     ${media.md`
         padding: ${rm(100)} ${rm(0)} ${rm(175)} ${rm(0)};
     `}
+
     ${media.xsm`
-        padding: ${rm(80)} ${rm(0)} ${rm(32)} ${rm(0)};
+        padding: ${rm(60)} ${rm(0)} ${rm(32)} ${rm(0)};
     `}
 
-    >h1 {
+    .WrapperInfo {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        gap: ${rm(147)};
+        padding: ${rm(0)} ${rm(60)};
+
+        ${media.lg`
+            gap: ${rm(40)};
+            padding: ${rm(0)} ${rm(40)};
+        `}
+
+        ${media.md`
+            flex-direction: column;
+            padding: ${rm(0)} ${rm(30)} ${rm(30)} ${rm(30)};
+            gap: ${rm(32)};
+        `}
+    }
+
+    .title{
         line-height: 120%;
         width: ${rm(915)};
         color: ${colors.blue1};
         font-size: ${rm(96)};
-        margin-left: ${rm(60)};
-        ${orbitronBold()}
+        ${orbitronBold()};
+
         ${media.lg`
-            font-size: ${rm(80)};
+            font-size: ${rm(85)};
             line-height: 110%;
-            width: ${rm(765)};
-            margin-left: ${rm(40)};
+            width: 100%;
         `}
+
         ${media.md`
             line-height: 120%;
-            margin-left: ${rm(30)};
         `}
+
         ${media.xsm`
             width: 100%;
-            font-size:  ${rm(48)};
+            font-size:  ${rm(40)};
             margin: 0;
-            padding-left: ${rm(10)};
-            padding-right: ${rm(10)};
         `}
-    
     }
     
 `
 
 export const Text = styled.div`
-        position: relative;
-        width: 100%;
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-end;
-        padding-right: ${rm(131)};
-        margin-top: ${rm(45)};
+    position: relative;
+    width: fit-content;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: ${rm(40)};
+    background-color: #d8dbdf;
+    gap: ${rm(40)};
+    flex-shrink: 0;
+
+    ${media.xsm`
+        gap: ${rm(20)};
+        padding: ${rm(15)};
+    `}
+
+    &::before {
+        content: '';
+        width: ${rm(40)};
+        height: ${rm(40)};
+        position: absolute;
+        right: ${rm(-20)};
+        top: ${rm(-20)};
+        transform: rotate(45deg);
+        background-color: #fff;
+    }
+
+    > :nth-child(1){
+        line-height: 120%;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #001a41;
+        font-size: ${rm(32)};
+        ${orbitron()}
+        width: ${rm(415)};
+
         ${media.lg`
-            margin-top: ${rm(62)};
-            padding-right: ${rm(194)};
-        `}
-
-${media.md`
-            margin-top: ${rm(40)};
-            padding-right: ${rm(0)};
-        justify-content: flex-start;
-        padding-left: ${rm(30)};
+            width: ${rm(370)};
         `}
 
         ${media.xsm`
-            margin-top: ${rm(20)};
-            padding-left: ${rm(10)};
-            padding-right: ${rm(10)};
-        `}
-
-
-        >p {
-            width: ${rm(516)};
-            color: ${colors.black1};
+            width: 100%;
             font-size: ${rm(24)};
-            line-height: 130%;
-            letter-spacing: 0.01em;
-            opacity: 0.6;
-            ${inter()}
-            ${media.lg`
-                font-size: ${rm(20)} ;
-            
         `}
-        ${media.md`
-                font-size: ${rm(24)} ;
-            
+    }
+
+    > :nth-child(2){
+        line-height: 130%;
+        color: #001a41;
+        font-size: ${rm(24)};
+        opacity: 0.8;
+        ${inter()}
+        width: ${rm(500)};
+
+        ${media.lg`
+            width: ${rm(400)};
         `}
         ${media.xsm`
-                font-size: ${rm(18)} ;
-                width: 100%;
+            width: 100%;
+            font-size: ${rm(16)};
         `}
-          
-        }
+    }
 `
 
 export const SwiperSlideImage = styled.img`

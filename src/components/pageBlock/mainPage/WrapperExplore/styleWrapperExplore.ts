@@ -1,6 +1,6 @@
 import AnimatiosWords from "@/components/UI/animation/animationText/AnimationWords/AnimationWords";
 import { colors } from "@/styles";
-import { inter, orbitronBold } from "@/styles/fonts";
+import { inter, orbitron, orbitronBold } from "@/styles/fonts";
 import { heightLvh, media, rm } from "@/styles/utils";
 import { CSS, animated } from "@react-spring/web";
 import styled, { css } from "styled-components";
@@ -86,55 +86,66 @@ export const Functionality = styled.div`
 `
 
 export const FunctionalityWrapperTexxt = styled.div`
- position: relative;
-    width: ${rm(530)};
+    position: relative;
     display: flex;
+    width: fit-content;
     flex-direction: column;
     gap: ${rm(40)};
     align-items: flex-start;
-    ${media.lg`
-        gap: ${rm(32)};
-    `}
-    ${media.md`
-        gap: ${rm(24)};
-    `}
+    padding: ${rm(40)};
+    background-color: #d8dbdf;
+    flex-shrink: 0;
+
+    &::before {
+        content: '';
+        width: ${rm(40)};
+        height: ${rm(40)};
+        position: absolute;
+        right: ${rm(-20)};
+        top: ${rm(-20)};
+        transform: rotate(45deg);
+        background-color: #fff;
+    }
+
     ${media.xsm`
-        width: 100%;
+        gap: ${rm(20)};
+        padding: ${rm(15)};
     `}
-    
 `
 
 export const FunctionalityTitle = styled.p`
-        font-size: ${rm(32)};
-        text-transform: uppercase;
-        color: ${colors.blue1} ;
-        line-height: 120%;
+    line-height: 120%;
         letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #001a41;
+        font-size: ${rm(32)};
+        ${orbitron()}
+        width: ${rm(516)};
+
         ${media.lg`
-            font-size: ${rm(30)};
+            width: ${rm(370)};
         `}
-        ${media.md`
-            font-size: ${rm(24)};
-        `}
+
         ${media.xsm`
-            font-size: ${rm(16)};
+            width: 100%;
+            font-size: ${rm(24)};
         `}
 `
 
 export const FunctionalitySubtitle = styled.p`
+      line-height: 130%;
+        color: #001a41;
         font-size: ${rm(24)};
-        color: ${colors.blue1} ;
-        line-height: 130%;
-        opacity: 0.6;
+        opacity: 0.8;
         ${inter()}
+        width: ${rm(535)};
+
         ${media.lg`
-            font-size: ${rm(20)};
-        `}
-        ${media.md`
-            font-size: ${rm(16)};
+            width: ${rm(400)};
         `}
         ${media.xsm`
-            font-size: ${rm(14)};
+            width: 100%;
+            font-size: ${rm(16)};
         `}
 `
 
@@ -281,6 +292,7 @@ export const WrapperText = styled(animated.div)`
         align-items: center;
         gap: ${rm(20)};
         >div{
+            
                 >p {
                 letter-spacing: 0.1em;
                 text-transform: uppercase;
