@@ -12,7 +12,8 @@ interface TypesString {
 interface Types {
     subtitle: string,
     swiper: Array<TypesString>,
-    title: string
+    title: string,
+    description: string
 }
 
 export default function CompatibleWhereCounts({ data }: { data: Types }) {
@@ -32,6 +33,7 @@ export default function CompatibleWhereCounts({ data }: { data: Types }) {
             wrapperRefHeight.current.style.marginTop = `-${newHeight}px`
         }
     }, [wrapperRefHeight, refHeight, innerWidth])
+
     return (
         <>
             {
@@ -39,14 +41,15 @@ export default function CompatibleWhereCounts({ data }: { data: Types }) {
                     <Stiky ref={wrapperRefHeight}>
                         <StikyNew ref={refHeight}>
                             <CompatibleWhereCountsStyleNew ref={stickyRef} >
-                                {data?.title ? <h1>{data?.title}</h1> : null}
-                                {
-                                    data?.subtitle ?
+                                <div className='WrapperInfo'>
+                                    {data?.title ? <h1 className={'title'}>{data?.title}</h1> : null}
+                                    { data?.subtitle || data?.description  ?
                                         <Text>
-                                            <p>{data?.subtitle}</p>
+                                            { data?.subtitle ? <p>{data.subtitle}</p> : null } 
+                                            { data?.description ? <p>{data?.description}</p> : null }
                                         </Text>
-                                        : null
-                                }
+                                    : null }
+                                </div>
                                 <Swiper
                                     spaceBetween={0}
                                     slidesPerView={'auto'}
