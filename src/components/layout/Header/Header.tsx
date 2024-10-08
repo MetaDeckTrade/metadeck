@@ -28,7 +28,7 @@ export default function Header({ data }: { data: Types | null }) {
     const [booted, setbooted] = useState(false)
 
     useEffect(() => {
-        console.log(data)
+      
         setbooted(true)
     }, [])
 
@@ -62,7 +62,6 @@ export default function Header({ data }: { data: Types | null }) {
                                     : null
                                 
                             }
-                            <LinkHeader name={"Litepaper"} anchor={"litepaper"} href={"/litepaper"} key={5} />
                             {data.button && data.button.length ?
                                 data.button.map((_: Navigation, i: number) => (
                                     <Button key={i + 99} header={true} href={_.href} anchor={_.anchor} color={_.style} name={_.name} />
