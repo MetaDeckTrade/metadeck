@@ -39,6 +39,7 @@ export default function Burger({ dataHeader, dataFooter, dataNetwork }: any) {
                         ))
                         : null
                 }
+            <LinkHeader onClick={() => { setBurger(false) }} name={"Litepaper"} anchor={"Litepaper"} href={"/litepaper"} key={5} />
             </div>
             {dataFooter?.precisionButton && dataFooter?.precisionButton?.[0] ?
                 <>

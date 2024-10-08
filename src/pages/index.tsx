@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import TradingCompanion from '@/components/pageBlock/mainPage/TradingCompanion/TradingCompanion'
 import WhyMetaDeck from '@/components/pageBlock/mainPage/WhyMetaDeck/WhyMetaDeck'
 import Costomizable from '@/components/pageBlock/mainPage/Costomizable/Costomizable'
@@ -84,7 +84,7 @@ export default function Home({ initialData }: any) {
     const mPointer: any = new Vector3(0, 0, 0)
     const [data, setData] = useState([])
     useFetchData('home', setData)
-    
+
     return (
         <>
             <Head>
