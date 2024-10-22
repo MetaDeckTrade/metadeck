@@ -44,6 +44,27 @@ export const Container = styled.div`
             gap: ${rm(15)};
         `}
     }
+    
+    .wrapperEmail {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .text{
+        transition: ease 0.5s;
+        opacity: 0.6;
+        line-height: 130%;
+        letter-spacing: 0.01em;
+        font-size: ${rm(16)};
+        ${inter()}
+        position: relative;
+        ${media.lg`
+            font-size: ${rm(14)};
+        `}
+    }
+    .textToken {
+        opacity: 1 !important;
+    }
 `
 
 export const Email = styled(Link)`
@@ -56,26 +77,14 @@ export const Email = styled(Link)`
             gap: ${rm(8)};
         `}
     
->p{
-    transition: ease 0.5s;
 
-    opacity: 0.6;
-    line-height: 130%;
-    letter-spacing: 0.01em;
-    font-size: ${rm(16)};
-    ${inter()}
-    ${media.lg`
-            font-size: ${rm(14)};
-    `}
-
-}
 .icon{
     position: relative;
     width: ${rm(24)};
     height: ${rm(24)};
 }
 &:hover{
->p{
+.text{
     opacity: 1;
 }
 }
