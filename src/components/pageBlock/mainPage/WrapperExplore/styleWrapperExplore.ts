@@ -196,7 +196,7 @@ export const WrapperTable = styled.div`
             justify-content: space-between;
             padding-left: ${rm(75)};
             padding-right: ${rm(10)};
-            padding-bottom: ${rm(32)};
+            padding-bottom: ${rm(100)};
         `}
         
 `
@@ -209,6 +209,9 @@ export const TitleTable = styled.p`
             white-space: nowrap;
             ${media.md`
                 font-size: ${rm(24)};
+            `}
+            ${media.xsm`
+                font-size: ${rm(20)};
             `}
 `
 
@@ -305,6 +308,9 @@ export const WrapperText = styled(animated.div)`
                 ${media.md`
                     font-size: ${rm(20)};
                 `}
+                ${media.xsm`
+                    font-size: ${rm(16)};
+                `}
             }
         }
         .icon{
@@ -312,6 +318,10 @@ export const WrapperText = styled(animated.div)`
             width: ${rm(16)};
             height: ${rm(16)};
             flex-shrink: 0;
+            ${media.xsm`
+                width: ${rm(14)};
+                height: ${rm(14)};
+                `}
         }
         
 `
